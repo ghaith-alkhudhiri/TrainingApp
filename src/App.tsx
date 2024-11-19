@@ -15,35 +15,26 @@ import ShopIcon from './Assets/Icons/ShopIcon';
 
 const Tab = createBottomTabNavigator();
 
+const tabs = [
+  { title: 'Home', icon: <HomeIcon />, component: HomePage, path: 'home' },
+  { title: 'Discover', icon: <DiscoverIcon />, component: Test, path: 'discover' },
+  { title: 'Calendar', icon: <CalendarIcon />, component: Test, path: 'calendar' },
+  { title: 'Shop', icon: <ShopIcon />, component: Test, path: 'shop' },
+  { title: 'You', icon: <ProfileIcon />, component: Test, path: 'profile' },
+];
+
 const config = {
   screens: {
       main: {
           path: "/",
-          screens: {
-              // Menu: 'Menu/:parentKey?',
-              Test: "Test",
-              // Order: "Order",
-              // CarList: "CarList",
-              // CarForm: "CarForm",
-              // AddressList: "AddressList",
-              // MyOrders: "MyOrders",
-              // Customization: "Customization",
-              // Verify: "Verify",
-              // Checkout: "Checkout",
-              // OrderStatus: "OrderStatus/:id",
-              // Home: ':id?'
-          }
+          screens: tabs.reduce((acc, tab) => {
+            acc[tab.title] = tab.path;
+            return acc;
+          }, {})
       }
   }
 };
 
-const tabs = [
-  { title: 'Home', icon: <HomeIcon />, component: HomePage },
-  { title: 'Discover', icon: <DiscoverIcon />, component: Test },
-  { title: 'Calendar', icon: <CalendarIcon />, component: Test },
-  { title: 'Shop', icon: <ShopIcon />, component: Test },
-  { title: 'You', icon: <ProfileIcon />, component: Test },
-];
 
 const linking = {
   prefixes: [],
@@ -69,8 +60,6 @@ function App() {
                   component={tab.component}
                 />
               ))}
-                {/* <Tab.Screen name="Test" component={Test} />
-                <Tab.Screen name="Home" component={HomePage} /> */}
             </Tab.Navigator>
         </NavigationContainer>
     </View>
