@@ -8,7 +8,10 @@ const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
  */
 const config = {
     resolver: {
-        sourceExts: ['js', 'jsx', 'ts', 'tsx', 'json', 'mjs'], // Add 'mjs'
+        sourceExts: ['js', 'jsx', 'ts', 'tsx', 'json', 'mjs', 'svg'], // Add 'mjs'
+    },
+    transformer: {
+        babelTransformerPath: require.resolve('react-native-svg-transformer'),
     },
 };
 
