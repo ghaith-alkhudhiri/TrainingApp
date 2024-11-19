@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 // import './App.css';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Test from './Test';
-
+import HomePage from './Home/HomePage';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,15 +39,25 @@ const linking = {
 
 function App() {
   return (
-    <View style={{flex: 1, backgroundColor: 'blue', alignItems: 'center', justifyContent: 'center'}}>
-      <Text style={{fontSize: 20, color: 'white'}}>Hello From create react app + react native web + react-native-app</Text>
-      <NavigationContainer linking={linking as any}>
-          <Tab.Navigator id={undefined}>
-              <Tab.Screen name="Test" component={Test} />
-          </Tab.Navigator>
-      </NavigationContainer>
+    <View style={styles.holder}>
+        <NavigationContainer linking={linking as any}>
+            <Tab.Navigator>
+                <Tab.Screen name="Test" component={Test} />
+                <Tab.Screen name="Home" component={HomePage} />
+            </Tab.Navigator>
+        </NavigationContainer>
     </View>
   );
 }
 
 export default App;
+
+const styles = StyleSheet.create({
+  holder: {
+      maxHeight: "100%",
+      height: "100%",
+      overflow: "hidden",
+      width: "100%"
+  }
+
+});

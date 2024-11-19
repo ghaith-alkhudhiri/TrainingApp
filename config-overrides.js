@@ -1,53 +1,42 @@
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin'); // Import TerserPlugin
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = function override(config, env) {
     // Remove ModuleScopePlugin
     config.resolve.plugins = config.resolve.plugins.filter(plugin => !(plugin instanceof ModuleScopePlugin));
 
-    // Add custom extensions
+    // Add extensions
     config.resolve.extensions.push(".web.tsx", ".web.ts", ".tsx", ".ts");
 
-    // Update plugins
-    config.plugins[0].hash = true;
-
-    // Set up aliases
-    config.resolve.alias = Object.assign(config.resolve.alias, {
+    // Set aliases
+    config.resolve.alias = {
+        ...config.resolve.alias,
         'react-native-maps': 'react-native-web-maps',
-    });
+    };
 
     // Add font loader
     config.module.rules.push({
         test: /\.ttf$/,
-        loader: "url-loader", 
+        loader: "url-loader",
         include: path.resolve(__dirname, "node_modules/react-native-vector-icons"),
     });
 
-    // Update babel plugins
-    var list = config.module.rules
-        .find(a => Object.keys(a).indexOf("oneOf") > -1)
-        .oneOf
-        .filter(a => a.loader && a.loader.indexOf('babel-loader') > -1)
-        .map(a => a.options)
-        .filter(a => a);
+    // Ensure output path is valid
+    config.output.path = path.resolve(__dirname, 'dist');
 
-    for (var i of list)
-        i.plugins = [
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-transform-react-jsx',
-            '@babel/plugin-transform-typescript',
-            '@babel/plugin-proposal-nullish-coalescing-operator',
-            '@babel/plugin-proposal-optional-chaining',
-            ...(i.plugins ?? [])
-        ];
+    // Add HtmlWebpackPlugin if missing
+    if (!config.plugins.some(plugin => plugin instanceof HtmlWebpackPlugin)) {
+        config.plugins.push(
+            new HtmlWebpackPlugin({
+                template: path.resolve(__dirname, 'public/index.html'),
+                inject: true,
+            })
+        );
+    }
 
-    // Set output path
-    config.output.path = path.resolve(__dirname, "hello");
-    config.output.path = "Z:\\WebApp";
-
-    // Update optimization to use TerserPlugin
+    // Enable TerserPlugin
     config.optimization = {
         ...config.optimization,
         minimize: true,
@@ -60,6 +49,16 @@ module.exports = function override(config, env) {
                 },
             }),
         ],
+    };
+
+    // Add devServer
+    config.devServer = {
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
+        compress: true,
+        port: 3000,
+        historyApiFallback: true,
     };
 
     return config;
