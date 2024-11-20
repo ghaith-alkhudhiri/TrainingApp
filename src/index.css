@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-html, body { height: 100%; }
-body { overflow: hidden; }
-#root { display: flex; height: 100%;}
+html, body { height: 100%; background-color: white; }
+body { overflow: hidden; background-color: white; }
+#root { display: flex; height: 100%; background-color: white;}

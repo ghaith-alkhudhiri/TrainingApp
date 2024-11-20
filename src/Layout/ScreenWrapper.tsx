@@ -61,6 +61,7 @@ export default ScreenWrapper;
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
+        backgroundColor: '#FFFFFF'
     },
     innerContainer: {
         paddingHorizontal: 10,

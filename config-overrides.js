@@ -63,7 +63,7 @@
 
 //     return config;
 // };
-
+const webpack = require('webpack');
 const { override, babelInclude } = require('customize-cra');
 const path = require('path');
 
@@ -71,5 +71,32 @@ module.exports = override(
   babelInclude([
     path.resolve('src'), // Include your source code
     path.resolve('node_modules/@react-native/assets-registry') // Include the problematic package
-  ])
+  ]),
+
+  (config) => {
+    // Define the __DEV__ global variable
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'), // Set __DEV__ based on environment
+      })
+    );
+
+    // Resolve aliases for React Native modules
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'react-native-gesture-handler': 'react-native-gesture-handler/gesture-handler.web.js', // Use web-specific handler
+      'react-native-maps': 'react-native-web-maps', // Replace with web-compatible maps
+      'react-native': 'react-native-web', // Replace core RN with RN Web
+    };
+
+    // Add support for font loading
+    config.module.rules.push({
+      test: /\.ttf$/,
+      loader: 'url-loader',
+      include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
+    });
+
+    // Return updated configuration
+    return config;
+  }
 );

@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     gap: 10,
+    backgroundColor: 'white'
   },
   form: {
     padding: 15,
