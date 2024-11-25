@@ -18,6 +18,7 @@ import SectionHeader from '../Home/SectionHeader';
 import GoalsCard from './GoalsCard';
 // import WeightGraph from '../components/common/CustomGraph';
 import theme from '../Constants/theme';
+import ToDoSection from './ToDo/ToDoSection';
 
 interface HomePageProps {
   navigate: any;
@@ -42,6 +43,54 @@ const weightData = [
   { date: '2024-07-11', weight: 61},
   { date: '2024-07-12', weight: 61},
   { date: '2024-07-13', weight: 61},
+];
+
+const workouts = [
+  {
+    id: '1',
+    title: 'Upper Workout',
+    tags: ['Hardcore', 'Yoga'],
+    progress: 5,
+    total: 20,
+    image: 'https://via.placeholder.com/150',
+    instructor: 'Noor M. Ali',
+  },
+  {
+    id: '2',
+    title: 'Lower Workout',
+    tags: ['Hardcore', 'Yoga'],
+    progress: 5,
+    total: 20,
+    image: 'https://via.placeholder.com/150',
+    instructor: 'Noor M. Ali',
+  },
+];
+
+const tasks = [
+  {
+    id: '1',
+    title: 'Body Measurement',
+    description: 'June Weight Update',
+    time: '10:00 AM',
+    date: '13th June, 2024',
+    completed: true,
+  },
+  {
+    id: '2',
+    title: 'Tips for breath work',
+    description: 'Useful Document',
+    time: '10:00 AM',
+    date: '13th June, 2024',
+    completed: false,
+  },
+  {
+    id: '3',
+    title: 'Progress Photo',
+    description: 'June Progress Photo',
+    time: '10:00 AM',
+    date: '13th June, 2024',
+    completed: false,
+  },
 ];
 
 export class HomePage extends Component<HomePageProps> {
@@ -86,8 +135,9 @@ export class HomePage extends Component<HomePageProps> {
         label: 'To do',
         content: (
           <View style={{gap: 22}}>
-              <CustomSectionCard sectionTitle='Workout of Day' title='Empty' description='You did not have any exercise or tasks on this date' image={<ClipboardIcon fill={theme.primary} />} titleStyle={{textAlign: 'center'}} descriptionStyle={{textAlign: 'center'}} />
-              <CustomSectionCard sectionTitle='Tasks' title='Empty' description='You did not have any exercise or tasks on this date' image={<DumbbellIcon fill={theme.primary} />} titleStyle={{textAlign: 'center'}} descriptionStyle={{textAlign: 'center'}} />
+            <ToDoSection />
+              {/* <CustomSectionCard sectionTitle='Workout of Day' title='Empty' description='You did not have any exercise or tasks on this date' image={<ClipboardIcon fill={theme.primary} />} titleStyle={{textAlign: 'center'}} descriptionStyle={{textAlign: 'center'}} />
+              <CustomSectionCard sectionTitle='Tasks' title='Empty' description='You did not have any exercise or tasks on this date' image={<DumbbellIcon fill={theme.primary} />} titleStyle={{textAlign: 'center'}} descriptionStyle={{textAlign: 'center'}} /> */}
           </View>
         )
       }
