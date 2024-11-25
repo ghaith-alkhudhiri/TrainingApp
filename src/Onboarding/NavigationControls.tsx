@@ -8,37 +8,93 @@ import theme from '../Constants/theme';
 interface NavigationControlsProps {
     currentIndex: number;
     totalSteps: number;
+    stepsStyle ?: 'normal' | 'numbered' | 'expanded' | 'wave';
+    buttonStyle ?: 'circular' | 'square';
     onBack: () => void;
     onNext: () => void;
 }
 
-const NavigationControls= ({ currentIndex, totalSteps, onBack, onNext }: NavigationControlsProps) => {
+const NavigationControls= ({ currentIndex, totalSteps, stepsStyle = 'normal', buttonStyle = 'circular', onBack, onNext }: NavigationControlsProps) => {
+    const buttonStyles = [
+        styles.button,
+        buttonStyle === 'circular' && styles.circularButton,
+        buttonStyle === 'square' && styles.squareButton,
+    ]
+
+    const renderSteps = (index: number) => {
+        let isActiveIndex = index === currentIndex;
+
+        switch(stepsStyle){
+            case 'normal':
+                return (
+                    <View
+                        key={index}
+                        style={[
+                            styles.indicator,
+                            isActiveIndex && styles.activeIndicator,
+                        ]}
+                    />
+                );
+            case 'numbered':
+                return (
+                    <View key={index}
+                        style={[
+                            styles.indicator,
+                            isActiveIndex && styles.activeIndicatorContainer,
+                        ]}
+                    >
+                        {isActiveIndex && (
+                            <Text style={styles.activeNumberedText}>{index + 1}</Text>
+                        )}
+                    </View>
+                );
+            case 'expanded':
+                return (
+                    <View 
+                        key={index}
+                        style={
+                            [
+                                styles.expandedIndicator,
+                                isActiveIndex && styles.activeExpandedIndicator
+                            ]
+                        }
+                    />
+                );
+            case 'wave':
+                return (
+                    <View 
+                        key={index}
+                        style={
+                            [
+                                styles.waveIndicator,
+                                isActiveIndex && styles.activeWaveIndicator
+                            ]
+                        }
+
+                    />
+                );
+            default:
+                return null;
+        }
+    }
     return (
         <View style={styles.navigationContainer}>
             <Pressable
-                style={[styles.button, styles.backBtn, currentIndex === 0 && styles.disabledButton]}
+                style={[...buttonStyles, styles.backBtn, currentIndex === 0 && styles.disabledButton]}
                 onPress={onBack}
                 disabled={currentIndex === 0}
             >
                 <LeftArrowIcon />
             </Pressable>
 
-            <View style={styles.indicatorContainer}>
-                {Array.from({ length: totalSteps }).map((_, index) => (
-                    <View
-                        key={index}
-                        style={[
-                            styles.indicator,
-                            currentIndex === index && styles.activeIndicator,
-                        ]}
-                    />
-                ))}
+            <View style={[styles.indicatorContainer, (stepsStyle === 'expanded' || stepsStyle === 'wave') && {gap: 5}]}>
+                {Array.from({ length: totalSteps }).map((_, index) => renderSteps(index))}
             </View>
 
             <Pressable
-                style={[styles.button, currentIndex === totalSteps - 1 && styles.disabledButton]}
+                style={[...buttonStyles]}
                 onPress={onNext}
-                disabled={currentIndex === totalSteps - 1}
+                // disabled={currentIndex === totalSteps - 1}
             >
                 <RightArrowIcon />
 
@@ -64,7 +120,12 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         height: 46,
         paddingHorizontal: 15,
+    },
+    circularButton: {
         borderRadius: 73,
+    },
+    squareButton: {
+        
     },
     backBtn: {
         backgroundColor: 'transparent',
@@ -88,10 +149,50 @@ const styles = StyleSheet.create({
         width: 10,
         height: 10,
         borderRadius: 5,
-        backgroundColor: 'gray',
+        backgroundColor: '#EAF2FF',
         marginHorizontal: 5,
     },
     activeIndicator: {
-        backgroundColor: 'white',
+        backgroundColor: theme.primary,
     },
+    activeIndicatorContainer: {
+        width: 35,
+        height: 36,
+        paddingVertical: 4,
+        paddingHorizontal: 14,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 27,
+        backgroundColor: theme.primary
+    },
+    activeNumberedText: {
+        color: "#FFF",
+        fontFamily: 'Poppins',
+        fontWeight: 500,
+        lineHeight: 20,
+        fontSize: 20,
+    },
+    expandedIndicator: {
+        width: 30,
+        height: 10,
+        backgroundColor: '#EAF2FF',
+        borderRadius: 5,
+    },
+    activeExpandedIndicator: {
+        width: 60,
+        backgroundColor: theme.primary,
+    },
+    waveIndicator: {
+        width: 4,
+        height: 10,
+        backgroundColor: '#D9D9D9',
+        borderRadius: 6,
+    },
+    activeWaveIndicator: {
+        width: 6,
+        height: 22,
+        borderRadius: 6,
+        backgroundColor: theme.primary
+    }
 });

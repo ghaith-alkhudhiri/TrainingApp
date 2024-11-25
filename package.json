@@ -11,6 +11,7 @@
     "web": "react-scripts start",
     "webx": "react-app-rewired start",
     "build-web": "react-scripts build",
+    "build-webx": "react-app-rewired build",
     "test-web": "react-scripts test",
     "eject": "react-scripts eject"
   },

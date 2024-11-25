@@ -316,18 +316,21 @@ const onboardingData = [
         image: require('../Assets/Images/Onboarding1.png'),
         title: 'Finding the Best Pilates Classes for You',
         description: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        transparent: false,
     },
     {
         id: '2',
         image: require('../Assets/Images/Onboarding2.png'),
         title: 'Finding the Best Pilates Classes for You',
         description: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        transparent: false,
     },
     {
         id: '3',
         image: require('../Assets/Images/Onboarding3.png'),
         title: 'Finding the Best Pilates Classes for You',
         description: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        transparent: false,
     },
 ];
 
@@ -335,7 +338,7 @@ interface Props {
     onComplete: () => void;
 }
 
-const OnboardingPage: React.FC<Props> = ({ onComplete }) => {
+const OnboardingPage = ({ onComplete }: Props) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleNext = () => {
@@ -356,12 +359,25 @@ const OnboardingPage: React.FC<Props> = ({ onComplete }) => {
         const currentScreen = onboardingData[currentIndex];
         return (
             <View style={styles.screen}>
-                <ImageBackground source={currentScreen.image} style={styles.image} resizeMode="cover">
-                    <View style={styles.textContainer}>
-                        <Text style={styles.title}>{currentScreen.title}</Text>
-                        <Text style={styles.description}>{currentScreen.description}</Text>
-                    </View>
-                </ImageBackground>
+                {currentScreen.transparent ? (
+                    <ImageBackground source={currentScreen.image} style={styles.image} resizeMode="cover">
+                        <View style={styles.textContainer}>
+                            <Text style={styles.title}>{currentScreen.title}</Text>
+                            <Text style={styles.description}>{currentScreen.description}</Text>
+                        </View>
+                    </ImageBackground>
+                ): (
+                    <>
+                        <ImageBackground source={currentScreen.image} style={styles.image} resizeMode="cover">
+                           
+                        </ImageBackground>
+                        <View style={styles.infoContainer}>
+                            <Text style={[styles.title, styles.infoTitle]}>{currentScreen.title}</Text>
+                            <Text style={[styles.description, styles.infoDescription]}>{currentScreen.description}</Text>
+                        </View>
+                    </>
+                )}
+                
             </View>
         );
     };
@@ -375,6 +391,8 @@ const OnboardingPage: React.FC<Props> = ({ onComplete }) => {
                     <NavigationControls
                         currentIndex={currentIndex}
                         totalSteps={onboardingData.length}
+                        buttonStyle={'circular'}
+                        stepsStyle={'normal'}
                         onBack={handleBack}
                         onNext={handleNext}
                     />
@@ -403,6 +421,7 @@ const OnboardingPage: React.FC<Props> = ({ onComplete }) => {
                     <NavigationControls
                         currentIndex={currentIndex}
                         totalSteps={onboardingData.length}
+                        buttonStyle={'circular'}
                         onBack={handleBack}
                         onNext={handleNext}
                     />
@@ -427,13 +446,32 @@ const styles = StyleSheet.create({
         justifyContent: 'center', // Position text at the bottom
         position: 'relative'
     },
+    bottomContainer: {
+        // position: "relative",
+        backgroundColor: 'white',
+        height: 400,
+       
+    },
     textContainer: {
         padding: 20,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: For better text visibility
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: For better text visibility
         borderRadius: 10,
         margin: 10,
         position: 'absolute',
-        top: 500
+        top: 650,
+    },
+    infoContainer: {
+        height: 300,
+        backgroundColor: 'white',
+        paddingTop: 28,
+        paddingHorizontal: 31,
+        // borderTopLeftRadius: 30,
+        // borderTopRightRadius: 13,
+        // borderWidth: 1,
+       
+    },
+    infoTitle: {
+        color: '#242424',
     },
     title: {
         color: '#E2E8F0',
@@ -441,6 +479,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter',
         fontWeight: '600',
         textAlign: 'center',
+    },
+    infoDescription: {
+        color: '#797979',
     },
     description: {
         color: 'white',
