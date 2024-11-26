@@ -1,4 +1,4 @@
-import { auth, provider, microsoftProvider, appleProvider} from '../../firebase';
+import { auth, provider, microsoftProvider, appleProvider} from '../firebase';
 import { signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, OAuthProvider, signInWithPhoneNumber, RecaptchaVerifier, isSignInWithEmailLink, sendSignInLinkToEmail, signInWithEmailLink } from 'firebase/auth';
 
 class AuthenticationManager {

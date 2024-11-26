@@ -59,6 +59,7 @@ yarn-error.log
 **/Pods/
 /vendor/bundle/
 
+firebase.ts
 #env
 .env
 

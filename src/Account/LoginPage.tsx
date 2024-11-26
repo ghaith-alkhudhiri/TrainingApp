@@ -5,7 +5,7 @@ import AuthenticationManager from "../Managers/AuthenticationManager";
 import CustomButton from "../Common/CustomButton";
 import ScreenWrapper from "../Layout/ScreenWrapper";
 import CustomTabs from "../Common/CustomTabs";
-import {auth} from '../../firebase';
+import {auth} from '../firebase';
 import SocialMediaBtn from "./Components/SocialMediaBtn";
 import MicrosoftIcon from "../Assets/Icons/MicrosoftIcon";
 import GoogleIcon from "../Assets/Icons/GoogleIcon";
@@ -26,7 +26,7 @@ interface LoginPageState {
     initialError: string;
 }
 
-class LoginPage extends Component<Props, LoginPageState>{
+export default class LoginPage extends Component<Props, LoginPageState>{
     constructor(props: any){
         super(props);
         this.state = {
