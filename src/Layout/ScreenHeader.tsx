@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component, ReactNode } from 'react'
 import BackArrowIcon from '../Assets/Icons/BackArrow';
 import If from '../Common/If';
+import ArrowLeft from '../Assets/Icons/ArrowLeft';
 
 interface Props {
     backEnabled: boolean;
@@ -25,7 +26,8 @@ export class ScreenHeader extends Component<Props> {
             </View>
             <Pressable style={styles.backContainer} onPress={this.handleBackPress}>
                 <If condition={backEnabled}>
-                    <BackArrowIcon width={20} height={20} color="#1E232C" />
+                    {/* <BackArrowIcon width={20} height={20} color="#1E232C" /> */}
+                    <ArrowLeft width={20} height={20} color="#1E232C"/>
                 </If>
             </Pressable>
                 {/* <View style={{ width: 41 }} /> */}
@@ -50,7 +52,8 @@ const styles = StyleSheet.create({
     backContainer: {
         width: 41,
         height: 41,
-        borderRadius: 12,
+        // borderRadius: 12,
+        borderRadius: 20,
         borderWidth: 1,
         borderColor: '#E8ECF4',
         backgroundColor: '#FFF',
@@ -82,5 +85,7 @@ const styles = StyleSheet.create({
         right: 0,
         zIndex: 10,
         columnGap: 50,
+        verticalAlign: 'middle',
+        height: 41,
     }
 });
