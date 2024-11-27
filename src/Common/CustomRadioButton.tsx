@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, StyleSheet, ViewStyle, TextStyle, Text } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  I18nManager,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 
 interface RadioButtonProps {
   options: string[];
@@ -23,9 +31,7 @@ interface RadioButtonState {
 class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
   constructor(props: RadioButtonProps) {
     super(props);
-    this.state = {
-      selectedOption: props.selectedOption,
-    };
+    this.state = { selectedOption: props.selectedOption };
   }
 
   handleOptionSelect = (option: string) => {
@@ -36,53 +42,79 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
   render() {
     const {
       options,
-      layout,
+      layout = 'column',
+      containerStyle,
       optionStyle,
       selectedOptionStyle,
       textStyle,
       selectedTextStyle,
-      radioColor,
-      selectedRadioColor,
-      containerStyle,
+      radioColor = '#000',
+      selectedRadioColor = '#007bff',
       icons,
     } = this.props;
     const { selectedOption } = this.state;
+
+    const isRTL = I18nManager.isRTL;
     const isRowLayout = layout === 'row';
 
     return (
-      <View style={[styles.container, containerStyle, isRowLayout ? [styles.row, {flexWrap: 'wrap'} ] : styles.column]}>
-        {options.map((option, index) => (
-          <TouchableOpacity
-            key={option}
-            style={[
-              styles.option,
-              optionStyle,
-              selectedOption === option && (selectedOptionStyle || styles.selectedOption),
-            ]}
-            onPress={() => this.handleOptionSelect(option)}
-          >
-            {icons && React.cloneElement(icons[index], { selected: selectedOption === option })}
-            
-            {!icons && (
-              <View style={[
-                styles.radioCircle,
-                { borderColor: selectedOption === option ? (selectedRadioColor || '#000') : (radioColor || '#000') }
-              ]}>
-                {selectedOption === option && (
-                  <View style={[styles.selectedRb, { backgroundColor: selectedRadioColor || '#000' }]} />
-                )}
-              </View>
-            )}
+      <View
+        style={[
+          styles.container,
+          containerStyle,
+          isRowLayout ? styles.row : styles.column,
+        ]}
+      >
+        {options.map((option, index) => {
+          const isSelected = selectedOption === option;
 
-            <Text style={[
-              styles.text,
-              textStyle,
-              selectedOption === option && (selectedTextStyle || styles.selectedText),
-            ]}>
-              {option}
-            </Text>
-          </TouchableOpacity>
-        ))}
+          return (
+            <TouchableOpacity
+              key={option}
+              style={[
+                styles.option,
+                optionStyle,
+                isSelected && [styles.selectedOption, selectedOptionStyle],
+              ]}
+              onPress={() => this.handleOptionSelect(option)}
+            >
+              {/* Icon or Circle */}
+              {icons && icons[index] ? (
+                React.cloneElement(icons[index], { selected: isSelected })
+              ) : (
+                <View
+                  style={[
+                    styles.radioCircle,
+                    { borderColor: isSelected ? selectedRadioColor : radioColor },
+                  ]}
+                >
+                  {isSelected && (
+                    <View
+                      style={[
+                        styles.selectedRb,
+                        { backgroundColor: selectedRadioColor },
+                      ]}
+                    />
+                  )}
+                </View>
+              )}
+
+              {/* Optional Text */}
+              {option ? (
+                <Text
+                  style={[
+                    styles.text,
+                    textStyle,
+                    isSelected && [styles.selectedText, selectedTextStyle],
+                    { textAlign: isRTL ? 'right' : 'left' },
+                  ]}
+                >
+                  {option}
+                </Text>
+              ) : null}
+            </TouchableOpacity>
+          );
+        })}
       </View>
     );
   }
@@ -92,17 +124,15 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
   },
   row: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   column: {
     flexDirection: 'column',
   },
   option: {
-    // flex: 1,
-    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
@@ -115,28 +145,26 @@ const styles = StyleSheet.create({
     borderColor: '#007bff',
     backgroundColor: '#e7f0ff',
   },
-  text: {
-    fontSize: 16,
-    marginLeft: 10,
-  },
   radioCircle: {
     height: 20,
     width: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#000',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
   },
   selectedRb: {
-    width: 10,
     height: 10,
+    width: 10,
     borderRadius: 5,
-    backgroundColor: '#000',
+  },
+  text: {
+    fontSize: 16,
   },
   selectedText: {
-    fontSize: 16,
-  }
+    fontWeight: 'bold',
+  },
 });
 
 export default CustomRadioButton;

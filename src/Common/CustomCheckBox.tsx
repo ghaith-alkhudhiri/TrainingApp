@@ -4,14 +4,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Text,
-  // I18nManager,
+  I18nManager,
   ViewStyle,
   TextStyle,
 } from 'react-native';
 
 interface CheckBoxProps {
   options: string[];
-  selectedOptions: string[]; // Allow multiple selections
+  selectedOptions: string[];
   onOptionToggle: (selectedOptions: string[]) => void;
   layout?: 'row' | 'column';
   containerStyle?: ViewStyle;
@@ -21,7 +21,7 @@ interface CheckBoxProps {
   selectedTextStyle?: TextStyle;
   boxColor?: string;
   selectedBoxColor?: string;
-  icons?: React.ReactElement<any>[]; // Optional icons for options
+  icons?: React.ReactElement<any>[];
 }
 
 interface CheckBoxState {
@@ -61,7 +61,7 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
     } = this.props;
     const { selectedOptions } = this.state;
 
-    // const isRTL = I18nManager.isRTL;
+    const isRTL = I18nManager.isRTL;
     const isRowLayout = layout === 'row';
 
     return (
@@ -113,7 +113,7 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
                     styles.text,
                     textStyle,
                     isSelected && [styles.selectedText, selectedTextStyle],
-                    // { textAlign: isRTL ? 'right' : 'left' },
+                    { textAlign: isRTL ? 'right' : 'left' },
                   ]}
                 >
                   {option}
