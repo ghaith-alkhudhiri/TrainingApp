@@ -16,6 +16,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OnboardingPage from './Onboarding/OnboardingPage';
 import LoginPage from './Account/LoginPage';
+import OTPVerification from './Account/OTPVerification';
+import SuccessPage from './Common/SuccessPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -113,6 +115,8 @@ export default class App extends Component<any, State> {
           ): (
             <>
                <Stack.Screen name="Login" component={LoginPage} />
+               <Stack.Screen name="success" component={SuccessPage} />
+               <Stack.Screen name="otp-verification" component={OTPVerification} />
                <Stack.Screen name="MainApp" component={MainTabs} /> 
             </>
           )}

@@ -139,7 +139,7 @@ class AuthenticationManager {
     signInWithPhoneNumber = async (phoneNumber: string) => {
         if(!window.recaptchaVerifier){
             window.recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-in-button', {
-                'size': 'visible',
+                'size': 'invisible',
                 'callback': (response: any) =>{
                     this.onSignInSubmit(phoneNumber);
                 },

@@ -12,7 +12,7 @@ import GoogleIcon from "../Assets/Icons/GoogleIcon";
 import AppleIcon from "../Assets/Icons/AppleIcon";
 import LineDividier from "../Common/LineDivider";
 interface Props {
-
+    navigation: any;
 }
 
 interface LoginPageState {
@@ -49,6 +49,7 @@ export default class LoginPage extends Component<Props, LoginPageState>{
         console.log("HandleSignInHasBeenCalled");
         await AuthenticationManager.signInWithPhoneNumber(this.state.phoneNumber);
         // this.props.navigate('/otp-verification');
+        this.props.navigation.navigate('otp-verification');
         
     };
 
