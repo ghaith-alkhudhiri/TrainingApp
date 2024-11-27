@@ -17,7 +17,7 @@ export class Header extends Component {
             <Pressable style={styles.iconContainer}>
                 <DirectIcon />
             </Pressable>
-            <Pressable style={styles.iconContainer}>
+            <Pressable style={styles.iconContainer} onPress={()=>{}}>
                 <NotificationBingIcon />
             </Pressable>
         </View>

@@ -1,12 +1,18 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import React, { Component } from 'react'
 import Dropdown from '../Common/Dropdown';
+import theme from '../Constants/theme';
 
 interface Props {
     title: string;
     onPress?: () => void;
     showActionBtn: boolean;
     showDropdown?: boolean;
+    counter?: number;
+    actionLabel?: string;
+    actionLabelStyle?: TextStyle;
+    titleStyle?: TextStyle;
+    containerStyle?: ViewStyle;
 }
 
 interface State {
@@ -30,15 +36,27 @@ export class SectionHeader extends Component<Props, State> {
     this.setState({selectedValue: value});
   }
   render() {
-    const {title, onPress, showActionBtn, showDropdown} = this.props;
+    const {title, onPress, showActionBtn, showDropdown, counter, actionLabel, actionLabelStyle, titleStyle, containerStyle} = this.props;
     const { selectedValue} = this.state;
     const dropdownOptions = ['weekly', 'monthly', 'yearly'];
     return (
-      <View style={styles.container}>
-        <Text style={styles.titleText}>{title}</Text>
+      <View style={[styles.container, containerStyle]}>
+        <View style={styles.titleContainer}>
+          <Text style={[styles.titleText, titleStyle]}>{title}</Text>
+          {counter && 
+            <View style={styles.counterContainer}>
+              <Text style={styles.counterText}>{counter}</Text>
+            </View>
+          }
+        </View>
         {showActionBtn && (
           <Pressable onPress={onPress}>
-            <Text style={styles.seeAllText}>See All</Text>
+            {actionLabel ? (
+              <Text style={[styles.actionLabel, actionLabelStyle]}>{actionLabel}</Text>
+            ):
+            (
+              <Text style={styles.actionLabel}>See All</Text>
+            )}
           </Pressable>
         )}
         {showDropdown && (
@@ -57,22 +75,41 @@ export default SectionHeader;
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        height: 27,
-        marginBottom: 13,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      height: 27,
+      marginBottom: 13,
+    },
+    titleContainer: {
+      flexDirection: 'row',
     },
     titleText: {
-        color: '#000',
-        fontFamily: 'Inter',
-        fontSize: 18,
-        fontWeight: 600,
-        letterSpacing: -0.3,
+      color: '#000',
+      fontFamily: 'Inter',
+      fontSize: 18,
+      fontWeight: 600,
+      letterSpacing: -0.3,
     },
-    seeAllText: {
-        color: '#0165FC',
-        fontFamily: 'Inter',
-        fontSize: 14,
-        lineHeight: 17,
-    }
+    actionLabel: {
+      color: theme.primary,
+      fontFamily: 'Inter',
+      fontSize: 14,
+      lineHeight: 17,
+    },
+    counterContainer: {
+      height: 20,
+      width: 20,
+      paddingHorizontal: 6,
+      backgroundColor: theme.primary,
+      borderRadius: 20,
+      marginLeft: 5,
+      justifyContent: 'center',
+    },
+    counterText: {
+      color: '#F4F6F9',
+      alignSelf: 'center',
+      fontFamily: 'Inter',
+      fontSize: 12,
+      fontWeight: '400',
+    },
 })
