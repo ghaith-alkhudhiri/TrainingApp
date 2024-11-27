@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import NotificationCard from './NotificationCard';
 // import SuccessView from './SuccessView';
-import ScreenWrapper from '../../Layout/ScreenWrapper';
-import SectionHeader from '../SectionHeader';
-import CustomButton from '../../Common/CustomButton';
-import theme from '../../Constants/theme';
-import NotificationIcon from '../../Assets/Icons/NotificationIcon';
+import ScreenWrapper from '../Layout/ScreenWrapper';
+import SectionHeader from '../Home/SectionHeader';
+import CustomButton from '../Common/CustomButton';
+import theme from '../Constants/theme';
+import NotificationIcon from '../Assets/Icons/NotificationIcon';
 
 interface Notification {
     id: number;

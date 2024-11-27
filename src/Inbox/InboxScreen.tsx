@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import InboxCard from './InboxCard';
-import ScreenWrapper from '../../Layout/ScreenWrapper';
-import SectionHeader from '../SectionHeader';
-import CustomButton from '../../Common/CustomButton';
-import theme from '../../Constants/theme';
-import MessageIcon from '../../Assets/Icons/MessageIcon';
+import ScreenWrapper from '../Layout/ScreenWrapper';
+import SectionHeader from '../Home/SectionHeader';
+import CustomButton from '../Common/CustomButton';
+import theme from '../Constants/theme';
+import MessageIcon from '../Assets/Icons/MessageIcon';
 
 interface Message {
     id: number;
