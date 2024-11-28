@@ -19,6 +19,7 @@ import LoginPage from './Account/LoginPage';
 import OTPVerification from './Account/OTPVerification';
 import SuccessPage from './Common/SuccessPage';
 import TestPage from './Test/TestPage';
+import ProfileScreen from './Profile/ProfilePage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -125,6 +126,7 @@ export default class App extends Component<any, State> {
             <>
               <Stack.Screen name="Login" component={LoginPage} />
               <Stack.Screen name="test" component={TestPage} />
+              <Stack.Screen name="Profile" component={ProfileScreen} />
               <Stack.Screen name="success" component={SuccessPage} />
               <Stack.Screen name="otp-verification" component={OTPVerification} />
               <Stack.Screen name="MainApp" component={MainTabs} /> 

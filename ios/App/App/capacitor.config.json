@@ -1,0 +1,11 @@
+{
+	"appId": "com.tamarran.trainingApp",
+	"appName": "TrainingApp",
+	"webDir": "public",
+	"packageClassList": [
+		"DatePickerPlugin",
+		"CAPCameraPlugin",
+		"FileOpenerPlugin",
+		"FilePickerPlugin"
+	]
+}
