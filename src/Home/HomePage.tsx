@@ -19,10 +19,7 @@ import GoalsCard from './GoalsCard';
 // import WeightGraph from '../components/common/CustomGraph';
 import theme from '../Constants/theme';
 import ToDoSection from './ToDo/ToDoSection';
-
-interface HomePageProps {
-  navigate: any;
-}
+import { NavProps } from '../types';
 
 const goals = [
   { title: 'Previous', value: 80, unit: 'kg'},
@@ -93,8 +90,9 @@ const tasks = [
   },
 ];
 
-export class HomePage extends Component<HomePageProps> {
+export class HomePage extends Component<NavProps> {
   render() {
+    const {navigation, route} = this.props;
     const tabs = [
       {
         key: 'general',
@@ -145,7 +143,7 @@ export class HomePage extends Component<HomePageProps> {
     return (
         <ScreenWrapper withoutHeader={true}>
           {/* <Home/> */}
-          <Header />
+          <Header navigation={navigation} route={route} />
           <SearchInput />
           <CustomTabs styleType='small' tabs={tabs} />
           {/* <AdvertisementBanner imageUrl='https://s3-alpha-sig.figma.com/img/ff82/42b7/8853662b37a74f0bb163d5471b0d694f?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HVQSZ5db-DRyg3qmYtK6~-gbqQKkf8nBDmWVR4XXG-M8HMJ8XXsvhZN-4S-uK9~vAdyEi9cTeeWwqNHGSMuu3v9C992R0wgOzwo6gNsKHK1Im~-ItW5ZzvGJF1y6V17scARYvLhEe5rbHnbAtVa91YmNvMbuuwkBACgcV45g9R-GJrqXWbwA3KaoYk4CmEfaT3Ly93MFFR0U7BQb5ChMw~e~UbuorrfvbNJpD6r~m-cmRslcVKoRy-9h~ZZFxFYRAzhtMsNOe4A~WntihThwVem44GIsTaPVv7U-KoU70SE0ACswTAeyEgGkPsNstnivSODo2TJ95ii9HHs5gyR43g__' title='Varies Membership' description="Don't miss out on our membership benefits" cta='Shop now' />

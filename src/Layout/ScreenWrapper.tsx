@@ -2,6 +2,8 @@ import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { Component, ReactNode } from 'react'
 import ScreenHeader from './ScreenHeader';
 import If from '../Common/If';
+import { NavProps } from '../types';
+import withNavProps from '../Navigation/WithNavProps';
 
 interface Props {
     children: any;
@@ -14,12 +16,13 @@ interface State {
     screenHeight: number;
 }
 
+type WrapperProps = NavProps & Props;
 
-export class ScreenWrapper extends Component<Props, State> {
+export class ScreenWrapper extends Component<WrapperProps, State> {
     static defaultProps  = {
         withoutHeader: false,
     }
-    constructor(props: Props){
+    constructor(props: WrapperProps){
         super(props);
         this.state = {
             screenHeight: Dimensions.get('window').height,
@@ -45,7 +48,13 @@ export class ScreenWrapper extends Component<Props, State> {
             <View style={[styles.wrapper, {minHeight: screenHeight}]}>
                 <ScrollView style={styles.innerContainer}>
                     <If condition={!withoutHeader}>
-                        <ScreenHeader backEnabled={true} title={title} rightElement={rightElement} />
+                        <ScreenHeader
+                            navigation={this.props.navigation} 
+                            route={this.props.route} 
+                            backEnabled={true} 
+                            title={title} 
+                            rightElement={rightElement} 
+                        />
                     </If>
                     <View style={styles.childrenContainer}>
                         {this.props.children}
@@ -56,7 +65,7 @@ export class ScreenWrapper extends Component<Props, State> {
     }
 }
 
-export default ScreenWrapper;
+export default withNavProps(ScreenWrapper);
 
 const styles = StyleSheet.create({
     wrapper: {
