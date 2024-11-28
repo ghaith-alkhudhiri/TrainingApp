@@ -75,12 +75,13 @@ const styles = StyleSheet.create({
         fontFamily: "Inter",
         fontWeight: 400,
         lineHeight: 16,
-        letterSpacing: 0.04
+        letterSpacing: 0.04,
+        color: '#64748B',
     },
     input: {
         fontSize: 16,
         fontWeight: 400,
-        lineHeight: 24,
+        lineHeight: 24
     },
     rounded: {
 
