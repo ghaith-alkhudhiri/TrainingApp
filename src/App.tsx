@@ -123,8 +123,8 @@ export default class App extends Component<any, State> {
           </Stack.Screen>
           ): (
             <>
-              <Stack.Screen name="test" component={TestPage} />
               <Stack.Screen name="Login" component={LoginPage} />
+              <Stack.Screen name="test" component={TestPage} />
               <Stack.Screen name="success" component={SuccessPage} />
               <Stack.Screen name="otp-verification" component={OTPVerification} />
               <Stack.Screen name="MainApp" component={MainTabs} /> 
