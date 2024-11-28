@@ -16,6 +16,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OnboardingPage from './Onboarding/OnboardingPage';
 import TabsNavigation from './Navigation/TabsNavigation';
+import LoginPage from './Account/LoginPage';
+import OTPVerification from './Account/OTPVerification';
+import SuccessPage from './Common/SuccessPage';
+import TestPage from './Test/TestPage';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -30,19 +34,27 @@ const tabs = [
 
 const config = {
   screens: {
-      main: {
-          path: "/",
-          screens: tabs.reduce((acc, tab) => {
-            acc[tab.title] = tab.path;
-            return acc;
-          }, {})
-      }
+      onboarding: 'onboarding',
+      login: 'login',
+      'otp-verification': 'otp-verification',
+      success: 'success',
+      mainApp: {
+        path: 'mainApp',
+        screens: {
+          home: 'home',
+          discover: 'discover',
+          calendar: 'calendar',
+          shop: 'shop',
+          profile: 'profile',
+        },
+      },
+      test: 'test'
   }
 };
 
 
 const linking = {
-  prefixes: [],
+  prefixes: ['http://localhost:3000'],
   config,
 };
 
@@ -112,7 +124,14 @@ export default class App extends Component<any, State> {
           </Stack.Screen>
           </Stack.Navigator>
           ): (
-            <TabsNavigation />
+            <>
+              <TabsNavigation />
+              <Stack.Screen name="Login" component={LoginPage} />
+              <Stack.Screen name="test" component={TestPage} />
+              <Stack.Screen name="success" component={SuccessPage} />
+              <Stack.Screen name="otp-verification" component={OTPVerification} />
+              <Stack.Screen name="MainApp" component={MainTabs} /> 
+            </>
           )}
       </NavigationContainer>
     )
