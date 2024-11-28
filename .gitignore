@@ -1,7 +1,8 @@
 # OSX
 #
 .DS_Store
-
+.env
+firebase.ts
 # Xcode
 #
 build/
