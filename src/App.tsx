@@ -20,6 +20,8 @@ import LoginPage from './Account/LoginPage';
 import OTPVerification from './Account/OTPVerification';
 import SuccessPage from './Common/SuccessPage';
 import TestPage from './Test/TestPage';
+import MemberPrerequisite from './Onboarding/MemberPrerequisite';
+import WelcomeScreen from './Onboarding/WelcomeScreen';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -122,14 +124,21 @@ export default class App extends Component<any, State> {
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
               )}
           </Stack.Screen>
+          <Stack.Screen name="MemberPrerequisite" component={MemberPrerequisite} options={{headerShown: false}} />
+          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} />
+          <Stack.Screen name="Login" component={LoginPage} />
+          <Stack.Screen name="otp-verification" component={OTPVerification} />
+          <Stack.Screen name="success">
+              {(props) => (
+                <SuccessPage {...props} onComplete={this.completeOnboarding} />
+              )}
+          </Stack.Screen>
           </Stack.Navigator>
           ): (
             <>
               <TabsNavigation />
-              <Stack.Screen name="Login" component={LoginPage} />
               <Stack.Screen name="test" component={TestPage} />
               <Stack.Screen name="success" component={SuccessPage} />
-              <Stack.Screen name="otp-verification" component={OTPVerification} />
             </>
           )}
       </NavigationContainer>

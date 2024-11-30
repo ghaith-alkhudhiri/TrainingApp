@@ -2,10 +2,10 @@ import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import SuccessView from './SuccessView';
 import SuccessMark from '../Assets/Icons/SuccessMark';
+import { NavProps } from '../types';
 
 interface Props {
-    navigation: any;
-    route: any;
+    onComplete: ()=>{};
 }
 
 interface State {
@@ -13,8 +13,10 @@ interface State {
     width: number;
 }
 
-class SuccessPage extends Component<Props, State> {
-    constructor(props: Props){
+type SuccessProps = Props & NavProps;
+
+class SuccessPage extends Component<SuccessProps, State> {
+    constructor(props: SuccessProps){
         super(props);
         const { height, width} = Dimensions.get('window');
         this.state = {
@@ -35,6 +37,7 @@ class SuccessPage extends Component<Props, State> {
         const {nextPage} = route.params || {};
 
         setTimeout(() => {
+            this.props.onComplete();
             if(nextPage){
                 navigation.navigate(nextPage);
             }

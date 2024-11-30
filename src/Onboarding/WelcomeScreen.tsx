@@ -1,24 +1,20 @@
 import { Text, Image, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import CustomButton from '../Common/CustomButton';
+import { NavProps } from '../types';
 
 const { height } = Dimensions.get('window');
 
-interface Props {
-    navigate: any;
-}
-
-export class WelcomeScreen extends Component<Props> {
+export class WelcomeScreen extends Component<NavProps> {
     goToLogin = () => {
-        const {navigate} = this.props;
-        navigate('/login');
+        this.props.navigation.navigate('Login');
     }
 
     render() {
     return (
       <View style={[styles.container]}>
         <Image
-            source={{ uri: '/welcome_bg.png'}}
+            source={require('../Assets/Images/welcome_bg.png')}
             style={styles.image}
             resizeMode='contain'
         />
@@ -30,7 +26,9 @@ export class WelcomeScreen extends Component<Props> {
                 </View>
                 <CustomButton label="Let's Get Started" onPress={() => {}} buttonStyle={styles.strechedBtn} />
                 <Text style={styles.haveAccountText}>Already have an account? 
-                    <TouchableOpacity onPress={this.goToLogin} style={styles.loginText}>Log In</TouchableOpacity>
+                    <TouchableOpacity onPress={this.goToLogin} style={styles.loginText}>
+                        <Text>Log In</Text>
+                    </TouchableOpacity>
                 </Text>
             </View>
         </View>

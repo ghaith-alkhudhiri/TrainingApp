@@ -3,27 +3,22 @@ import React, { Component } from 'react'
 import CustomButton from '../Common/CustomButton';
 import CustomModal, { Action } from '../Common/CustomModal';
 import theme from '../Constants/theme';
+import { NavProps } from '../types';
 
 const { height } = Dimensions.get('window');
-
-interface Props {
-    navigate: any;
-}
 
 interface State {
     modalVisible: boolean;
 }
-
-export class MemberPrerequisite extends Component<Props, State> {
-    constructor(props: Props) {
+export class MemberPrerequisite extends Component<NavProps, State> {
+    constructor(props: NavProps) {
         super(props);
         this.state = {
             modalVisible: false,
         };
     }
     goToWelcomeScreen = () => {
-        const {navigate} = this.props;
-        navigate('/welcome');
+        this.props.navigation.navigate('WelcomeScreen');
     }
 
     render() {
