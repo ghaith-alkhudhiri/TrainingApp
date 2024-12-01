@@ -46,7 +46,7 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
         const { withoutHeader, title, rightElement, navigation} = this.props;
         console.log('Screen height', screenHeight);
         return (
-            <View style={[styles.wrapper, {minHeight: screenHeight}]}>
+            <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
                 <ScrollView style={styles.innerContainer}>
                     <If condition={!withoutHeader}>
                         <ScreenHeader
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     innerContainer: {
-        flexGrow: 1,
+        // flexGrow: 1,
         paddingHorizontal: 10,
         paddingTop: 5,
         paddingBottom: 90,
