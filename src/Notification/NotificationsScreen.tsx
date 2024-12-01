@@ -152,6 +152,7 @@ export class NotificationsScreen extends Component<{}, NotificationsScreenState>
                                         title={notification.title}
                                         message={notification.message}
                                         timestamp={notification.timestamp}
+                                        status={notification.status}
                                     />
                                 ))}
                             </View>
