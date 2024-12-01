@@ -2,9 +2,11 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import DirectIcon from '../Assets/Icons/DirectIcon';
 import NotificationBingIcon from '../Assets/Icons/NotificationBingIcon';
+import { NavProps } from '../types';
 
-export class Header extends Component {
+export class Header extends Component<NavProps> {
   render() {
+    const {navigation, route} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.welcomeContainer}>
@@ -14,10 +16,10 @@ export class Header extends Component {
             </View>
         </View>
         <View style={styles.iconsContainer}>
-            <Pressable style={styles.iconContainer}>
+            <Pressable style={styles.iconContainer} onPress={()=>{navigation.navigate('Inbox')}}>
                 <DirectIcon />
             </Pressable>
-            <Pressable style={styles.iconContainer} onPress={()=>{}}>
+            <Pressable style={styles.iconContainer} onPress={()=>{navigation.navigate('Notification')}}>
                 <NotificationBingIcon />
             </Pressable>
         </View>

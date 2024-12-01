@@ -35,7 +35,7 @@ export class OTPVerification extends Component<Props, State> {
             this.props.navigation.navigate('success', {
                 title: "Thank you!",
                 description: "Thank you for joining our team! you will be directed to finishing creating account process",
-                nextPage: "MainApp"
+                nextPage: "Homepage"
             });
         } catch (error) {
             console.error("Error verifying code: ", error);

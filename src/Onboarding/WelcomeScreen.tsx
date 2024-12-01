@@ -1,39 +1,22 @@
 import { Text, Image, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import CustomButton from '../Common/CustomButton';
-import CustomModal, { Action } from '../Common/CustomModal';
-import theme from '../Constants/theme';
 import { NavProps } from '../types';
 
 const { height } = Dimensions.get('window');
 
-interface State {
-    modalVisible: boolean;
+interface Props {
+    onComplete: ()=>{}
 }
-export class MemberPrerequisite extends Component<NavProps, State> {
-    constructor(props: NavProps) {
-        super(props);
-        this.state = {
-            modalVisible: false,
-        };
-    }
-    goToWelcomeScreen = () => {
-        this.props.navigation.navigate('WelcomeScreen');
+
+type WelcomeProps = Props & NavProps;
+export class WelcomeScreen extends Component<WelcomeProps> {
+    goToLogin = () => {
+        this.props.onComplete(); //remove
+        this.props.navigation.navigate('Login');
     }
 
     render() {
-        const actions: Action[] = [
-            {
-              text: 'Okay',
-              onPress: () => this.setState({modalVisible: false}),
-              style: 'primary',
-            },
-            {
-              text: 'Our Gym Location',
-              onPress: () => this.setState({modalVisible: false}),
-              style: 'outline',
-            },
-          ];        
     return (
       <View style={[styles.container]}>
         <Image
@@ -44,20 +27,15 @@ export class MemberPrerequisite extends Component<NavProps, State> {
         <View style={styles.overlay}>
             <View style={styles.welcomeOuterContainer}>
                 <View style={styles.welcomeTextContainer}>
-                    <Text style={styles.title}>Are you a <Text style={{color: theme.primary}}>member</Text>{"\n"}of our gym</Text>
-                    <Text style={styles.description}>You must be member in our gym so you can use our app! </Text>
+                    <Text style={styles.title}>Finding the Best Pilates Classes for You</Text>
+                    <Text style={styles.description}>App to search and discover the most suitable place for you to stay.</Text>
                 </View>
-                <CustomButton label="Yes, I am" onPress={this.goToWelcomeScreen} buttonStyle={styles.stretchedBtn} />
-                <CustomButton label="No, I am not" onPress={() => {this.setState({modalVisible: true})}} buttonStyle={styles.outlineBtn} textStyle={styles.outlineBtnText} />
-                <CustomModal
-                    visible={this.state.modalVisible}
-                    onClose={() => this.setState({modalVisible: false})}
-                    title="We're Sorry"
-                    description="You must be a member of our gym before using our app! visit our closest branch and Join our family now!"
-                    actions={actions}
-                    animationType='slide'
-                >
-                </CustomModal>
+                <CustomButton label="Let's Get Started" onPress={() => {}} buttonStyle={styles.strechedBtn} />
+                <Text style={styles.haveAccountText}>Already have an account? 
+                    <TouchableOpacity onPress={this.goToLogin} style={styles.loginText}>
+                        <Text>Log In</Text>
+                    </TouchableOpacity>
+                </Text>
             </View>
         </View>
       </View>
@@ -65,7 +43,7 @@ export class MemberPrerequisite extends Component<NavProps, State> {
   }
 }
 
-export default MemberPrerequisite;
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -122,7 +100,7 @@ const styles = StyleSheet.create({
         fontWeight: 400,
         lineHeight: 22,
     },
-    stretchedBtn: {
+    strechedBtn: {
         alignSelf: 'stretch',
     },
     loginText: {
@@ -132,14 +110,5 @@ const styles = StyleSheet.create({
         lineHeight: 22,
         textDecorationLine: 'underline',
         cursor: 'pointer',
-    },
-    outlineBtn: {
-        backgroundColor: 'white',
-        borderColor: '#0961F5',
-        borderWidth: 1,
-        alignSelf: 'stretch',
-    },
-    outlineBtnText: {
-        color: '#0961F5',
     }
 })

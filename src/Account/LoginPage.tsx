@@ -5,6 +5,7 @@ import AuthenticationManager from "../Managers/AuthenticationManager";
 import CustomButton from "../Common/CustomButton";
 import ScreenWrapper from "../Layout/ScreenWrapper";
 import CustomTabs from "../Common/CustomTabs";
+
 import {auth, isSignInWithEmailLink} from '../firebase';
 import SocialMediaBtn from "./Components/SocialMediaBtn";
 import MicrosoftIcon from "../Assets/Icons/MicrosoftIcon";

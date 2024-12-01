@@ -309,6 +309,7 @@ import onboarding1 from '../Assets/Images/Onboarding1.png';
 import onboarding2 from '../Assets/Images/Onboarding2.png';
 import onboarding3 from '../Assets/Images/Onboarding3.png';
 import NavigationControls from './NavigationControls'; // Assuming NavigationControls is separated
+import { NavProps } from '../types';
 
 const onboardingData = [
     {
@@ -338,14 +339,17 @@ interface Props {
     onComplete: () => void;
 }
 
-const OnboardingPage = ({ onComplete }: Props) => {
+type OnboardingProps = Props & NavProps;
+
+const OnboardingPage = ({ onComplete, navigation, route }: OnboardingProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleNext = () => {
         if (currentIndex < onboardingData.length - 1) {
             setCurrentIndex(currentIndex + 1);
         } else {
-            onComplete(); // Trigger onComplete when the last screen is reached
+            navigation.navigate('MemberPrerequisite');
+            // onComplete(); // Trigger onComplete when the last screen is reached
         }
     };
 

@@ -3,6 +3,7 @@ import React, { Component, ReactNode } from 'react'
 import BackArrowIcon from '../Assets/Icons/BackArrow';
 import If from '../Common/If';
 import ArrowLeft from '../Assets/Icons/ArrowLeft';
+import { NavProps } from '../types';
 
 interface Props {
     backEnabled: boolean;
@@ -10,11 +11,19 @@ interface Props {
     rightElement?: ReactNode;
     navigation?: any;
 }
+type HeaderProps = NavProps & Props;
 
-export class ScreenHeader extends Component<Props> {
-    handleBackPress = () => {
-        this.props.navigation.goBack();
-      };
+
+export class ScreenHeader extends Component<HeaderProps> {
+    handleGoBack = () => {
+        const { navigation, route } = this.props;
+        if (navigation && navigation.canGoBack()) {
+            navigation.goBack();
+        } else {
+            console.log('No screen to go back to!');
+            navigation.navigate('Home');
+        }
+    };
     render() {
         const {backEnabled, title, rightElement} = this.props;
         return (
@@ -25,7 +34,7 @@ export class ScreenHeader extends Component<Props> {
                     <Text style={styles.title}>{title}</Text>
                 </If>
             </View>
-            <Pressable style={styles.backContainer} onPress={this.handleBackPress}>
+            <Pressable style={styles.backContainer} onPress={this.handleGoBack}>
                 <If condition={backEnabled}>
                     {/* <BackArrowIcon width={20} height={20} color="#1E232C" /> */}
                     <ArrowLeft width={20} height={20} color="#1E232C"/>

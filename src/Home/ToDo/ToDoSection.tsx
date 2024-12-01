@@ -89,7 +89,7 @@ class ToDoSection extends Component<{}, State> {
       ];
 
       this.setState({ workouts: sampleWorkouts, tasks: sampleTasks, loading: false });
-    }, 2000);
+    }, 1000);
   }
 
   // Render Workouts

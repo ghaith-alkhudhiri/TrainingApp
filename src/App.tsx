@@ -15,13 +15,16 @@ import ShopIcon from './Assets/Icons/ShopIcon';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OnboardingPage from './Onboarding/OnboardingPage';
+import TabsNavigation from './Navigation/TabsNavigation';
 import LoginPage from './Account/LoginPage';
 import OTPVerification from './Account/OTPVerification';
 import SuccessPage from './Common/SuccessPage';
 import TestPage from './Test/TestPage';
 import ProfileScreen from './Profile/ProfilePage';
+import MemberPrerequisite from './Onboarding/MemberPrerequisite';
+import WelcomeScreen from './Onboarding/WelcomeScreen';
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const tabs = [
@@ -58,26 +61,26 @@ const linking = {
   config,
 };
 
-class MainTabs extends Component {
-  render(){
-    return (
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: () => {
-            const tab = tabs.find((t) => t.title === route.name);
-            return tab?.icon || null;
-          },
-          headerShown: false,
-          tabBarShowLabel: true,
-        })}
-      >
-        {tabs.map((tab) => (
-          <Tab.Screen key={tab.title} name={tab.title} component={tab.component} />
-        ))}
-      </Tab.Navigator>
-    );
-  }
-}
+// class MainTabs extends Component {
+//   render(){
+//     return (
+//       <Tab.Navigator
+//         screenOptions={({ route }) => ({
+//           tabBarIcon: () => {
+//             const tab = tabs.find((t) => t.title === route.name);
+//             return tab?.icon || null;
+//           },
+//           headerShown: false,
+//           tabBarShowLabel: true,
+//         })}
+//       >
+//         {tabs.map((tab) => (
+//           <Tab.Screen key={tab.title} name={tab.title} component={tab.component} />
+//         ))}
+//       </Tab.Navigator>
+//     );
+//   }
+// }
 
 interface State {
   hasSeenOnboarding: boolean;
@@ -115,52 +118,41 @@ export default class App extends Component<any, State> {
 
     return (
       <NavigationContainer linking={linking as any}>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
           {!hasSeenOnboarding ? (
+        <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
               )}
           </Stack.Screen>
+          <Stack.Screen name="MemberPrerequisite" component={MemberPrerequisite} options={{headerShown: false}} />
+          {/* <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} /> */}
+          <Stack.Screen name="WelcomeScreen">
+              {(props) => (
+                <WelcomeScreen {...props} onComplete={this.completeOnboarding} />
+              )}
+          </Stack.Screen>
+          <Stack.Screen name="Login" component={LoginPage} />
+          <Stack.Screen name="otp-verification" component={OTPVerification} />
+          <Stack.Screen name="success">
+              {(props) => (
+                <SuccessPage {...props} onComplete={this.completeOnboarding} />
+              )}
+          </Stack.Screen>
+          </Stack.Navigator>
           ): (
             <>
               <Stack.Screen name="Profile" component={ProfileScreen} />
               <Stack.Screen name="Login" component={LoginPage} />
+              <TabsNavigation />
               <Stack.Screen name="test" component={TestPage} />
               <Stack.Screen name="success" component={SuccessPage} />
-              <Stack.Screen name="otp-verification" component={OTPVerification} />
-              <Stack.Screen name="MainApp" component={MainTabs} /> 
             </>
           )}
-        </Stack.Navigator>
       </NavigationContainer>
     )
   }
-  // return (
-    // <View style={styles.holder}>
-    //     <NavigationContainer linking={linking as any}>
-    //         <Tab.Navigator screenOptions={({ route }) => ({
-    //           tabBarIcon: () => {
-    //             const tab = tabs.find((t) => t.title === route.name);
-    //             return tab?.icon || null;
-    //           },
-    //           headerShown: false, // Optional: hide the header
-    //           tabBarShowLabel: true, // Optional: control label visibility
-    //       })}>
-    //           {tabs.map((tab) => (
-    //             <Tab.Screen
-    //               key={tab.title}
-    //               name={tab.title}
-    //               component={tab.component}
-    //             />
-    //           ))}
-    //         </Tab.Navigator>
-    //     </NavigationContainer>
-    // </View>
-  // );
 }
-
-// export default App;
 
 const styles = StyleSheet.create({
   holder: {
