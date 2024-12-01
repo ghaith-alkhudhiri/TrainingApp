@@ -8,6 +8,7 @@ interface Props {
     withoutHeader: boolean;
     title?: string;
     rightElement?: ReactNode;
+    navigation?: any;
 }
 
 interface State {
@@ -39,13 +40,13 @@ export class ScreenWrapper extends Component<Props, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement} = this.props;
+        const { withoutHeader, title, rightElement, navigation} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {minHeight: screenHeight}]}>
                 <ScrollView style={styles.innerContainer}>
                     <If condition={!withoutHeader}>
-                        <ScreenHeader backEnabled={true} title={title} rightElement={rightElement} />
+                        <ScreenHeader backEnabled={true} title={title} rightElement={rightElement} navigation={navigation} />
                     </If>
                     <View style={styles.childrenContainer}>
                         {this.props.children}
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     innerContainer: {
+        flexGrow: 1,
         paddingHorizontal: 10,
         paddingTop: 5,
         paddingBottom: 90,

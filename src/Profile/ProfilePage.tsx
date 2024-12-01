@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 // import AvatarPicker from '../components/common/AvatarPicker';
 import {FilePicker, PickFilesResult, PickFilesOptions} from '@capawesome/capacitor-file-picker'
@@ -11,10 +11,11 @@ import CustomRadioButton from '../Common/CustomRadioButton';
 import FileUploadInput from '../Common/FileUploadInput';
 import AvatarPicker from '../Common/AvatarPicker';
 import DatePickerInput from '../Common/DatePickerInput';
+import { isIOS } from '../Utils/PlatformUtil';
 
 
 interface Props {
-    navigate: any;
+    navigation: any;
 }
 
 interface State {
@@ -75,63 +76,83 @@ export class ProfileScreen extends Component<Props, State> {
 
   render() {
     const {firstName, lastName, personalId, selectedOption, selectedValue, medicalIssues} = this.state;
+    const {navigation} = this.props;
     console.log("Selected date inside profile", this.state.selectedDate);
     console.log("Selected Option inside profile", selectedOption);
     console.log("Selected Value inside profile", selectedValue);
     return (
-      <ScreenWrapper>
-        <Text style={styles.title}>Complete Your Profile</Text>
-        <AvatarPicker containerStyle={styles.avatarContainerStyle} />
-        <SectionWrapper title='Personal Information'>
-            <CustomTextInput 
-                label='First Name *'
-                placeholder='Enter your first Name'
-                value={firstName}
-                onChangeText={this.handleFirstNameChange}
-            />
-            <CustomTextInput 
-                label='Last Name *'
-                placeholder='Enter your Last Name'
-                value={lastName}
-                onChangeText={this.handleLastNameChange}
-            />
-            <CustomTextInput 
-                label='Personal Id *'
-                placeholder='Enter your Personal Id'
-                value={personalId}
-                onChangeText={this.handlePersonalIdChange}
-            />
-            <DatePickerInput onDateChange={this.handleDateChange}/>
-        </SectionWrapper>
-        <SectionWrapper title='Do you have any medical issues?'>
-            <CustomRadioButton
-                options={['Yes', 'No']}
-                selectedOption={this.state.selectedOption}
-                onOptionSelect={this.handleOptionSelect}
-                layout="column"
-                optionStyle={styles.option}
-                selectedOptionStyle={styles.selectedOption}
-                textStyle={styles.text}
-            />
-        </SectionWrapper>
-        {
-            selectedOption === 'Yes' && (
-                <SectionWrapper title='If yes, write them down'>
-                    <CustomTextInput 
-                        label="medical Issues *"
-                        placeholder='Enter your medical issues'
-                        value={medicalIssues}
-                        onChangeText={this.handleMedicalIssues}
-                    />
-                </SectionWrapper>
-            )
-        }
-        <SectionWrapper title='When you will start *'>
-            <Text>Immediately</Text>
-        </SectionWrapper>
-        <SectionWrapper title='Upload your personal Id'>
-            <FileUploadInput onFileSelected={this.handleFilesSelected} />
-        </SectionWrapper>
+      <ScreenWrapper navigation={navigation}>
+       
+            <Text style={styles.title}>Complete Your Profile</Text>
+            <AvatarPicker containerStyle={styles.avatarContainerStyle} />
+            <SectionWrapper title='Personal Information'>
+                <CustomTextInput 
+                    label='First Name *'
+                    placeholder='Enter your first Name'
+                    value={firstName}
+                    onChangeText={this.handleFirstNameChange}
+                />
+                <CustomTextInput 
+                    label='First Name *'
+                    placeholder='Enter your first Name'
+                    value={firstName}
+                    onChangeText={this.handleFirstNameChange}
+                />
+                <CustomTextInput 
+                    label='First Name *'
+                    placeholder='Enter your first Name'
+                    value={firstName}
+                    onChangeText={this.handleFirstNameChange}
+                />
+                <CustomTextInput 
+                    label='First Name *'
+                    placeholder='Enter your first Name'
+                    value={firstName}
+                    onChangeText={this.handleFirstNameChange}
+                />
+                <CustomTextInput 
+                    label='Last Name *'
+                    placeholder='Enter your Last Name'
+                    value={lastName}
+                    onChangeText={this.handleLastNameChange}
+                />
+                <CustomTextInput 
+                    label='Personal Id *'
+                    placeholder='Enter your Personal Id'
+                    value={personalId}
+                    onChangeText={this.handlePersonalIdChange}
+                />
+                <DatePickerInput onDateChange={this.handleDateChange}/>
+            </SectionWrapper>
+            <SectionWrapper title='Do you have any medical issues?'>
+                <CustomRadioButton
+                    options={['Yes', 'No']}
+                    selectedOption={this.state.selectedOption}
+                    onOptionSelect={this.handleOptionSelect}
+                    layout="column"
+                    optionStyle={styles.option}
+                    selectedOptionStyle={styles.selectedOption}
+                    textStyle={styles.text}
+                />
+            </SectionWrapper>
+            {
+                selectedOption === 'Yes' && (
+                    <SectionWrapper title='If yes, write them down'>
+                        <CustomTextInput 
+                            label="medical Issues *"
+                            placeholder='Enter your medical issues'
+                            value={medicalIssues}
+                            onChangeText={this.handleMedicalIssues}
+                        />
+                    </SectionWrapper>
+                )
+            }
+            <SectionWrapper title='When you will start *'>
+                <Text>Immediately</Text>
+            </SectionWrapper>
+            <SectionWrapper title='Upload your personal Id'>
+                <FileUploadInput onFileSelected={this.handleFilesSelected} />
+            </SectionWrapper>
       </ScreenWrapper>
     )
   }
@@ -170,5 +191,5 @@ const styles  = StyleSheet.create({
     },
     text: {
 
-    }
+    },
 });

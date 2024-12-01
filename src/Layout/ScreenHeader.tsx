@@ -8,11 +8,12 @@ interface Props {
     backEnabled: boolean;
     title?: string;
     rightElement?: ReactNode;
+    navigation?: any;
 }
 
 export class ScreenHeader extends Component<Props> {
     handleBackPress = () => {
-        // this.props.navigate(-1);
+        this.props.navigation.goBack();
       };
     render() {
         const {backEnabled, title, rightElement} = this.props;

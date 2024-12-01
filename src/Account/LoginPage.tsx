@@ -1,11 +1,11 @@
 import { Component } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Linking, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import MobileNumberInput from "./Components/MobileNumberInput";
 import AuthenticationManager from "../Managers/AuthenticationManager";
 import CustomButton from "../Common/CustomButton";
 import ScreenWrapper from "../Layout/ScreenWrapper";
 import CustomTabs from "../Common/CustomTabs";
-import {auth} from '../firebase';
+import {auth, isSignInWithEmailLink} from '../firebase';
 import SocialMediaBtn from "./Components/SocialMediaBtn";
 import MicrosoftIcon from "../Assets/Icons/MicrosoftIcon";
 import GoogleIcon from "../Assets/Icons/GoogleIcon";
@@ -101,8 +101,60 @@ export default class LoginPage extends Component<Props, LoginPageState>{
         }
     }
 
+    completeEmailSignIn = async (url: string) => {
+        const { navigation } = this.props;
+        this.setState({ initialLoading: true });
+        try {
+            const result = await AuthenticationManager.completeSignInWithEmailLink(url);
+            this.setState({
+                initialLoading: false,
+                initialError: '',
+            });
+            navigation.navigate('MainApp');
+        } catch (err: any) {
+            this.setState({
+                initialLoading: false,
+                initialError: err.message,
+            });
+            navigation.navigate('Login');
+        }
+
+        
+    }
+
+    async componentDidMount() {
+        const {navigation} = this.props;
+
+        auth.onAuthStateChanged((user) => {
+            if(user){
+                navigation.navigate('MainApp');
+            }else {
+                Linking.getInitialURL().then((url) => {
+                    if(url && isSignInWithEmailLink(auth, url)){
+                        console.log("Complete email sign in called", url);
+                        this.completeEmailSignIn(url);
+                    }else {
+                        console.log('Enter email and sign in');
+                    }
+                }).catch(err => {
+                    console.error('Error fetching initial URL', err);
+                })
+            }
+        });
+
+        try {
+            const result = await AuthenticationManager.handleRedirectResult();
+            if (result) {
+                console.log('Redirected user', result.user);
+            }
+        } catch (error) {
+            console.error('Error handling redirect', error);
+        }
+    }
+
     render(){
         const { email, loginLoading, loginError, infoMsg, initialLoading, initialError } = this.state;
+        console.log("Auth", auth.currentUser)
         const tabs = [
             {
                 key: 'phone',
