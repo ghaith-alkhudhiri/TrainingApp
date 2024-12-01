@@ -5,8 +5,14 @@ import { NavProps } from '../types';
 
 const { height } = Dimensions.get('window');
 
-export class WelcomeScreen extends Component<NavProps> {
+interface Props {
+    onComplete: ()=>{}
+}
+
+type WelcomeProps = Props & NavProps;
+export class WelcomeScreen extends Component<WelcomeProps> {
     goToLogin = () => {
+        this.props.onComplete(); //remove
         this.props.navigation.navigate('Login');
     }
 

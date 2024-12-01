@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     margin: 5,
+    width: '100%',
   },
   selectedOption: {
     borderColor: '#007bff',
