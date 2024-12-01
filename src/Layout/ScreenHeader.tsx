@@ -9,8 +9,10 @@ interface Props {
     backEnabled: boolean;
     title?: string;
     rightElement?: ReactNode;
+    navigation?: any;
 }
 type HeaderProps = NavProps & Props;
+
 
 export class ScreenHeader extends Component<HeaderProps> {
     handleGoBack = () => {
