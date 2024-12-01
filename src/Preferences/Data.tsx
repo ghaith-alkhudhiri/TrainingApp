@@ -2,6 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import ScreenWrapper from '../Layout/ScreenWrapper'
 import CustomRadioButton from '../Common/CustomRadioButton'
+import CustomTextInput from '../Common/CustomTextInput';
+import CustomButton from '../Common/CustomButton';
 
 interface State {
     selectedOption: string;
@@ -26,11 +28,17 @@ export class Data extends Component<{}, State> {
             <Text style={styles.h1}>Your Data</Text>
             <Text style={styles.description}>To give you the best journey, we need to learn more about you</Text>
         </View>
-        <Text>Gender</Text>
         <CustomRadioButton 
+            label='Gender'
             options={['Male', 'Female']} 
             selectedOption={this.state.selectedOption} 
             onOptionSelect={this.handleSelectedOption} />
+        <Text style={{fontSize: 15, fontWeight: '600', lineHeight: 18.75}}>Personal Information</Text>
+        <CustomTextInput label={'Height (cm)'} placeholder={'Enter Your Height'} />
+        <CustomTextInput label={'Weight (kg)'} placeholder={'Enter your Weight'} />
+        <CustomTextInput label={'Body Fat'} placeholder={'Enter your Body Fat'} />
+        <CustomTextInput label={'Muscle Mass'} placeholder={'Enter your Muscle Mass'} />
+        <CustomButton label='Next' onPress={()=>{}} />
       </ScreenWrapper>
     )
   }
