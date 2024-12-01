@@ -4,9 +4,11 @@ import ScreenWrapper from '../Layout/ScreenWrapper'
 import CustomRadioButton from '../Common/CustomRadioButton'
 import CustomTextInput from '../Common/CustomTextInput';
 import CustomButton from '../Common/CustomButton';
+import DatePickerInput from '../Common/DatePickerInput';
 
 interface State {
     selectedOption: string;
+    selectedDate: Date | null;
 }
 
 export class Goal extends Component<{}, State> {
@@ -14,12 +16,18 @@ export class Goal extends Component<{}, State> {
         super(props);
         this.state = {
             selectedOption: 'Lose weight',
+            selectedDate: null
         };
     }
 
     handleSelectedOption = (option: string) => {
         this.setState({selectedOption: option})
     }
+
+    handleDateChange = (date: Date | null) => {
+        this.setState({selectedDate: date});
+    }
+
   render() {
     
     return (
@@ -37,6 +45,7 @@ export class Goal extends Component<{}, State> {
         <CustomTextInput label={'Target Weight (kg)'} placeholder={'Enter your Weight'} />
         <CustomTextInput label={'Target Body Fat'} placeholder={'Enter your Body Fat'} />
         <CustomTextInput label={'Target date of completion'} placeholder={'Enter your Muscle Mass'} />
+        <DatePickerInput label='Target date of completion' onDateChange={this.handleDateChange}/>
         <CustomButton label='Next' onPress={()=>{}} />
       </ScreenWrapper>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import InboxCard from './InboxCard';
+import NotificationCard from '../Notification/NotificationCard';
 import ScreenWrapper from '../Layout/ScreenWrapper';
 import SectionHeader from '../Home/SectionHeader';
 import CustomButton from '../Common/CustomButton';
@@ -79,7 +79,7 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
 
     render() {
         const unreadCount = this.getUnreadCount();
-        const groupMessages = this.state.messages.filter((message) => message.group);
+        const group = this.state.messages.filter((message) => message.group);
         const trainerMessages = this.state.messages.filter((message) => message.trainer);
 
         return (
@@ -101,7 +101,7 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
                     </View>
                 ) : (
                     <>
-                        {groupMessages.length > 0 && (
+                        {group.length > 0 && (
                             <View style={{ marginHorizontal: -10 }}>
                                 <SectionHeader
                                     title="Groups"
@@ -111,12 +111,13 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
                                     onPress={() => this.markAllAsRead('Groups')}
                                     containerStyle={styles.containerStyle}
                                 />
-                                {groupMessages.map((message) => (
-                                    <InboxCard
+                                {group.map((message: Message) => (
+                                    <NotificationCard
                                         key={message.id}
                                         title={message.title}
                                         message={message.message}
                                         timestamp={message.timestamp}
+                                        status={message.status}
                                     />
                                 ))}
                             </View>
@@ -132,12 +133,13 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
                                     onPress={() => this.markAllAsRead('Trainers')}
                                     containerStyle={styles.containerStyle}
                                 />
-                                {trainerMessages.map((message) => (
-                                    <InboxCard
+                                {trainerMessages.map((message: Message) => (
+                                    <NotificationCard
                                         key={message.id}
                                         title={message.title}
                                         message={message.message}
                                         timestamp={message.timestamp}
+                                        status={message.status}
                                     />
                                 ))}
                             </View>
