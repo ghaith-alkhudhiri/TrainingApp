@@ -125,7 +125,12 @@ export default class App extends Component<any, State> {
               )}
           </Stack.Screen>
           <Stack.Screen name="MemberPrerequisite" component={MemberPrerequisite} options={{headerShown: false}} />
-          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} />
+          {/* <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} /> */}
+          <Stack.Screen name="WelcomeScreen">
+              {(props) => (
+                <WelcomeScreen {...props} onComplete={this.completeOnboarding} />
+              )}
+          </Stack.Screen>
           <Stack.Screen name="Login" component={LoginPage} />
           <Stack.Screen name="otp-verification" component={OTPVerification} />
           <Stack.Screen name="success">

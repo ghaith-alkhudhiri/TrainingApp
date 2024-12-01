@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 interface RadioButtonProps {
+  label?: string;
   options: string[];
   selectedOption: string;
   onOptionSelect: (option: string) => void;
@@ -41,6 +42,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
 
   render() {
     const {
+      label,
       options,
       layout = 'column',
       containerStyle,
@@ -65,6 +67,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
           isRowLayout ? styles.row : styles.column,
         ]}
       >
+        {label && <Text style={styles.label}>{label}</Text>}
         {options.map((option, index) => {
           const isSelected = selectedOption === option;
 
@@ -132,6 +135,13 @@ const styles = StyleSheet.create({
   column: {
     flexDirection: 'column',
   },
+  label: {
+    textAlign: 'left',
+    width: '100%',
+    fontSize: 15,
+    fontWeight: '600',
+    lineHeight: 18.75,
+  },
   option: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -140,6 +150,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     margin: 5,
+    width: '100%',
   },
   selectedOption: {
     borderColor: '#007bff',
