@@ -10,6 +10,7 @@ interface Props {
     withoutHeader: boolean;
     title?: string;
     rightElement?: ReactNode;
+    navigation?: any;
 }
 
 interface State {
@@ -42,7 +43,7 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement} = this.props;
+        const { withoutHeader, title, rightElement, navigation} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {minHeight: screenHeight}]}>
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     innerContainer: {
+        flexGrow: 1,
         paddingHorizontal: 10,
         paddingTop: 5,
         paddingBottom: 90,

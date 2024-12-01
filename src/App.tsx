@@ -20,6 +20,7 @@ import LoginPage from './Account/LoginPage';
 import OTPVerification from './Account/OTPVerification';
 import SuccessPage from './Common/SuccessPage';
 import TestPage from './Test/TestPage';
+import ProfileScreen from './Profile/ProfilePage';
 import MemberPrerequisite from './Onboarding/MemberPrerequisite';
 import WelcomeScreen from './Onboarding/WelcomeScreen';
 
@@ -141,6 +142,8 @@ export default class App extends Component<any, State> {
           </Stack.Navigator>
           ): (
             <>
+              <Stack.Screen name="Profile" component={ProfileScreen} />
+              <Stack.Screen name="Login" component={LoginPage} />
               <TabsNavigation />
               <Stack.Screen name="test" component={TestPage} />
               <Stack.Screen name="success" component={SuccessPage} />
