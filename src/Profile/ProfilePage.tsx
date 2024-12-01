@@ -122,7 +122,7 @@ export class ProfileScreen extends Component<Props, State> {
                     value={personalId}
                     onChangeText={this.handlePersonalIdChange}
                 />
-                <DatePickerInput onDateChange={this.handleDateChange}/>
+                <DatePickerInput label='Date of birth' onDateChange={this.handleDateChange}/>
             </SectionWrapper>
             <SectionWrapper title='Do you have any medical issues?'>
                 <CustomRadioButton

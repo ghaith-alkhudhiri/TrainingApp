@@ -6,6 +6,7 @@ import { DatePicker } from '@capacitor-community/date-picker';
 
 interface Props {
     onDateChange: (date: Date | null) => void;
+    label?: string;
 }
 
 interface State {
@@ -51,6 +52,7 @@ export class DatePickerInput extends Component<Props,State> {
         }
     }
   render() {
+    const {label} = this.props;
     const {selectedDate} = this.state;
     return (
       <View style={styles.container}>
@@ -61,7 +63,7 @@ export class DatePickerInput extends Component<Props,State> {
         )}
         {Platform.OS === 'web' && (
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Date of birth</Text>
+                {label ? <Text style={styles.label}>{label}</Text> : null}
                 <input type="date" value={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
                     onChange={this.handleWebDateChange}
                     style={styles.dateInput}
