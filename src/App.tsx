@@ -120,6 +120,8 @@ export default class App extends Component<any, State> {
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
         <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="test" component={TestPage} />
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -142,10 +144,8 @@ export default class App extends Component<any, State> {
           </Stack.Navigator>
           ): (
             <>
-              <Stack.Screen name="Profile" component={ProfileScreen} />
               <Stack.Screen name="Login" component={LoginPage} />
               <TabsNavigation />
-              <Stack.Screen name="test" component={TestPage} />
               <Stack.Screen name="success" component={SuccessPage} />
             </>
           )}

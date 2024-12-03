@@ -64,15 +64,17 @@
 //     return config;
 // };
 const webpack = require('webpack');
-const { override, babelInclude } = require('customize-cra');
+const { override, babelInclude, addBabelPreset } = require('customize-cra');
 const path = require('path');
 
 module.exports = override(
   babelInclude([
     path.resolve('src'), // Include your source code
-    path.resolve('node_modules/@react-native/assets-registry') // Include the problematic package
+    path.resolve('node_modules/@react-native/assets-registry'), // Include the problematic package
+    path.resolve('node_modules/react-native-vector-icons'),
   ]),
 
+  addBabelPreset('@babel/preset-react'),
   (config) => {
     // Define the __DEV__ global variable
     config.plugins.push(

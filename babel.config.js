@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['module:@react-native/babel-preset', '@babel/preset-flow'],
+  presets: ['module:@react-native/babel-preset', '@babel/preset-flow', '@babel/preset-react'],
   plugins: [
     [
       'module:react-native-dotenv',
@@ -17,6 +17,13 @@ module.exports = {
       },
     ],
     '@babel/plugin-syntax-flow',
-    'react-native-reanimated/plugin'],
+    'react-native-reanimated/plugin',
+  ],
+  overrides: [
+    {
+      test: /node_modules[\\/]react-native-vector-icons[\\/]/,
+      presets: ['@babel/preset-react'],
+    }
+  ]
 };
 
