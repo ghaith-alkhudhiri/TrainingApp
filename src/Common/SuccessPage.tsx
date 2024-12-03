@@ -5,6 +5,8 @@ import SuccessMark from '../Assets/Icons/SuccessMark';
 import { NavProps } from '../types';
 
 interface Props {
+    navigation?: any;
+    route?: any;
     onComplete: ()=>{};
 }
 
@@ -34,12 +36,12 @@ class SuccessPage extends Component<SuccessProps, State> {
         Dimensions.addEventListener('change', this.updateDimensions);
 
         const {navigation, route} = this.props;
-        const {nextPage} = route.params || {};
+        const {nextPage, nextPageParameters} = route.params || {};
 
         setTimeout(() => {
-            this.props.onComplete();
             if(nextPage){
-                navigation.navigate(nextPage);
+                console.log("Navigating to next page", nextPage)
+                navigation.navigate(nextPage, nextPageParameters);
             }
         }, 4000);
     }

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Linking, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import MobileNumberInput from "./Components/MobileNumberInput";
 import AuthenticationManager from "../Managers/AuthenticationManager";
@@ -76,9 +76,16 @@ export default class LoginPage extends Component<Props, LoginPageState>{
     }
 
     handleGoogleSignIn = async () => {
+        const {navigation} = this.props;
         try {
             const result = await AuthenticationManager.signInWithGooglePopup();
             console.log('Logged in user:', result.user);
+            if(result.user){
+                navigation.navigate("Profile");
+            }else {
+
+            }
+            // navigation.navigate("Main");
         }catch(error){
             console.error('Error logging in', error);
         }
@@ -111,7 +118,7 @@ export default class LoginPage extends Component<Props, LoginPageState>{
                 initialLoading: false,
                 initialError: '',
             });
-            navigation.navigate('MainApp');
+            navigation.navigate('Main', {screen: "Home"});
         } catch (err: any) {
             this.setState({
                 initialLoading: false,

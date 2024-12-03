@@ -81,6 +81,16 @@ export class ProfileScreen extends Component<Props, State> {
         this.setState({});
     }
 
+    validateProfilePage = () => {
+        console.log("Profile page validated");
+        this.props.navigation.navigate("success", {
+            title: "Thank you!",
+            description: "Thank you for joining our team! you will be directed to finishing creating account process",
+            nextPage: "Main",
+            nextPageParameters: {screen: "Home"}
+        })
+    }
+
   render() {
     const {firstName, lastName, personalId, selectedOption, selectedValue, medicalIssues} = this.state;
     const {navigation} = this.props;
@@ -88,7 +98,7 @@ export class ProfileScreen extends Component<Props, State> {
     console.log("Selected Option inside profile", selectedOption);
     console.log("Selected Value inside profile", selectedValue);
     return (
-      <ScreenWrapper navigation={navigation} floatingBtn={true}>
+      <ScreenWrapper navigation={navigation} floatingBtn={true} floatingBtnProps={{onPress: this.validateProfilePage, label: "Complete Profile"}}>
        
             <Text style={styles.title}>Complete Your Profile</Text>
             <AvatarPicker containerStyle={styles.avatarContainerStyle} />

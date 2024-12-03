@@ -12,7 +12,8 @@ interface Props {
 type WelcomeProps = Props & NavProps;
 export class WelcomeScreen extends Component<WelcomeProps> {
     goToLogin = () => {
-        this.props.onComplete(); //remove
+        // this.props.onComplete(); //remove
+        console.log("Navigate to Login Page");
         this.props.navigation.navigate('Login');
     }
 

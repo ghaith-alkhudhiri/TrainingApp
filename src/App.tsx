@@ -120,8 +120,6 @@ export default class App extends Component<any, State> {
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
         <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="test" component={TestPage} />
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -134,18 +132,19 @@ export default class App extends Component<any, State> {
                 <WelcomeScreen {...props} onComplete={this.completeOnboarding} />
               )}
           </Stack.Screen>
+          <Stack.Screen name="test" component={TestPage} />
           <Stack.Screen name="Login" component={LoginPage} />
           <Stack.Screen name="otp-verification" component={OTPVerification} />
-          <Stack.Screen name="success">
-              {(props) => (
-                <SuccessPage {...props} onComplete={this.completeOnboarding} />
-              )}
-          </Stack.Screen>
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="success" component={SuccessPage} />
+          <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (
             <>
-              <Stack.Screen name="Login" component={LoginPage} />
-              <TabsNavigation />
+              {/* <Stack.Screen name="Login" component={LoginPage} /> */}
+              <Stack.Screen name="Profile" component={ProfileScreen} />
+              <Stack.Screen name="Main" component={TabsNavigation} />
+              {/* <TabsNavigation /> */}
               <Stack.Screen name="success" component={SuccessPage} />
             </>
           )}
