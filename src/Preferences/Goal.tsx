@@ -6,13 +6,18 @@ import CustomTextInput from '../Common/CustomTextInput';
 import CustomButton from '../Common/CustomButton';
 import DatePickerInput from '../Common/DatePickerInput';
 
+interface Props {
+    navigation: any;
+    route: any;
+}
+
 interface State {
     selectedOption: string;
     selectedDate: Date | null;
 }
 
-export class Goal extends Component<{}, State> {
-    constructor(props: {}){
+export class Goal extends Component<Props, State> {
+    constructor(props: Props){
         super(props);
         this.state = {
             selectedOption: 'Lose weight',
@@ -28,10 +33,14 @@ export class Goal extends Component<{}, State> {
         this.setState({selectedDate: date});
     }
 
+    navigateToDataPage = () => {
+        this.props.navigation.navigate("data");
+    }
+
   render() {
     
     return (
-      <ScreenWrapper headerShown={false}>
+      <ScreenWrapper headerShown={false} floatingBtn={true} floatingBtnProps={{label: 'Next', onPress: this.navigateToDataPage }}>
         <View>
             <Text style={styles.h1}>Your Goal</Text>
             <Text style={styles.description}>What are your current goals for your body figure?</Text>
@@ -46,7 +55,6 @@ export class Goal extends Component<{}, State> {
         <CustomTextInput label={'Target Body Fat'} placeholder={'Enter your Body Fat'} />
         <CustomTextInput label={'Target date of completion'} placeholder={'Enter your Muscle Mass'} />
         <DatePickerInput label='Target date of completion' onDateChange={this.handleDateChange}/>
-        <CustomButton label='Next' onPress={()=>{}} />
       </ScreenWrapper>
     )
   }

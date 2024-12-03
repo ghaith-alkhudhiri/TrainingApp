@@ -86,8 +86,8 @@ export class ProfileScreen extends Component<Props, State> {
         this.props.navigation.navigate("success", {
             title: "Thank you!",
             description: "Thank you for joining our team! you will be directed to finishing creating account process",
-            nextPage: "Main",
-            nextPageParameters: {screen: "Home"}
+            nextPage: "goals",
+            nextPageParameters: ""
         })
     }
 
