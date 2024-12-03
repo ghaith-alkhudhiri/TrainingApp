@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import React, { Component } from 'react'
-import Dropdown from '../Common/Dropdown';
+import Dropdown from '../Common/ModalDropdown';
 import theme from '../Constants/theme';
 
 interface Props {

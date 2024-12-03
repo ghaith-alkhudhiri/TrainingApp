@@ -18,7 +18,7 @@ export class FileItem extends Component<FileItemProps> {
                 <DocumentTextIcon />
                 <Pressable onPress={() => onOpenFile(file)} style={styles.fileItem}>
                     <Text style={styles.fileName}>{file.name.length > 80 ? file.name.substring(0, 80) + '...' : file.name}</Text>
-                    <Text>200 KB</Text>
+                    <Text style={styles.fileSizeText}>200 KB</Text>
                 </Pressable>
                 <Pressable onPress={onRemoveFile} style={styles.removeButton}>
                     <TrashIcon />
@@ -57,5 +57,12 @@ const styles = StyleSheet.create({
       },
       removeButtonText: {
       },
+      fileSizeText: {
+        color: '#989692',
+        fontSize: 12,
+        fontFamily: 'Poppins',
+        fontWeight: 400,
+        lineHeight: 20,
+      }
 
 });

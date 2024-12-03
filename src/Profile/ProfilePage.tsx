@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 // import AvatarPicker from '../components/common/AvatarPicker';
 import {FilePicker, PickFilesResult, PickFilesOptions} from '@capawesome/capacitor-file-picker'
@@ -12,6 +12,7 @@ import FileUploadInput from '../Common/FileUploadInput';
 import AvatarPicker from '../Common/AvatarPicker';
 import DatePickerInput from '../Common/DatePickerInput';
 import { isIOS } from '../Utils/PlatformUtil';
+import Dropdown from '../Common/Dropdown';
 
 
 interface Props {
@@ -26,6 +27,7 @@ interface State {
     selectedOption: string;
     selectedValue: string | null;
     medicalIssues: string;
+    startDate: string | null;
 }
 
 export class ProfileScreen extends Component<Props, State> {
@@ -39,6 +41,7 @@ export class ProfileScreen extends Component<Props, State> {
             selectedOption: 'Yes',
             selectedValue: null,
             medicalIssues: '',
+            startDate: null,
         }
     }
 
@@ -65,6 +68,10 @@ export class ProfileScreen extends Component<Props, State> {
     handleOptionSelect = (option: string) => {
         this.setState({ selectedOption: option });
     };
+
+    handleStartDateChange = (value: string | null) => {
+        this.setState({startDate: value});
+    }
     
     handleValueSelect = (option: string) => {
         this.setState({ selectedValue: option });
@@ -81,7 +88,7 @@ export class ProfileScreen extends Component<Props, State> {
     console.log("Selected Option inside profile", selectedOption);
     console.log("Selected Value inside profile", selectedValue);
     return (
-      <ScreenWrapper navigation={navigation}>
+      <ScreenWrapper navigation={navigation} floatingBtn={true}>
        
             <Text style={styles.title}>Complete Your Profile</Text>
             <AvatarPicker containerStyle={styles.avatarContainerStyle} />
@@ -148,7 +155,11 @@ export class ProfileScreen extends Component<Props, State> {
                 )
             }
             <SectionWrapper title='When you will start *'>
-                <Text>Immediately</Text>
+                <Dropdown
+                    label="When you will start *"
+                    options={["Immediately", "Tomorrow", "1 week", "2 weeks", "3 weeks"]}
+                    onValueChange={this.handleStartDateChange}
+                />
             </SectionWrapper>
             <SectionWrapper title='Upload your personal Id'>
                 <FileUploadInput onFileSelected={this.handleFilesSelected} />

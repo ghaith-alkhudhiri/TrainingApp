@@ -1,9 +1,11 @@
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { Component, ReactNode } from 'react'
 import ScreenHeader from './ScreenHeader';
 import If from '../Common/If';
 import { NavProps } from '../types';
 import withNavProps from '../Navigation/WithNavProps';
+import { isAndroid, isIOS, isWeb } from '../Utils/PlatformUtil';
+import CustomButton from '../Common/CustomButton';
 
 interface Props {
     children: any;
@@ -11,6 +13,11 @@ interface Props {
     title?: string;
     rightElement?: ReactNode;
     navigation?: any;
+    floatingBtn?: boolean;
+    floatingBtnProps?: {
+        label: string;
+        onPress: () => void;
+    }
 }
 
 interface State {
@@ -43,11 +50,11 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement, navigation} = this.props;
+        const { withoutHeader, title, rightElement, navigation, floatingBtn, floatingBtnProps} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
-                <ScrollView style={styles.innerContainer}>
+                <ScrollView style={[styles.innerContainer, floatingBtn && {marginBottom: 80}]}>
                     <If condition={!withoutHeader}>
                         <ScreenHeader
                             navigation={this.props.navigation} 
@@ -61,6 +68,17 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
                         {this.props.children}
                     </View>
                 </ScrollView>
+                <If condition={floatingBtn}>
+                    <View style={[styles.floatingButtonContainer, isWeb ? null : {paddingBottom: 29}]}>
+                        {/* <Pressable style={[styles.floatingButton]} onPress={() => console.log('Floating button pressed')}>
+                            <Text style={styles.buttonText}>+</Text>
+                        </Pressable> */}
+                        <CustomButton 
+                            label={floatingBtnProps?.label || 'Default Label' } 
+                            onPress={floatingBtnProps?.onPress || (() => console.log("Button pressed"))} 
+                            />
+                    </View>
+                </If>
             </View>
         )
     }
@@ -77,9 +95,40 @@ const styles = StyleSheet.create({
         // flexGrow: 1,
         paddingHorizontal: 10,
         paddingTop: 5,
-        paddingBottom: 90,
+        paddingBottom: 40,
     },
     childrenContainer: {
         gap: 22,
+    },
+    floatingButtonContainer: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        left: 0,
+        borderTopLeftRadius: 13,
+        borderTopRightRadius: 13,
+        paddingHorizontal: 24,
+        paddingVertical: 18,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+        backgroundColor: '#FFFFFF',
+        shadowColor: '#F1F5F9',
+        shadowOffset: { width: 0, height: -3},
+        shadowOpacity: 1,
+        shadowRadius: 8,
+        elevation: 5,
+    },
+    floatingButton: {
+        backgroundColor: '#007AFF',
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#FFFFFF',
+        fontSize: 24,
+        fontWeight: 'bold'
     }
 })
