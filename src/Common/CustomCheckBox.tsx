@@ -8,9 +8,13 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import CheckMarkIcon from '../Assets/Icons/CheckMarkIcon';
+import theme from '../Constants/theme';
 
 interface CheckBoxProps {
+  label?: string;
   options: string[];
+  removeOptionText?: boolean;
   selectedOptions: string[];
   onOptionToggle: (selectedOptions: string[]) => void;
   layout?: 'row' | 'column';
@@ -38,7 +42,7 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
     const { selectedOptions } = this.state;
     const { onOptionToggle } = this.props;
 
-    const newSelectedOptions = selectedOptions.includes(option)
+    const newSelectedOptions = selectedOptions?.includes(option)
       ? selectedOptions.filter((item) => item !== option)
       : [...selectedOptions, option];
 
@@ -48,15 +52,17 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
 
   render() {
     const {
+      label,
       options,
+      removeOptionText,
       layout = 'column',
       containerStyle,
       optionStyle,
       selectedOptionStyle,
       textStyle,
       selectedTextStyle,
-      boxColor = '#000',
-      selectedBoxColor = '#007bff',
+      boxColor,
+      selectedBoxColor,
       icons,
     } = this.props;
     const { selectedOptions } = this.state;
@@ -72,6 +78,7 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
           isRowLayout ? styles.row : styles.column,
         ]}
       >
+        {label && <Text style={styles.label}>{label}</Text>}
         {options.map((option, index) => {
           const isSelected = selectedOptions.includes(option);
 
@@ -82,43 +89,45 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
                 styles.option,
                 optionStyle,
                 isSelected && [styles.selectedOption, selectedOptionStyle],
+                removeOptionText && styles.removeOptionText,
+                { flexDirection: isRTL ? 'row-reverse' : 'row' }
               ]}
               onPress={() => this.handleOptionToggle(option)}
             >
               {/* Icon or Box */}
               {icons && icons[index] ? (
                 React.cloneElement(icons[index], { selected: isSelected })
+              ) : isSelected ? (
+                <View
+                  style={[
+                    styles.checkboxSquare,
+                    { backgroundColor: selectedBoxColor? selectedBoxColor : theme.primary },
+                    { borderColor: selectedBoxColor? selectedBoxColor : theme.primary }
+                  ]}
+                >
+                  <CheckMarkIcon width={14} height={14}/>
+                </View>
               ) : (
                 <View
                   style={[
                     styles.checkboxSquare,
-                    { borderColor: isSelected ? selectedBoxColor : boxColor },
+                    { borderColor: boxColor? boxColor : '#D1D1D6' },
                   ]}
-                >
-                  {isSelected && (
-                    <View
-                      style={[
-                        styles.selectedCheck,
-                        { backgroundColor: selectedBoxColor },
-                      ]}
-                    />
-                  )}
-                </View>
+                />
               )}
-
-              {/* Optional Text */}
-              {option ? (
+              {/* Option Text */}
+              {removeOptionText ? (null) : 
                 <Text
                   style={[
                     styles.text,
                     textStyle,
-                    isSelected && [styles.selectedText, selectedTextStyle],
+                    isSelected && selectedTextStyle,
                     { textAlign: isRTL ? 'right' : 'left' },
                   ]}
                 >
-                  {option}
-                </Text>
-              ) : null}
+                {option}
+              </Text>
+              }
             </TouchableOpacity>
           );
         })}
@@ -139,36 +148,48 @@ const styles = StyleSheet.create({
   column: {
     flexDirection: 'column',
   },
+  label: {
+    textAlign: 'left',
+    width: '100%',
+    fontSize: 15,
+    fontWeight: '600',
+    lineHeight: 18.75,
+  },
   option: {
-    flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    borderColor: '#D1D1D6',
+    borderRadius: 6,
     margin: 5,
+    width: '100%',
+    flex: 1,
+  },
+  removeOptionText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderWidth: 0,
+    margin: 5,
+    width: '100%',
   },
   selectedOption: {
-    borderColor: '#007bff',
-    backgroundColor: '#e7f0ff',
+    borderColor: theme.primary,
   },
   checkboxSquare: {
     height: 20,
     width: 20,
-    borderWidth: 2,
+    borderWidth: 0.5,
+    borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
-  },
-  selectedCheck: {
-    height: 12,
-    width: 12,
+    marginHorizontal: 8,
   },
   text: {
-    fontSize: 16,
-  },
-  selectedText: {
-    fontWeight: 'bold',
+    color: '#2C2C2E',
+    fontSize: 15,
+    fontWeight: 600,
+    textTransform: 'capitalize',
   },
 });
 
