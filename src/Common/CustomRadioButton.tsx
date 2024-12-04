@@ -8,10 +8,12 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import theme from '../Constants/theme';
 
 interface RadioButtonProps {
   label?: string;
   options: string[];
+  removeOptionText?: boolean;
   selectedOption: string;
   onOptionSelect: (option: string) => void;
   layout?: 'row' | 'column';
@@ -44,14 +46,15 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
     const {
       label,
       options,
-      layout = 'column',
+      removeOptionText,
+      layout,
       containerStyle,
       optionStyle,
       selectedOptionStyle,
       textStyle,
       selectedTextStyle,
-      radioColor = '#000',
-      selectedRadioColor = '#007bff',
+      radioColor,
+      selectedRadioColor,
       icons,
     } = this.props;
     const { selectedOption } = this.state;
@@ -78,6 +81,8 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
                 styles.option,
                 optionStyle,
                 isSelected && [styles.selectedOption, selectedOptionStyle],
+                removeOptionText && styles.removeOptionText,
+                { flexDirection: isRTL ? 'row-reverse' : 'row' }
               ]}
               onPress={() => this.handleOptionSelect(option)}
             >
@@ -88,33 +93,33 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
                 <View
                   style={[
                     styles.radioCircle,
-                    { borderColor: isSelected ? selectedRadioColor : radioColor },
+                    { borderColor: isSelected ? selectedRadioColor ? selectedRadioColor : theme.primary : radioColor ? radioColor : '#D1D1D6' },
                   ]}
                 >
                   {isSelected && (
                     <View
                       style={[
                         styles.selectedRb,
-                        { backgroundColor: selectedRadioColor },
+                        { backgroundColor: selectedRadioColor ? selectedRadioColor : theme.primary },
                       ]}
                     />
                   )}
                 </View>
-              )}
+                )}
 
               {/* Optional Text */}
-              {option ? (
+              {removeOptionText ? (null) :
                 <Text
                   style={[
                     styles.text,
                     textStyle,
-                    isSelected && [styles.selectedText, selectedTextStyle],
+                    isSelected && selectedTextStyle,
                     { textAlign: isRTL ? 'right' : 'left' },
                   ]}
                 >
                   {option}
                 </Text>
-              ) : null}
+            }
             </TouchableOpacity>
           );
         })}
@@ -137,44 +142,61 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'left',
-    width: '100%',
+    flex: 1,
     fontSize: 15,
     fontWeight: '600',
     lineHeight: 18.75,
   },
   option: {
-    flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    borderColor: '#D1D1D6',
+    borderRadius: 6,
+    margin: 5,
+    width: '100%',
+    flex: 1,
+  },
+  removeOptionText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderWidth: 0,
     margin: 5,
     width: '100%',
   },
   selectedOption: {
-    borderColor: '#007bff',
-    backgroundColor: '#e7f0ff',
+    borderColor: theme.primary,
   },
   radioCircle: {
     height: 20,
     width: 20,
-    borderRadius: 10,
+    borderRadius: 20,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
+    position: 'relative',
+    marginHorizontal: 10,
   },
+  
   selectedRb: {
     height: 10,
     width: 10,
-    borderRadius: 5,
-  },
+    borderRadius: 10,
+    position: 'absolute',
+    top: '50%', // Center it vertically
+    left: '50%', // Center it horizontally
+    transform: [
+      { translateX: '-50%' }, // Adjust the position back by half the width
+      { translateY: '-50%' }, // Adjust the position back by half the height
+    ],
+  }
+  ,
   text: {
-    fontSize: 16,
-  },
-  selectedText: {
-    fontWeight: 'bold',
+    color: '#2C2C2E',
+    fontSize: 15,
+    fontWeight: 600,
+    textTransform: 'capitalize',
   },
 });
 
