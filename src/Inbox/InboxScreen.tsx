@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import NotificationCard from '../Notification/NotificationCard';
 import ScreenWrapper from '../Layout/ScreenWrapper';
 import SectionHeader from '../Home/SectionHeader';
 import CustomButton from '../Common/CustomButton';
 import theme from '../Constants/theme';
 import MessageIcon from '../Assets/Icons/MessageIcon';
+import SuccessView from '../Common/SuccessView';
 
 interface Message {
     id: number;
@@ -77,6 +78,14 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
         }));
     };
 
+    markAsRead = (id: number) => {
+        this.setState((prevState) => ({
+            messages: prevState.messages.map((message) =>
+                message.id === id ? { ...message, status: 'read' } : message
+            ),
+        }));
+    };    
+
     render() {
         const unreadCount = this.getUnreadCount();
         const group = this.state.messages.filter((message) => message.group);
@@ -96,8 +105,15 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
             >
                 {this.state.messages.length === 0 ? (
                     <View style={styles.emptyContainer}>
-                        <MessageIcon />
-                        <Text>No message available.</Text>
+                        <SuccessView
+                            image={MessageIcon}
+                            title='No Messages'
+                            description='There are no messages were sent yet.'
+                            containerStyle={styles.successContainerStyle}
+                            infoStyle={styles.infoStyle}
+                            titleStyle={styles.successTitleStyle}
+                            descriptionStyle={styles.descriptionStyle}
+                        />
                     </View>
                 ) : (
                     <>
@@ -118,6 +134,7 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
                                         message={message.message}
                                         timestamp={message.timestamp}
                                         status={message.status}
+                                        onPress={() => this.markAsRead(message.id)}
                                     />
                                 ))}
                             </View>
@@ -140,6 +157,7 @@ export class InboxScreen extends Component<{}, InboxScreenState> {
                                         message={message.message}
                                         timestamp={message.timestamp}
                                         status={message.status}
+                                        onPress={() => this.markAsRead(message.id)}
                                     />
                                 ))}
                             </View>
@@ -158,20 +176,44 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        marginVertical: '50%',
     },
     actionLabelStyle: {
-        fontWeight: '400',
+        fontWeight: 400,
     },
     titleStyle: {
         textTransform: 'uppercase',
         color: theme.secondaryText,
         fontSize: 15,
-        fontWeight: '400',
+        fontWeight: 400,
         lineHeight: 18.75,
         letterSpacing: 0.75,
     },
     containerStyle: {
         paddingLeft: 24,
         paddingRight: 23,
+    },
+    successContainerStyle: {
+        // width: 375,
+        height: 812,
+        justifyContent: 'center',
+        flex: 1,
+        alignItems: 'center',
+        gap: 12,
+        // height: Dimensions.get('window').height,
+        // verticalAlign: 'middle',
+        // alignSelf: 'center'
+    },
+    infoStyle: {
+        gap: null,
+    },
+    successTitleStyle: {
+        color: '#000',
+        textAlign: 'center',
+        fontSize: 18,
+        letterSpacing: -0.3,
+    },
+    descriptionStyle: {
+        color: '#64748B',
     },
 });

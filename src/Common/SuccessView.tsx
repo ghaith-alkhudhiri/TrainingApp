@@ -1,21 +1,31 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import React, { Component } from 'react'
 
 interface Props {
     image: React.ComponentType;
     title: string;
     description: string;
+    containerStyle?: ViewStyle;
+    infoStyle?: ViewStyle;
+    titleStyle?: TextStyle;
+    descriptionStyle?: TextStyle;
 }
 
 export class SuccessView extends Component<Props> {
   render() {
-    const {image: ImageComponent, title, description} = this.props;
+    const {image: ImageComponent, title, description, containerStyle, infoStyle, titleStyle, descriptionStyle} = this.props;
+    // Remove `gap` if it's explicitly set to `null`
+    const computedInfoStyle = {
+      ...styles.successInfo,
+      ...infoStyle,
+      ...(infoStyle?.gap === null ? { gap: undefined } : {}),
+    };
     return (
-      <View style={styles.container}>
+      <View style={[containerStyle ? containerStyle : styles.container]}>
         <ImageComponent />
-        <View style={styles.successInfo}>
-            <Text style={styles.successTitle}>{title}</Text>
-            <Text style={styles.successDescription}>{description}</Text>
+        <View style={computedInfoStyle}>
+            <Text style={[titleStyle, styles.successTitle]}>{title}</Text>
+            <Text style={[descriptionStyle, styles.successDescription]}>{description}</Text>
         </View>
       </View>
     )
@@ -34,7 +44,6 @@ const styles = StyleSheet.create({
     successTitle: {
         fontSize: 27,
         fontWeight: 600,
-
     },
     successDescription: {
         color: '#8391A1',

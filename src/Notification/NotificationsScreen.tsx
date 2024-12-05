@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import NotificationCard from './NotificationCard';
-// import SuccessView from './SuccessView';
 import ScreenWrapper from '../Layout/ScreenWrapper';
 import SectionHeader from '../Home/SectionHeader';
 import CustomButton from '../Common/CustomButton';
 import theme from '../Constants/theme';
 import NotificationIcon from '../Assets/Icons/NotificationIcon';
+import SuccessView from '../Common/SuccessView';
 
 interface Notification {
     id: number;
@@ -107,11 +107,17 @@ export class NotificationsScreen extends Component<{}, NotificationsScreenState>
         }));
     };
 
+    markAsRead = (id: number) => {
+        this.setState((prevState) => ({
+            notifications: prevState.notifications.map((notification) =>
+                notification.id === id ? { ...notification, status: 'read' } : notification
+            ),
+        }));
+    };    
 
     render() {
         const unreadCount = this.getUnreadCount();
         const groupedNotifications = this.groupNotifications();
-        // const mergedStyle = { ...styles.containerStyle, paddingTop: 24 };
         return (
             <ScreenWrapper
                 title="Notifications"
@@ -126,13 +132,15 @@ export class NotificationsScreen extends Component<{}, NotificationsScreenState>
             >
                 {this.state.notifications.length === 0 ? (
                     <View style={styles.emptyContainer}>
-                        <NotificationIcon/>
-                        <Text>No notifications available.</Text>
-                        {/* <SuccessView
+                        <SuccessView
                             image={NotificationIcon}
                             title='No Notification'
                             description='There are no Notification were sent yet.'
-                        /> */}
+                            containerStyle={styles.successContainerStyle}
+                            infoStyle={styles.infoStyle}
+                            titleStyle={styles.successTitleStyle}
+                            descriptionStyle={styles.descriptionStyle}
+                        />
                     </View>
                 ) : (
                     Object.entries(groupedNotifications).map(([key, group]) => (
@@ -153,6 +161,7 @@ export class NotificationsScreen extends Component<{}, NotificationsScreenState>
                                         message={notification.message}
                                         timestamp={notification.timestamp}
                                         status={notification.status}
+                                        onPress={()=>this.markAsRead(notification.id)}
                                     />
                                 ))}
                             </View>
@@ -171,6 +180,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        marginVertical: '50%',
     },
     actionLabelStyle: {
         fontWeight: 400,
@@ -184,9 +194,26 @@ const styles = StyleSheet.create({
         letterSpacing: 0.75,
     },
     containerStyle: {
-        // margin: 0,
         paddingLeft: 24,
         paddingRight: 23,
-        // paddingBottom: 14,
+    },
+    successContainerStyle: {
+        height: 812,
+        justifyContent: 'center',
+        flex: 1,
+        alignItems: 'center',
+        gap: 12,
+    },
+    infoStyle: {
+        gap: null,
+    },
+    successTitleStyle: {
+        color: '#000',
+        textAlign: 'center',
+        fontSize: 18,
+        letterSpacing: -0.3,
+    },
+    descriptionStyle: {
+        color: '#64748B',
     },
 })

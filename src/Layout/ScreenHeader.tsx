@@ -84,9 +84,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#1E232C',
+        color: '#000',
+        textAlign: 'center',
+        fontSize: 15,
+        fontWeight: 600,
+        lineHeight: 18.75,
     },
     rightContainer: {
         flexDirection: 'row',
