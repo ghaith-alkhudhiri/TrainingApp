@@ -6,6 +6,7 @@ interface NotificationCardProps {
     message: string;
     timestamp: Date;
     status: 'read' | 'unread';
+    onPress: () => void;
 }
 
 const randomColor = () => {
@@ -37,37 +38,18 @@ const timeSince = (timestamp: Date): string => {
     }
 };
 
-export class NotificationCard extends Component<NotificationCardProps, { isHovered: boolean }> {
-    constructor(props: NotificationCardProps) {
-        super(props);
-        this.state = {
-            isHovered: false,
-        };
-    }
-
-    handleMouseEnter = () => {
-        this.setState({ isHovered: true });
-    };
-
-    handleMouseLeave = () => {
-        this.setState({ isHovered: false });
-    };
+export class NotificationCard extends Component<NotificationCardProps> {
 
     render() {
-        const { title, message, timestamp, status } = this.props;
-        const { isHovered } = this.state;
+        const { title, message, timestamp, status, onPress } = this.props;
         const bgColor = randomColor();
-        const bgColorState = isHovered ? '#EFF6FF' : 'transparent';
 
         // Apply bold text style and border for unread notifications
         const unreadStyle = status === 'unread' ? styles.unread : {};
 
         return (
-            <Pressable
-                onPressIn={this.handleMouseEnter}
-                onPressOut={this.handleMouseLeave}
-            >
-                <View style={[styles.container, { backgroundColor: bgColorState }]}>
+            <Pressable onPress={onPress}>
+                <View style={[styles.container]}>
                     <View style={[styles.card, unreadStyle]}>
                         <View style={[styles.image, { backgroundColor: bgColor }]} />
                         <View style={{ flex: 1 }}>
