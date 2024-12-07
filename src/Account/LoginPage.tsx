@@ -178,7 +178,7 @@ export default class LoginPage extends Component<Props, LoginPageState>{
                 key: 'email',
                 label: 'Email',
                 content: (
-                    <View>
+                    <View style={[styles.mobileNumberContainerStyle, {borderRadius: 10}]}>
                         {initialLoading ? (
                         <Text style={styles.successText}>Loading...</Text>
                         ) : (
@@ -190,7 +190,7 @@ export default class LoginPage extends Component<Props, LoginPageState>{
                                 {auth.currentUser ? (
                                 <Text style={styles.successText}>Please wait...</Text>
                                 ) : (
-                                <View>
+                                <View style={[styles.mobileNumberContainerStyle, {borderRadius: 10}]}>
                                     <TextInput style={styles.input}
                                     placeholder="Enter email"
                                     value={email}
@@ -280,11 +280,15 @@ const styles = StyleSheet.create({
         gap: 10,
       },
       input: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 10,
         padding: 10,
-        width: 250,
+        // width: 250,
+        alignSelf: 'stretch',
+        flex: 1,
+        width: '100%',
+        height: 40,
       },
       label: {
         fontSize: 20,

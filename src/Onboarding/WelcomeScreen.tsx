@@ -31,7 +31,7 @@ export class WelcomeScreen extends Component<WelcomeProps> {
                     <Text style={styles.title}>Finding the Best Pilates Classes for You</Text>
                     <Text style={styles.description}>App to search and discover the most suitable place for you to stay.</Text>
                 </View>
-                <CustomButton label="Let's Get Started" onPress={() => {}} buttonStyle={styles.strechedBtn} />
+                <CustomButton label="Let's Get Started" onPress={this.goToLogin} buttonStyle={styles.strechedBtn} />
                 <Text style={styles.haveAccountText}>Already have an account? 
                     <TouchableOpacity onPress={this.goToLogin} style={styles.loginText}>
                         <Text>Log In</Text>

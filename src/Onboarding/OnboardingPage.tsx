@@ -310,6 +310,7 @@ import onboarding2 from '../Assets/Images/Onboarding2.png';
 import onboarding3 from '../Assets/Images/Onboarding3.png';
 import NavigationControls from './NavigationControls'; // Assuming NavigationControls is separated
 import { NavProps } from '../types';
+import theme from '../Constants/theme';
 
 const onboardingData = [
     {
@@ -363,6 +364,9 @@ const OnboardingPage = ({ onComplete, navigation, route }: OnboardingProps) => {
         const currentScreen = onboardingData[currentIndex];
         return (
             <View style={styles.screen}>
+                <View style={styles.skipContainer}>
+                    <Text style={[styles.skipText, currentIndex === onboardingData.length -1 && styles.skipTextGray]}>Skip</Text>
+                </View>
                 {currentScreen.transparent ? (
                     <ImageBackground source={currentScreen.image} style={styles.image} resizeMode="cover">
                         <View style={styles.textContainer}>
@@ -375,9 +379,17 @@ const OnboardingPage = ({ onComplete, navigation, route }: OnboardingProps) => {
                         <ImageBackground source={currentScreen.image} style={styles.image} resizeMode="cover">
                            
                         </ImageBackground>
-                        <View style={styles.infoContainer}>
-                            <Text style={[styles.title, styles.infoTitle]}>{currentScreen.title}</Text>
-                            <Text style={[styles.description, styles.infoDescription]}>{currentScreen.description}</Text>
+                        <View style={styles.infoWrapper}>
+                            <View style={styles.infoContainer}>
+                                <Text style={[styles.title, styles.infoTitle]}>
+                                    Finding the{' '}
+                                    <Text style={styles.highlight}>Best Pilates Classes</Text>{' '}
+                                    for You
+                                </Text>
+                                <Text style={[styles.description, styles.infoDescription]}>
+                                    {currentScreen.description}
+                                </Text>
+                            </View>
                         </View>
                     </>
                 )}
@@ -445,10 +457,27 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },
+    skipContainer: {
+        zIndex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginRight: 27,
+        marginTop: 56,
+    },
+    skipText: {
+        color: theme.primary,
+        fontSize: 14,
+        fontWeight: 500,
+        fontFamily: theme.font,
+    },
+    skipTextGray: {
+        color: '#92918C',
+    },    
     image: {
         flex: 1,
         justifyContent: 'center', // Position text at the bottom
-        position: 'relative'
+        position: 'relative',
+        bottom: 280,
     },
     bottomContainer: {
         // position: "relative",
@@ -464,33 +493,51 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 650,
     },
-    infoContainer: {
+    infoWrapper: {
         height: 300,
+        borderTopLeftRadius: 13,
+        borderTopRightRadius: 13,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        backgroundColor: 'white',
+        zIndex: 1,
+    },
+    infoContainer: {
+        flex: 1,
         backgroundColor: 'white',
         paddingTop: 28,
         paddingHorizontal: 31,
-        // borderTopLeftRadius: 30,
-        // borderTopRightRadius: 13,
-        // borderWidth: 1,
-       
     },
     infoTitle: {
         color: '#242424',
+        fontFamily: theme.font,
     },
+    highlight: {
+        color: theme.primary,
+        fontFamily: theme.font,
+    },    
     title: {
         color: '#E2E8F0',
         fontSize: 27,
-        fontFamily: 'Inter',
+        fontFamily: theme.font,
         fontWeight: '600',
         textAlign: 'center',
+        width: 300,
     },
     infoDescription: {
         color: '#797979',
+        fontFamily: theme.font,
     },
     description: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 14,
         textAlign: 'center',
-        marginTop: 10,
+        marginTop: 24,
+        fontFamily: theme.font,
+        fontWeight: '400',
+        width: 350,
+        lineHeight: 17,
     },
 });

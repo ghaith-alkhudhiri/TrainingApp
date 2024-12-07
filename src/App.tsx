@@ -25,6 +25,8 @@ import MemberPrerequisite from './Onboarding/MemberPrerequisite';
 import WelcomeScreen from './Onboarding/WelcomeScreen';
 import Goal from './Preferences/Goal';
 import Data from './Preferences/Data';
+import InboxScreen from './Inbox/InboxScreen';
+import NotificationsScreen from './Notification/NotificationsScreen';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -150,6 +152,8 @@ export default class App extends Component<any, State> {
               <Stack.Screen name="Main" component={TabsNavigation} />
               {/* <TabsNavigation /> */}
               <Stack.Screen name="success" component={SuccessPage} />
+              <Stack.Screen name="inbox" component={InboxScreen} />
+              <Stack.Screen name="notification" component={NotificationsScreen} />
             </>
           )}
       </NavigationContainer>
