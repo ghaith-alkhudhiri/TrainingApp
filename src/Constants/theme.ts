@@ -4,5 +4,6 @@ const theme = {
     gray: '#D9D9D9',
     primaryText: '#242424',
     secondaryText: '#797979',
+    font: 'Inter'
 }
 export default theme;

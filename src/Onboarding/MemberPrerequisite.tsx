@@ -47,8 +47,10 @@ export class MemberPrerequisite extends Component<NavProps, State> {
                     <Text style={styles.title}>Are you a <Text style={{color: theme.primary}}>member</Text>{"\n"}of our gym</Text>
                     <Text style={styles.description}>You must be member in our gym so you can use our app! </Text>
                 </View>
-                <CustomButton label="Yes, I am" onPress={this.goToWelcomeScreen} buttonStyle={styles.stretchedBtn} />
-                <CustomButton label="No, I am not" onPress={() => {this.setState({modalVisible: true})}} buttonStyle={styles.outlineBtn} textStyle={styles.outlineBtnText} />
+                <View style={[styles.stretchedBtn, {gap: 15}]}>
+                    <CustomButton label="Yes, I am" onPress={this.goToWelcomeScreen} buttonStyle={styles.stretchedBtn} />
+                    <CustomButton label="No, I am not" onPress={() => {this.setState({modalVisible: true})}} buttonStyle={styles.outlineBtn} textStyle={styles.outlineBtnText} />
+                </View>
                 <CustomModal
                     visible={this.state.modalVisible}
                     onClose={() => this.setState({modalVisible: false})}
@@ -74,12 +76,12 @@ const styles = StyleSheet.create({
         position: 'relative',
         width: '100%',
         backgroundColor: '#F8F8F8',
-        minHeight: height
+        minHeight: height,
     },
     image: {
         width: 240,
         height: 489.365,
-        position: 'absolute'
+        position: 'absolute',
     },
     overlay: {
         position: 'absolute',
@@ -87,59 +89,50 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 345,
         backgroundColor: 'white',
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: -23},
+        shadowOffset: { width: 0, height: -4 },
         shadowOpacity: 0.1,
         shadowRadius: 10,
         elevation: 10,
         paddingHorizontal: 24,
-        paddingTop: 19
+        paddingTop: 24,
+        gap: 24, // Consistent spacing between elements
     },
     welcomeOuterContainer: {
-        gap: 24,
-        alignItems: 'center'
+        alignItems: 'center',
+        gap: 24, // Consistent spacing between text and buttons
     },
     welcomeTextContainer: {
-        gap: 24,
+        gap: 24, // Ensure consistent spacing between title and description
+        alignItems: 'center', // Center-align the text
     },
     title: {
         color: '#1E1E1E',
         textAlign: 'center',
         fontSize: 27,
-        fontWeight: 600,
+        fontWeight: '600', // Ensure bold title
     },
     description: {
         color: '#797979',
         textAlign: 'center',
         fontSize: 14,
-        fontWeight: 400,
-    },
-    haveAccountText: {
-        color: '#242424',
-        fontSize: 16,
-        fontWeight: 400,
-        lineHeight: 22,
+        fontWeight: '400',
     },
     stretchedBtn: {
-        alignSelf: 'stretch',
-    },
-    loginText: {
-        color: '#0961F5',
-        fontSize: 16,
-        fontWeight: 500,
-        lineHeight: 22,
-        textDecorationLine: 'underline',
-        cursor: 'pointer',
+        alignSelf: 'stretch', // Stretch buttons to fill width
     },
     outlineBtn: {
         backgroundColor: 'white',
         borderColor: '#0961F5',
         borderWidth: 1,
         alignSelf: 'stretch',
+        borderRadius: 8, // Add button rounding for a modern look
     },
     outlineBtnText: {
         color: '#0961F5',
-    }
-})
+    },
+});
