@@ -135,7 +135,7 @@ const smallStyles = StyleSheet.create({
         gap: 6,
     },
     tab: {
-        borderRadius: 27,
+        borderRadius: 5,
         paddingHorizontal: 25,
         paddingVertical: 6,
         justifyContent: 'center',
@@ -147,7 +147,7 @@ const smallStyles = StyleSheet.create({
     },
     activeTab: {
         backgroundColor: theme.primary,
-        borderRadius: 27,
+        borderRadius: 5,
         width: 'auto',
         flex: 1,
     },

@@ -27,6 +27,9 @@ import Goal from './Preferences/Goal';
 import Data from './Preferences/Data';
 import InboxScreen from './Inbox/InboxScreen';
 import NotificationsScreen from './Notification/NotificationsScreen';
+import TasksPage from './Tasks/TasksPage';
+import BodyMeasurementOverview from './Tasks/BodyMeasurementOverview';
+import BodyMeasurementForm from './Tasks/BodyMeasurementForm';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -123,27 +126,30 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Main'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='bodyMeasurement'>
+            <Stack.Screen name="Tasks" component={TasksPage} />
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
               )}
-          </Stack.Screen>
-          <Stack.Screen name="MemberPrerequisite" component={MemberPrerequisite} options={{headerShown: false}} />
-          {/* <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} /> */}
-          <Stack.Screen name="WelcomeScreen">
-              {(props) => (
-                <WelcomeScreen {...props} onComplete={this.completeOnboarding} />
-              )}
-          </Stack.Screen>
-          <Stack.Screen name="test" component={TestPage} />
-          <Stack.Screen name="Login" component={LoginPage} />
-          <Stack.Screen name="otp-verification" component={OTPVerification} />
-          <Stack.Screen name="Profile" component={ProfileScreen} />
-          <Stack.Screen name="goals" component={Goal} />
-          <Stack.Screen name="data" component={Data} />
-          <Stack.Screen name="success" component={SuccessPage} />
-          <Stack.Screen name="Main" component={TabsNavigation} />
+            </Stack.Screen>
+            <Stack.Screen name="MemberPrerequisite" component={MemberPrerequisite} options={{headerShown: false}} />
+            {/* <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} /> */}
+            <Stack.Screen name="WelcomeScreen">
+                {(props) => (
+                  <WelcomeScreen {...props} onComplete={this.completeOnboarding} />
+                )}
+            </Stack.Screen>
+            <Stack.Screen name="test" component={TestPage} />
+            <Stack.Screen name="Login" component={LoginPage} />
+            <Stack.Screen name="otp-verification" component={OTPVerification} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="goals" component={Goal} />
+            <Stack.Screen name="data" component={Data} />
+            <Stack.Screen name="success" component={SuccessPage} />
+            <Stack.Screen name="bodyMeasurement" component={BodyMeasurementOverview} />
+            <Stack.Screen name="newBodyMeasurement" component={BodyMeasurementForm} />
+            <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (
             <>
