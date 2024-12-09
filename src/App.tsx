@@ -30,6 +30,8 @@ import NotificationsScreen from './Notification/NotificationsScreen';
 import TasksPage from './Tasks/TasksPage';
 import BodyMeasurementOverview from './Tasks/BodyMeasurementOverview';
 import BodyMeasurementForm from './Tasks/BodyMeasurementForm';
+import { DocumentPage } from './Tasks/DocumentPage';
+import DocumentViewer from './Tasks/DocumentViewer';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -126,8 +128,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='bodyMeasurement'>
-            <Stack.Screen name="Tasks" component={TasksPage} />
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Tasks'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -147,8 +148,11 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="goals" component={Goal} />
             <Stack.Screen name="data" component={Data} />
             <Stack.Screen name="success" component={SuccessPage} />
+            <Stack.Screen name="Tasks" component={TasksPage} />
             <Stack.Screen name="bodyMeasurement" component={BodyMeasurementOverview} />
             <Stack.Screen name="newBodyMeasurement" component={BodyMeasurementForm} />
+            <Stack.Screen name="Document" component={DocumentPage} />
+            <Stack.Screen name="DocumentViewer" component={DocumentViewer} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (

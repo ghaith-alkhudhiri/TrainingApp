@@ -1,19 +1,22 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import If from '../Common/If';
 import CheckIcon from '../Assets/Icons/CheckIcon';
+import { Task } from './TasksPage';
 
 interface Props {
     title: string;
     description: string;
     status: 'done' | 'pending';
+    type: 'bodyMeasurement' | 'document' | 'progressPhoto';
+    onPress: (task: Task) => void;
 }
 
 export class TaskCard extends Component<Props> {
   render() {
-    const {title, description, status} = this.props;
+    const {title, description, status, type, onPress} = this.props;
     return (
-      <View style={styles.container}>
+      <Pressable style={styles.container} onPress={() => onPress({title, description, status, type})}>
         <View style={styles.cardHeaderContainer}>
             <View style={styles.cardHeaderTextContainer}>
                 <Text style={styles.taskCardTitle}>{title}</Text>
@@ -38,7 +41,7 @@ export class TaskCard extends Component<Props> {
                 />
             </View>
         </View>
-      </View>
+      </Pressable>
     )
   }
 }

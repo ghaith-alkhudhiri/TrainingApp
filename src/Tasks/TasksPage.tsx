@@ -3,12 +3,19 @@ import React, { Component } from 'react'
 import ScreenWrapper from '../Layout/ScreenWrapper';
 import CustomTabs from '../Common/CustomTabs';
 import TaskCard from './TaskCard';
+import { storage } from '../firebase';
+import { getDownloadURL, ref } from 'firebase/storage';
 
-
-interface Task {
+export interface Task {
     title: string;
     description: string;
     status: 'done' | 'pending';
+    type: 'bodyMeasurement' | 'document' | 'progressPhoto';
+    url?: string;
+}
+
+interface Props {
+    navigation: any;
 }
 
 interface State {
@@ -17,7 +24,7 @@ interface State {
 }
 
 
-export class TasksPage extends Component<any, State> {
+export class TasksPage extends Component<Props, State> {
     state: State = {
         tasks: [],
         isLoading: true,
@@ -26,18 +33,63 @@ export class TasksPage extends Component<any, State> {
         this.simulateFetchTasks();
     }
 
+    getFileUrl = async (fileName: string): Promise<string> => {
+        try {
+            const fileRef = ref(storage, fileName);
+            const url = await getDownloadURL(fileRef);
+            return url;
+        } catch (error) {
+            console.error("Error fetching file URL:", error);
+            return "";
+        }
+    }
+
+   
+
     simulateFetchTasks = async () => {
         const simulatedTasks: Task[] = [
-            { title: 'Body Measurement', description: 'June Weight Update', status: 'done'},
-            { title: 'Workout', description: 'Morning Routine', status: 'pending'},
-            { title: 'Meal Prep', description: 'Lunch Prep', status: 'done'},
-            { title: 'Grocery Shopping', description: 'Weekly groceries', status: 'pending'},
-            { title: 'Project Review', description: 'Code review with team', status: 'done'},
+            { title: 'Body Measurement', description: 'June Weight Update', status: 'done', type: 'bodyMeasurement'},
+            { title: 'Workout', description: 'Morning Routine', status: 'pending', type: 'progressPhoto'},
+            { title: 'Meal Prep', description: 'Lunch Prep', status: 'done', type: 'document', url: "Desktop.pdf" },
+            { title: 'Grocery Shopping', description: 'Weekly groceries', status: 'pending', type: 'document', url: "Desktop.pdf" },
+            { title: 'Project Review', description: 'Code review with team', status: 'done', type: 'bodyMeasurement'},
         ];
 
-        setTimeout(() => {
-            this.setState({tasks: simulatedTasks, isLoading: false})
-        }, 1000);
+        try {
+            const tasksWithUrls = await Promise.all(
+                simulatedTasks.map(async (task) => {
+                    if (task.type === 'document' && task.url) {
+                        const url = await this.getFileUrl(task.url);
+                        return { ...task, url };
+                    }
+                    return task;
+                })
+            );
+
+            this.setState({ tasks: tasksWithUrls, isLoading: false });
+            console.log("State", this.state);
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+            this.setState({ isLoading: false });
+        }
+    }
+
+    handleTaskNavigation = (task: Task) => {
+        switch(task.type){
+            case 'bodyMeasurement':
+                this.props.navigation.navigate('bodyMeasurement');
+                break;
+            case 'document':
+                if(task.url){
+                    this.props.navigation.navigate('Document', {
+                        title: task.title,
+                        description: task.description,
+                        document: task.url
+                    });
+                }else {
+                    console.warn('Document URL is not available');
+                }
+        }
     }
   render() {
     const { tasks, isLoading} = this.state;
@@ -57,7 +109,9 @@ export class TasksPage extends Component<any, State> {
                             key={index} 
                             title={task.title} 
                             description={task.description} 
-                            status={task.status} 
+                            type={task.type}
+                            status={task.status}
+                            onPress={() => this.handleTaskNavigation(task)} 
                         />
 
                     ))}
@@ -75,7 +129,9 @@ export class TasksPage extends Component<any, State> {
                         key={index}
                         title={task.title}
                         description={task.description}
+                        type={task.type}
                         status={task.status}
+                        onPress={this.handleTaskNavigation}
                     />
                     ))}
                 </View>
@@ -90,8 +146,10 @@ export class TasksPage extends Component<any, State> {
                     <TaskCard
                         key={index}
                         title={task.title}
+                        type={task.type}
                         description={task.description}
                         status={task.status}
+                        onPress={this.handleTaskNavigation}
                     />
                     ))}
                 </View>
