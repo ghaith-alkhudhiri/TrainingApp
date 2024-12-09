@@ -20,6 +20,7 @@ import GoalsCard from './GoalsCard';
 import theme from '../Constants/theme';
 import ToDoSection from './ToDo/ToDoSection';
 import { NavProps } from '../types';
+import HighlightedClassCard from './HighlightedClassCard';
 
 const goals = [
   { title: 'Previous', value: 80, unit: 'kg'},
@@ -98,14 +99,27 @@ export class HomePage extends Component<NavProps> {
         key: 'general',
         label: 'General',
         content: (
-          <View style={{gap: 22}}>
-            <AdvertisementBanner imageUrl='https://s3-alpha-sig.figma.com/img/ff82/42b7/8853662b37a74f0bb163d5471b0d694f?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HVQSZ5db-DRyg3qmYtK6~-gbqQKkf8nBDmWVR4XXG-M8HMJ8XXsvhZN-4S-uK9~vAdyEi9cTeeWwqNHGSMuu3v9C992R0wgOzwo6gNsKHK1Im~-ItW5ZzvGJF1y6V17scARYvLhEe5rbHnbAtVa91YmNvMbuuwkBACgcV45g9R-GJrqXWbwA3KaoYk4CmEfaT3Ly93MFFR0U7BQb5ChMw~e~UbuorrfvbNJpD6r~m-cmRslcVKoRy-9h~ZZFxFYRAzhtMsNOe4A~WntihThwVem44GIsTaPVv7U-KoU70SE0ACswTAeyEgGkPsNstnivSODo2TJ95ii9HHs5gyR43g__' title='Varies Membership' description="Don't miss out on our membership benefits" cta='Shop now' />
+          <View style={{gap: 22, marginTop: 5}}>
+            <AdvertisementBanner 
+              imageUrl={require('../Assets/Images/ad.png')}
+              title='Varies Membership'
+              description="Don't miss out on our membership benefits"
+              cta='Shop now'
+            />
             <UpcomingClasses />
             <AdvertisementBanner 
-              imageUrl='https://s3-alpha-sig.figma.com/img/4228/4932/fbdd36834c5ba5297716cd08de7c9d33?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BdUqEgnJFYxf5vIuSYZTEq0BcS~brGX2hf5Tjhc3EptfP8vTnR9YpE267QQBuZN9hB2sd2~mT~MAKie8lbDli7oY03wLRi8YztHAJleohxGw3iLgSPZfnDI9rvbuM0KB4knLvm4t9kxFLoTS0ndnWYWSmJL1oIHd4JU0boADVz8N7dxFpU7m0KqCjXQlSD7WdEuZ7G2vyYyPdUlMmHHaLRpQFBH5YL9rGY~1xZbsOVQC-JBqNmQ~uCKbgNrYjPqha8WJuoMlYN7amqvzUDki4hQPQQnseTZKRUeT8~A5JNggW~KJeyrUAr3Li2Vj2-9BHQgg~gkcl6kGK7I4eae4qQ__'
+              imageUrl={require('../Assets/Images/ad2.png')}
               title="New Collection"
               description='Be the first to buy the new merchandise'
               cta='Shop now'
+            />
+            <SectionHeader title="Upcoming Classes" counter={3} onPress={() => {}} />
+            <HighlightedClassCard 
+              title='Hatha yoga'
+              date='Monday, 26 July'
+              time='09:00 - 10:00'
+              coach='Noor M. Ali'
+              imageUrl={require('../Assets/Images/img.png')}
             />
             <Events/>
           </View>
@@ -133,28 +147,18 @@ export class HomePage extends Component<NavProps> {
         label: 'To do',
         content: (
           <View style={{gap: 22}}>
-            <ToDoSection />
-              {/* <CustomSectionCard sectionTitle='Workout of Day' title='Empty' description='You did not have any exercise or tasks on this date' image={<ClipboardIcon fill={theme.primary} />} titleStyle={{textAlign: 'center'}} descriptionStyle={{textAlign: 'center'}} />
-              <CustomSectionCard sectionTitle='Tasks' title='Empty' description='You did not have any exercise or tasks on this date' image={<DumbbellIcon fill={theme.primary} />} titleStyle={{textAlign: 'center'}} descriptionStyle={{textAlign: 'center'}} /> */}
+            <ToDoSection navigation={navigation} route={route} />
           </View>
         )
       }
     ];
     return (
         <ScreenWrapper withoutHeader={true}>
-          {/* <Home/> */}
-          <Header navigation={navigation} route={route} />
-          <SearchInput />
-          <CustomTabs styleType='small' tabs={tabs} />
-          {/* <AdvertisementBanner imageUrl='https://s3-alpha-sig.figma.com/img/ff82/42b7/8853662b37a74f0bb163d5471b0d694f?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HVQSZ5db-DRyg3qmYtK6~-gbqQKkf8nBDmWVR4XXG-M8HMJ8XXsvhZN-4S-uK9~vAdyEi9cTeeWwqNHGSMuu3v9C992R0wgOzwo6gNsKHK1Im~-ItW5ZzvGJF1y6V17scARYvLhEe5rbHnbAtVa91YmNvMbuuwkBACgcV45g9R-GJrqXWbwA3KaoYk4CmEfaT3Ly93MFFR0U7BQb5ChMw~e~UbuorrfvbNJpD6r~m-cmRslcVKoRy-9h~ZZFxFYRAzhtMsNOe4A~WntihThwVem44GIsTaPVv7U-KoU70SE0ACswTAeyEgGkPsNstnivSODo2TJ95ii9HHs5gyR43g__' title='Varies Membership' description="Don't miss out on our membership benefits" cta='Shop now' />
-          <UpcomingClasses />
-          <AdvertisementBanner 
-            imageUrl='https://s3-alpha-sig.figma.com/img/4228/4932/fbdd36834c5ba5297716cd08de7c9d33?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BdUqEgnJFYxf5vIuSYZTEq0BcS~brGX2hf5Tjhc3EptfP8vTnR9YpE267QQBuZN9hB2sd2~mT~MAKie8lbDli7oY03wLRi8YztHAJleohxGw3iLgSPZfnDI9rvbuM0KB4knLvm4t9kxFLoTS0ndnWYWSmJL1oIHd4JU0boADVz8N7dxFpU7m0KqCjXQlSD7WdEuZ7G2vyYyPdUlMmHHaLRpQFBH5YL9rGY~1xZbsOVQC-JBqNmQ~uCKbgNrYjPqha8WJuoMlYN7amqvzUDki4hQPQQnseTZKRUeT8~A5JNggW~KJeyrUAr3Li2Vj2-9BHQgg~gkcl6kGK7I4eae4qQ__'
-            title="New Collection"
-            description='Be the first to buy the new merchandise'
-            cta='Shop now'
-          />
-          <Events/> */}
+          <View style={{paddingHorizontal: 14, gap: 17}}>
+            <Header navigation={navigation} route={route} />
+            <SearchInput />
+            <CustomTabs styleType='small' tabs={tabs} />
+          </View>
         </ScreenWrapper>
     );
   };

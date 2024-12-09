@@ -4,6 +4,7 @@ import BackArrowIcon from '../Assets/Icons/BackArrow';
 import If from '../Common/If';
 import ArrowLeft from '../Assets/Icons/ArrowLeft';
 import { NavProps } from '../types';
+import theme from '../Constants/theme';
 
 interface Props {
     backEnabled: boolean;
@@ -86,9 +87,11 @@ const styles = StyleSheet.create({
     title: {
         color: '#000',
         textAlign: 'center',
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 600,
         lineHeight: 18.75,
+        letterSpacing: -0.3,
+        fontFamily: theme.font,
     },
     rightContainer: {
         flexDirection: 'row',
