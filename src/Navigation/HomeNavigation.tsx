@@ -4,6 +4,7 @@ import HiddenTabBar from './HiddenTabBar';
 import HomePage from '../Home/HomePage';
 import NotificationsScreen from '../Notification/NotificationsScreen';
 import InboxScreen from '../Inbox/InboxScreen';
+import Workouts from '../Home/ToDo/Workouts/Workouts';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ class HomeNavigation extends Component{
         <Stack.Screen name="Home" component={HomePage} options={{headerShown: false}} />
         <Stack.Screen name="Notification" component={HiddenTabBar(NotificationsScreen)} options={{headerShown: false}} />
         <Stack.Screen name="Inbox" component={HiddenTabBar(InboxScreen)} options={{headerShown: false}} />
+        <Stack.Screen name="Workouts" component={HiddenTabBar(Workouts)} options={{headerShown: false}} />
       </Stack.Navigator>
     );
   }

@@ -1,17 +1,17 @@
-import { Pressable, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
-import React, { Component, ReactNode } from 'react'
+import { Pressable, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
+import React, { Component, ReactNode } from 'react';
 import theme from '../Constants/theme';
 
 interface CustomTabsProps {
-    tabs: { key: string; label: string; content: ReactNode}[];
+    tabs: { key: string; label: string; content: ReactNode }[];
     containerStyle?: ViewStyle;
-    tabBarStyle?:ViewStyle;
-    tabStyle?:ViewStyle;
-    activeTabStyle?:ViewStyle;
-    tabTextStyle?:TextStyle;
-    activeTabTextStyle?:TextStyle;
-    tabContentStyle?:ViewStyle;
-    styleType?: 'large' | 'small';
+    tabBarStyle?: ViewStyle;
+    tabStyle?: ViewStyle;
+    activeTabStyle?: ViewStyle;
+    tabTextStyle?: TextStyle;
+    activeTabTextStyle?: TextStyle;
+    tabContentStyle?: ViewStyle;
+    styleType?: 'large' | 'small' | 'underline';
 }
 
 interface CustomTabsState {
@@ -23,8 +23,8 @@ export class CustomTabs extends Component<CustomTabsProps, CustomTabsState> {
     static defaultProps = {
         styleType: 'large',
     };
-    
-    constructor(props: CustomTabsProps){
+
+    constructor(props: CustomTabsProps) {
         super(props);
         this.state = {
             activeTab: props.tabs[0].key,
@@ -32,44 +32,43 @@ export class CustomTabs extends Component<CustomTabsProps, CustomTabsState> {
     }
 
     setActiveTab = (key: string) => {
-        this.setState({activeTab: key});
+        this.setState({ activeTab: key });
     }
 
-
     render() {
-        const { tabs, containerStyle, tabBarStyle, tabStyle, activeTabStyle, tabTextStyle, activeTabTextStyle, tabContentStyle, styleType} = this.props;
+        const { tabs, containerStyle, tabBarStyle, tabStyle, activeTabStyle, tabTextStyle, activeTabTextStyle, tabContentStyle, styleType } = this.props;
         const { activeTab } = this.state;
         const activeContent = tabs.find(tab => tab.key === activeTab)?.content;
 
-        const isLarge = styleType === 'large';
-        const appliedStyles = isLarge ? largeStyles : smallStyles;
+        const appliedStyles = styleType === 'underline' ? underlineStyles : styleType === 'large' ? largeStyles : smallStyles;
 
         return (
-        <View style={[appliedStyles.container, containerStyle]}>
-            <View style={[appliedStyles.tabBar, tabBarStyle]}>
-                {tabs.map(tab => (
-                    <Pressable
-                        key={tab.key}
-                        onPress={() => this.setActiveTab(tab.key)}
-                        style={StyleSheet.flatten([
-                            appliedStyles.tab,
-                            tabStyle,
-                            activeTab === tab.key && StyleSheet.flatten([appliedStyles.activeTab, activeTabStyle]),
-                        ])}
-                    >
-                        <Text style={StyleSheet.flatten([
-                            appliedStyles.tabText,
-                            tabTextStyle,
-                            activeTab === tab.key && StyleSheet.flatten([appliedStyles.activeTabText, activeTabTextStyle]),
-                        ])}>{tab.label}</Text>
-                    </Pressable>
-                ))}
+            <View style={[appliedStyles.container, containerStyle]}>
+                <View style={[appliedStyles.tabBar, tabBarStyle]}>
+                    {tabs.map(tab => (
+                        <Pressable
+                            key={tab.key}
+                            onPress={() => this.setActiveTab(tab.key)}
+                            style={StyleSheet.flatten([
+                                appliedStyles.tab,
+                                tabStyle,
+                                activeTab === tab.key && StyleSheet.flatten([appliedStyles.activeTab, activeTabStyle]),
+                            ])}
+                        >
+                            <Text style={StyleSheet.flatten([
+                                appliedStyles.tabText,
+                                tabTextStyle,
+                                activeTab === tab.key && StyleSheet.flatten([appliedStyles.activeTabText, activeTabTextStyle]),
+                            ])}>{tab.label}</Text>
+                            {activeTab === tab.key && <View style={appliedStyles.underline} />}
+                        </Pressable>
+                    ))}
+                </View>
+                <View style={appliedStyles.tabContent}>
+                    {activeContent}
+                </View>
             </View>
-            <View style={appliedStyles.tabContent}>
-                {activeContent}
-            </View>
-        </View>
-        )
+        );
     }
 }
 
@@ -94,18 +93,16 @@ const largeStyles = StyleSheet.create({
         paddingVertical: 11,
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
-
+        alignItems: 'center',
     },
     activeTab: {
         backgroundColor: '#FFF',
         borderRadius: 6,
         shadowColor: '#000',
-        shadowOffset: { width: -2, height: -1},
+        shadowOffset: { width: -2, height: -1 },
         shadowOpacity: 0.03,
         shadowRadius: 4,
         elevation: 2,
-
     },
     activeTabText: {
         color: '#404B52',
@@ -119,12 +116,13 @@ const largeStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-})
+    underline: {},
+});
 
 const smallStyles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 22,
+        gap: 17,
     },
     tabBar: {
         flexDirection: 'row',
@@ -166,4 +164,52 @@ const smallStyles = StyleSheet.create({
     tabContent: {
         flex: 1,
     },
-})
+    underline: {},
+});
+
+const underlineStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        gap: 25,
+    },
+    tabBar: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+        borderBottomWidth: 1,
+        borderColor: '#E2E2E3',
+        paddingHorizontal: 20,
+    },
+    tab: {
+        flex: 1,
+        paddingHorizontal: 51,
+        paddingVertical: 13,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+    },
+    underline: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        height: 4,
+        width: '100%',
+        backgroundColor: theme.primary,
+    },
+    activeTabText: {
+        color: theme.primary,
+        fontSize: 14,
+        fontWeight: 600,
+        fontFamily: theme.font,
+    },
+    tabText: {
+        color: '#1E1E1E',
+        fontSize: 14,
+        fontWeight: 400,
+        fontFamily: theme.font,
+    },
+    tabContent: {
+        flex: 1,
+    },
+    activeTab:{},
+});

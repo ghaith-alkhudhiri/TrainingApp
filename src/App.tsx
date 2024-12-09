@@ -27,6 +27,7 @@ import Goal from './Preferences/Goal';
 import Data from './Preferences/Data';
 import InboxScreen from './Inbox/InboxScreen';
 import NotificationsScreen from './Notification/NotificationsScreen';
+import Workouts from './Home/ToDo/Workouts/Workouts';
 import TasksPage from './Tasks/TasksPage';
 import BodyMeasurementOverview from './Tasks/BodyMeasurementOverview';
 import BodyMeasurementForm from './Tasks/BodyMeasurementForm';
@@ -164,6 +165,7 @@ export default class App extends Component<any, State> {
               <Stack.Screen name="success" component={SuccessPage} />
               <Stack.Screen name="inbox" component={InboxScreen} />
               <Stack.Screen name="notification" component={NotificationsScreen} />
+              <Stack.Screen name="workouts" component={Workouts} />
             </>
           )}
       </NavigationContainer>

@@ -1,4 +1,4 @@
-import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import React, { Component, ReactNode } from 'react'
 import ScreenHeader from './ScreenHeader';
 import If from '../Common/If';
@@ -18,6 +18,7 @@ interface Props {
         label: string;
         onPress: () => void;
     }
+    scrollContainerStyle?: ViewStyle;
     childrenContainerStyle: object;
 }
 
@@ -51,11 +52,11 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps} = this.props;
+        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, scrollContainerStyle} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
-                <ScrollView style={[styles.innerContainer, floatingBtn && {marginBottom: 80}]}>
+                <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, floatingBtn && {marginBottom: 80}]}>
                     <If condition={!withoutHeader}>
                         <ScreenHeader
                             navigation={this.props.navigation} 
