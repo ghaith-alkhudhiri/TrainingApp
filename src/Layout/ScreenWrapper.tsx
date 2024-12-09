@@ -19,6 +19,7 @@ interface Props {
         onPress: () => void;
     }
     scrollContainerStyle?: ViewStyle;
+    childrenContainerStyle: object;
 }
 
 interface State {
@@ -51,7 +52,7 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement, navigation, floatingBtn, floatingBtnProps, scrollContainerStyle} = this.props;
+        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, scrollContainerStyle} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
@@ -65,7 +66,7 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
                             rightElement={rightElement} 
                         />
                     </If>
-                    <View style={styles.childrenContainer}>
+                    <View style={[styles.childrenContainer, childrenContainerStyle]}>
                         {this.props.children}
                     </View>
                 </ScrollView>
