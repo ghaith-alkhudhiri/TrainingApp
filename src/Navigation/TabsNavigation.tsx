@@ -11,13 +11,7 @@ import Test from '../Test';
 import DiscoverNavigation from './DiscoverNavigation';
 
 const Tab = createBottomTabNavigator();
-const tabs = [
-    { title: 'Home', icon: <HomeIcon />, component: Test, path: 'home' },
-    { title: 'Discover', icon: <DiscoverIcon />, component: Test, path: 'discover' },
-    { title: 'Calendar', icon: <CalendarIcon />, component: Test, path: 'calendar' },
-    { title: 'Shop', icon: <ShopIcon />, component: Test, path: 'shop' },
-    { title: 'You', icon: <ProfileIcon />, component: Test, path: 'profile' },
-  ];
+
 const TabsNavigation = () => {
   return (
     <Tab.Navigator>
