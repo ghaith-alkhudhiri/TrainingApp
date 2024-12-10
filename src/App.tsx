@@ -32,6 +32,9 @@ import BodyMeasurementOverview from './Tasks/BodyMeasurementOverview';
 import BodyMeasurementForm from './Tasks/BodyMeasurementForm';
 import { DocumentPage } from './Tasks/DocumentPage';
 import DocumentViewer from './Tasks/DocumentViewer';
+import ProgressPhoto from './Tasks/ProgressPhoto';
+import Categories from './Discover/Categories';
+import CategoryDetails from './Discover/CategoryDetails';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -128,7 +131,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Tasks'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Categories'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -153,6 +156,9 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="newBodyMeasurement" component={BodyMeasurementForm} />
             <Stack.Screen name="Document" component={DocumentPage} />
             <Stack.Screen name="DocumentViewer" component={DocumentViewer} />
+            <Stack.Screen name="ProgressPhoto" component={ProgressPhoto} />
+            <Stack.Screen name="Categories" component={Categories} />
+            <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (

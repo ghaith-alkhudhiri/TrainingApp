@@ -89,6 +89,9 @@ export class TasksPage extends Component<Props, State> {
                 }else {
                     console.warn('Document URL is not available');
                 }
+                break;
+            case 'progressPhoto':
+                this.props.navigation.navigate('ProgressPhoto');
         }
     }
   render() {

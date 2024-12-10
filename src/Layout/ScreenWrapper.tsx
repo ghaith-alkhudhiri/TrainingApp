@@ -1,4 +1,4 @@
-import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, ImageBackground, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { Component, ReactNode } from 'react'
 import ScreenHeader from './ScreenHeader';
 import If from '../Common/If';
@@ -18,6 +18,8 @@ interface Props {
         label: string;
         onPress: () => void;
     }
+    heroImage?: boolean;
+    heroImageUrl?: string;
     childrenContainerStyle: object;
 }
 
@@ -51,19 +53,38 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps} = this.props;
+        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImageUrl} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
-                <ScrollView style={[styles.innerContainer, floatingBtn && {marginBottom: 80}]}>
-                    <If condition={!withoutHeader}>
-                        <ScreenHeader
-                            navigation={this.props.navigation} 
-                            route={this.props.route} 
-                            backEnabled={true} 
-                            title={title} 
-                            rightElement={rightElement} 
-                        />
+                <ScrollView style={[styles.innerContainer, floatingBtn && {marginBottom: 80}, heroImage && {paddingHorizontal: 0, paddingTop: 0}]}>
+                    <If condition={heroImage}>
+                        <ImageBackground
+                            source={{uri: heroImageUrl }}
+                            resizeMode='cover'
+                            style={styles.heroImageBackground}
+                        >
+                            <ScreenHeader
+                                navigation={this.props.navigation} 
+                                route={this.props.route} 
+                                backEnabled={true} 
+                                title={title} 
+                                rightElement={rightElement}
+                                backContainerStyle={{left: 25}}
+                                rightContainerStyle={{right: 25}}
+                            />
+                        </ImageBackground>
+                    </If>
+                    <If condition={!heroImage}>
+                        <If condition={!withoutHeader}>
+                            <ScreenHeader
+                                navigation={this.props.navigation} 
+                                route={this.props.route} 
+                                backEnabled={true} 
+                                title={title} 
+                                rightElement={rightElement} 
+                            />
+                        </If>
                     </If>
                     <View style={[styles.childrenContainer, childrenContainerStyle]}>
                         {this.props.children}
@@ -126,6 +147,10 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    heroImageBackground: {
+        height: 225,
+        width: '100%'
     },
     buttonText: {
         color: '#FFFFFF',

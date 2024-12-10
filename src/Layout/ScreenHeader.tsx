@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import React, { Component, ReactNode } from 'react'
 import BackArrowIcon from '../Assets/Icons/BackArrow';
 import If from '../Common/If';
@@ -10,6 +10,9 @@ interface Props {
     title?: string;
     rightElement?: ReactNode;
     navigation?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    backContainerStyle?: StyleProp<ViewStyle>;
+    rightContainerStyle?: StyleProp<ViewStyle>;
 }
 type HeaderProps = NavProps & Props;
 
@@ -25,23 +28,23 @@ export class ScreenHeader extends Component<HeaderProps> {
         }
     };
     render() {
-        const {backEnabled, title, rightElement} = this.props;
+        const {backEnabled, title, rightElement, containerStyle, backContainerStyle, rightContainerStyle} = this.props;
         return (
-        <View style={styles.container}>
+        <View style={[styles.container, containerStyle]}>
             
             <View style={styles.titleContainer}>
                 <If condition={!!title}>
                     <Text style={styles.title}>{title}</Text>
                 </If>
             </View>
-            <Pressable style={styles.backContainer} onPress={this.handleGoBack}>
+            <Pressable style={[styles.backContainer, backContainerStyle]} onPress={this.handleGoBack}>
                 <If condition={backEnabled}>
                     {/* <BackArrowIcon width={20} height={20} color="#1E232C" /> */}
                     <ArrowLeft width={20} height={20} color="#1E232C"/>
                 </If>
             </Pressable>
                 {/* <View style={{ width: 41 }} /> */}
-            <View style={[styles.rightContainer]}>
+            <View style={[styles.rightContainer, rightContainerStyle]}>
                 <If condition={!!rightElement}>
                     {rightElement}
                 </If>
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         paddingVertical: 20,
-        position: 'relative'
+        position: 'relative',
     },
     backContainer: {
         width: 41,
@@ -99,5 +102,6 @@ const styles = StyleSheet.create({
         columnGap: 50,
         verticalAlign: 'middle',
         height: 41,
-    }
+    },
+    
 });
