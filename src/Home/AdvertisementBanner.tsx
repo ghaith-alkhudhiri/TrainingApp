@@ -4,7 +4,7 @@ import theme from '../Constants/theme';
 
 interface Props {
     title: string;
-    imageUrl: string;
+    imageUrl?: any;
     description: string;
     cta: string;
 }
@@ -21,7 +21,8 @@ export class AdvertisementBanner extends Component<Props> {
                 <Text style={styles.ctaText}>{cta}</Text>
             </View>
         </View>
-        <Image source={{uri: imageUrl}} style={styles.advertisementImg} />
+        <Image source={imageUrl} style={styles.advertisementImg}/>
+        {/* <Image source={{uri: imageUrl}} style={styles.advertisementImg} /> */}
       </View>
     )
   }

@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      height: 27,
+      // height: 27,
       marginBottom: 13,
     },
     titleContainer: {

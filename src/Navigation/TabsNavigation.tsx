@@ -8,6 +8,7 @@ import CalendarIcon from '../Assets/Icons/CalendarIcon';
 import ShopIcon from '../Assets/Icons/ShopIcon';
 import ProfileIcon from '../Assets/Icons/ProfileIcon';
 import Test from '../Test';
+import DiscoverNavigation from './DiscoverNavigation';
 
 const Tab = createBottomTabNavigator();
 const tabs = [
@@ -30,7 +31,7 @@ const TabsNavigation = () => {
         />
         <Tab.Screen 
             name="Discover" 
-            component={Test}
+            component={DiscoverNavigation}
             options={{
                 headerShown: false,
                 tabBarIcon: ({color, size}) => <DiscoverIcon />

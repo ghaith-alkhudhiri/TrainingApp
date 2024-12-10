@@ -1,4 +1,4 @@
-import { Dimensions, ImageBackground, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, ImageBackground, Pressable, ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import React, { Component, ReactNode } from 'react'
 import ScreenHeader from './ScreenHeader';
 import If from '../Common/If';
@@ -20,6 +20,7 @@ interface Props {
     }
     heroImage?: boolean;
     heroImageUrl?: string;
+    scrollContainerStyle?: ViewStyle;
     childrenContainerStyle: object;
 }
 
@@ -53,11 +54,11 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImageUrl} = this.props;
+        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImageUrl, scrollContainerStyle} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
-                <ScrollView style={[styles.innerContainer, floatingBtn && {marginBottom: 80}, heroImage && {paddingHorizontal: 0, paddingTop: 0}]}>
+                <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, floatingBtn && {marginBottom: 80}, heroImage && {paddingHorizontal: 0, paddingTop: 0}]}>
                     <If condition={heroImage}>
                         <ImageBackground
                             source={{uri: heroImageUrl }}
