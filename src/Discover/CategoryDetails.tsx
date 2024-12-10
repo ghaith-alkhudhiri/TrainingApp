@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import ScreenWrapper from '../Layout/ScreenWrapper';
 import ShareIcon from '../Assets/Icons/ShareIcon';
@@ -16,20 +16,30 @@ export class ShareBtn extends Component {
 
 export class CategoryDetails extends Component {
     render() {
+        const galleryImages = [
+            "https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        ]
         const tabs = [
             {
-                key: 'tabAll',
-                label: "All",
+                key: 'about',
+                label: "About",
                 content: (
-                    <View>
-                        <Text>welcome</Text>
+                    <View style={styles.tabContainer}>
+                        <Text style={styles.aboutText}>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae mi tristique, laoreet nibh sed, aliquet arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae mi tristique, laoreet nibh sed, aliquet arcu. 
+
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae mi tristique, laoreet nibh sed, aliquet arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae mi tristique, laoreet nibh sed, aliquet arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae mi tristique, laoreet nibh sed, aliquet arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        </Text>
                     
                     </View>
                 )
             },
             {
-                key: 'tabOpen',
-                label: 'Open',
+                key: 'trainers',
+                label: 'Trainers',
                 content: (
                     <View>
                        <Text>Hello</Text>
@@ -37,14 +47,28 @@ export class CategoryDetails extends Component {
                 )
             },
             {
-                key: 'tabClosed',
-                label: "Closed",
+                key: 'gallery',
+                label: "Gallery",
+                content: (
+                    <View style={styles.galleryContainer}>
+                        <Text style={styles.galleryText}>Gallery <Text style={styles.imagesCount}>({galleryImages.length})</Text></Text>
+                        <View style={styles.galleryImagesContainer}>
+                            {galleryImages.map((image, index) => {
+                               return <Image key={index} source={{uri: image}} style={styles.galleryImage}/>
+                            })}
+                        </View>
+                    </View>
+                )
+            },
+            {
+                key: 'review',
+                label: "Review",
                 content: (
                     <View>
                         <Text>Great</Text>
                     </View>
                 )
-            }
+            },
         ];
         return (
         <ScreenWrapper 
@@ -57,7 +81,8 @@ export class CategoryDetails extends Component {
                     <Text style={styles.title}>Vinyasa Yoga</Text>
                     <CustomTabs 
                         tabs={tabs}
-                        styleType='small'
+                        tabBarStyle={{paddingHorizontal: 0}}
+                        styleType='underline'
                     />
                 </View>
         </ScreenWrapper>
@@ -88,6 +113,45 @@ const styles = StyleSheet.create({
         fontWeight: 600,
         paddingTop: 16,
         paddingHorizontal: 24,
+    },
+    tabContainer: {
+        paddingHorizontal: 22,
+        paddingBottom: 13
+    },
+    aboutText: {
+        color: '#797979',
+        textAlign: 'justify',
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: 400,
+        lineHeight: 18,
+    },
+    galleryContainer: {
+        paddingHorizontal: 24,
+        gap: 11,
+    },
+    galleryText: {
+        color: "#000",
+        fontFamily: "Inter",
+        fontSize: 18,
+        fontWeight: 600,
+    },
+    imagesCount: {
+        color: "#0165FC",
+        fontFamily: "Inter",
+        fontWeight: 600,
+        letterSpacing: -0.3,
+    },
+    galleryImagesContainer: {
+        flexDirection: 'row',
+        columnGap: 16,
+        rowGap: 14,
+        flexWrap: 'wrap'
+    },
+    galleryImage: {
+        width: 155,
+        height: 162,
+        borderRadius: 7,
     }
 
 })
