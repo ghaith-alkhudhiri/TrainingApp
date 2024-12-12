@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import React, { Component } from 'react'
 import StarIcon from '../../Assets/Icons/StartIcon';
 
@@ -6,21 +6,35 @@ interface Props {
     name: string;
     rating: number;
     reviewMsg: string;
+    timestamp: string;
+    containerStyle?: ViewStyle;
+    nameStyle?: TextStyle;
+    reviewStyle?: TextStyle;
+    ratingContainerStyle?: ViewStyle;
+    timestampStyle?: TextStyle;
+    icon?: React.ReactNode;
 }
 
 export class ReviewItem extends Component<Props> {
+    static defaultProps = {
+        name: 'Anonymous',
+        rating: 0,
+        reviewMsg: 'No review provided.',
+        timestamp: 'Some time ago',
+        icon: <StarIcon />
+    }
   render() {
-    const {name, rating, reviewMsg} = this.props;
+    const {name, rating, reviewMsg, timestamp, containerStyle, nameStyle, reviewStyle, ratingContainerStyle, timestampStyle, icon} = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
         <View style={styles.header}>
-            <Text style={styles.nameText}>{name}</Text>
+            <Text style={[styles.nameText, nameStyle]}>{name}</Text>
             <View style={styles.infoContainer}>
-                <View style={styles.ratingContainer}>
+                <View style={[styles.ratingContainer, ratingContainerStyle]}>
                     <StarIcon />
                     <Text>{rating}</Text>
                 </View>
-                <Text style={styles.publishedAtText}>2 Weeks ago</Text>
+                <Text style={[styles.publishedAtText, timestampStyle]}>{timestamp}</Text>
             </View>
         </View>
         <Text style={styles.reviewMsgText}>{reviewMsg}</Text>
@@ -36,7 +50,7 @@ const styles = StyleSheet.create({
         gap: 9,
         paddingVertical: 16,
         paddingHorizontal: 25,
-        borderTopWidth: 1,
+        // borderTopWidth: 1,
         borderColor: '#E0E0E0',
         borderBottomWidth: 1,
     },

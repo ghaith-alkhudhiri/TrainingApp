@@ -29,42 +29,50 @@ export class CategoryDetails extends Component {
             {
                 senderUserName: "Ghaith Alkhudhiri",
                 rating: 3,
-                content: "The service was okay, but there's room for improvement."
+                content: "The service was okay, but there's room for improvement.",
+                timestamp: "2 weeks ago"
             },
             {
                 senderUserName: "Ali Salman",
                 rating: 5,
-                content: "Amazing experience! Highly recommended."
+                content: "Amazing experience! Highly recommended.",
+                timestamp: "3 weeks ago",
             },
             {
                 senderUserName: "Fatima Yusuf",
                 rating: 4,
-                content: "Good overall, but the process could be faster."
+                content: "Good overall, but the process could be faster.",
+                timestamp: "1 week ago",
             },
             {
                 senderUserName: "Ahmed Jamal",
                 rating: 2,
-                content: "Not satisfied with the quality of service."
+                content: "Not satisfied with the quality of service.",
+                timestamp: '1 year ago'
             },
             {
                 senderUserName: "Noor Ali",
                 rating: 5,
-                content: "Excellent! The team was very professional."
+                content: "Excellent! The team was very professional.",
+                timestamp: '2 years ago',
             },
             {
                 senderUserName: "Sarah Ibrahim",
                 rating: 1,
-                content: "Very disappointed. Will not use this service again."
+                content: "Very disappointed. Will not use this service again.",
+                timestamp: '3 years ago',
             },
             {
                 senderUserName: "Hassan Mohammed",
                 rating: 4,
-                content: "Great service but a bit expensive."
+                content: "Great service but a bit expensive.",
+                timestamp: '2 minutes ago',
             },
             {
                 senderUserName: "Mariam Abdullah",
                 rating: 3,
-                content: "It was average. Nothing exceptional."
+                content: "It was average. Nothing exceptional.",
+                timestamp: '1 minute ago'
             },
             {
                 senderUserName: "Omar Khalid",
@@ -137,7 +145,7 @@ export class CategoryDetails extends Component {
                         </View>
                         <View style={styles.reviewsContainer}>
                             {reviews.map((review, index) => (
-                                <ReviewItem name={review.senderUserName} rating={review.rating} reviewMsg={review.content} />
+                                <ReviewItem key={index} name={review.senderUserName} rating={review.rating} reviewMsg={review.content} timestamp={review.timestamp} />
 
                             ))}
                         </View>
