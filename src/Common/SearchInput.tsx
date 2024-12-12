@@ -1,13 +1,30 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleProp, StyleSheet, Text, TextInput, TextInputProps, TextStyle, View, ViewStyle } from 'react-native'
 import React, { Component } from 'react'
 import SearchIcon from '../Assets/Icons/SearchIcon';
 
-export class SearchInput extends Component {
+
+interface SearchInputProps extends TextInputProps {
+  containerStyle?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<TextStyle>;
+  icon?: React.ReactNode;
+}
+
+export class SearchInput extends Component<SearchInputProps> {
+  static defaultProps = {
+    placeholder: 'Search...',
+    icon: <SearchIcon />
+  }
   render() {
+    const {containerStyle, inputStyle, icon, ...textInputProps} =  this.props;
     return (
-      <View style={styles.container}>
-        <SearchIcon />
-        <TextInput style={styles.input} placeholder='Search Classes, Trainer' />
+      <View style={[styles.container, containerStyle]}>
+        {/* <SearchIcon /> */}
+        {icon}
+        <TextInput 
+          style={[styles.input, inputStyle]} 
+          placeholderTextColor="#797979"
+          {...textInputProps}
+          />
       </View>
     )
   }

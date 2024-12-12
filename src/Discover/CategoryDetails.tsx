@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import ScreenWrapper from '../Layout/ScreenWrapper';
 import ShareIcon from '../Assets/Icons/ShareIcon';
 import CustomTabs from '../Common/CustomTabs';
+import SearchInput from '../Common/SearchInput';
+import ReviewItem from './Components/ReviewItem';
 
 export class ShareBtn extends Component {
     render(){
@@ -22,6 +24,60 @@ export class CategoryDetails extends Component {
             "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         ]
+
+        const reviews = [
+            {
+                senderUserName: "Ghaith Alkhudhiri",
+                rating: 3,
+                content: "The service was okay, but there's room for improvement."
+            },
+            {
+                senderUserName: "Ali Salman",
+                rating: 5,
+                content: "Amazing experience! Highly recommended."
+            },
+            {
+                senderUserName: "Fatima Yusuf",
+                rating: 4,
+                content: "Good overall, but the process could be faster."
+            },
+            {
+                senderUserName: "Ahmed Jamal",
+                rating: 2,
+                content: "Not satisfied with the quality of service."
+            },
+            {
+                senderUserName: "Noor Ali",
+                rating: 5,
+                content: "Excellent! The team was very professional."
+            },
+            {
+                senderUserName: "Sarah Ibrahim",
+                rating: 1,
+                content: "Very disappointed. Will not use this service again."
+            },
+            {
+                senderUserName: "Hassan Mohammed",
+                rating: 4,
+                content: "Great service but a bit expensive."
+            },
+            {
+                senderUserName: "Mariam Abdullah",
+                rating: 3,
+                content: "It was average. Nothing exceptional."
+            },
+            {
+                senderUserName: "Omar Khalid",
+                rating: 5,
+                content: "Outstanding service and quick response!"
+            },
+            {
+                senderUserName: "Layla Nasser",
+                rating: 2,
+                content: "Service was slow, and staff were unresponsive."
+            }
+        ];
+        
         const tabs = [
             {
                 key: 'about',
@@ -64,8 +120,27 @@ export class CategoryDetails extends Component {
                 key: 'review',
                 label: "Review",
                 content: (
-                    <View>
-                        <Text>Great</Text>
+                    <View style={styles.reviewContainer}>
+                        <View style={styles.reviewControlsContainer}>
+                            <View style={styles.reviewHeaderContainer}>
+                                <Text style={styles.reviewTitle}>Reviews</Text>
+                                <Pressable style={styles.addReviewBtn} onPress={() => console.log("Add Review Pressed")}>
+                                    <Text style={styles.addReviewText}>Add Review</Text>
+                                </Pressable>
+                            </View>
+                            <SearchInput
+                                placeholder='Search in Reviews'
+                                containerStyle={{borderRadius: 11, borderWidth: 1, borderColor: '#E9E9E9', backgroundColor: '#FFF'}}
+                                onChangeText={(text) => console.log("Search: ", text)}
+                                onFocus={() => console.log('Input focused')}
+                            />
+                        </View>
+                        <View style={styles.reviewsContainer}>
+                            {reviews.map((review, index) => (
+                                <ReviewItem name={review.senderUserName} rating={review.rating} reviewMsg={review.content} />
+
+                            ))}
+                        </View>
                     </View>
                 )
             },
@@ -153,6 +228,38 @@ const styles = StyleSheet.create({
         width: 155,
         height: 162,
         borderRadius: 7,
+    },
+    reviewContainer: {
+        gap: 16,
+    },
+    reviewControlsContainer: {
+        gap: 11,
+        paddingHorizontal: 24,
+    },
+    reviewTitle: {
+        color: '#000',
+        fontFamily: "Inter",
+        fontSize: 18,
+        fontWeight: 600,
+    },
+    addReviewBtn: {
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+    },
+    addReviewText: {
+        color: '#0165FC',
+        fontFamily: "Inter",
+        fontSize: 12,
+        fontWeight: 500,
+        lineHeight: 17,
+    },
+    reviewHeaderContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    reviewsContainer: {
+
     }
 
 })
