@@ -9,6 +9,7 @@ import ShopIcon from '../Assets/Icons/ShopIcon';
 import ProfileIcon from '../Assets/Icons/ProfileIcon';
 import Test from '../Test';
 import DiscoverNavigation from './DiscoverNavigation';
+import MembershipDetail from '../Discover/Memberships/MembershipDetail';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,7 @@ const TabsNavigation = () => {
         />
         <Tab.Screen 
             name="Discover" 
-            component={DiscoverNavigation}
+            component={MembershipDetail}
             options={{
                 headerShown: false,
                 tabBarIcon: ({color, size}) => <DiscoverIcon />

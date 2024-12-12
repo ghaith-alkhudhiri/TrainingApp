@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HiddenTabBar from './HiddenTabBar';
 import Discover from '../Discover/Discover';
-import Overview from '../Discover/Memberships/Overview';
+import Overview from '../Discover/Memberships/MembershipScreen';
 
 const Stack = createStackNavigator();
 
