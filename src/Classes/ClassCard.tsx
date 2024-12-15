@@ -1,9 +1,10 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import NameIcon from '../Assets/Icons/NameIcon';
 import ClockIcon from '../Assets/Icons/ClockIcon';
 import ClassCategory from './ClassCategory';
 import theme from '../Constants/theme';
+import StarIcon from '../Assets/Icons/StartIcon';
 
 
 interface ClassCardProps {
@@ -14,15 +15,24 @@ interface ClassCardProps {
     price?: number;
     coachName: string;
     time: string;
+    navigation: any;
 }
 
-interface ClassCardState {}
+interface ClassCardState {
+
+}
 
 export class ClassCard extends Component<ClassCardProps, ClassCardState> {
+    navigateToClassesDetails = () => {
+        
+        this.props.navigation.navigate("ClassDetails", {
+            url: [this.props.url]
+        });
+    }
   render() {
-    const {title, coachName, time, price, url, categories} = this.props;
+    const {title, coachName, time, price, url, categories, rating} = this.props;
     return (
-      <View style={styles.container}>
+      <Pressable style={styles.container} onPress={this.navigateToClassesDetails}>
         <Image style={styles.classImg} source={{uri: url}} />
         <View style={styles.cardContent}>
             <View style={styles.categoriesAndRatingRow}>
@@ -34,7 +44,8 @@ export class ClassCard extends Component<ClassCardProps, ClassCardState> {
                     </View>
                 }
                 <View style={styles.ratingContainer}>
-                    <Text>Rating</Text>
+                    <StarIcon />
+                    <Text style={styles.ratingText}>{rating}</Text>
                 </View>
             </View>
             <View>
@@ -50,7 +61,7 @@ export class ClassCard extends Component<ClassCardProps, ClassCardState> {
             </View>
             <Text style={styles.priceText}>{price} RS</Text>
         </View>
-      </View>
+      </Pressable>
     )
   }
 }
@@ -123,5 +134,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 12,
     },
-    ratingContainer: {},
+    ratingContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 3,
+    },
+    ratingText: {
+        color: '#000',
+        fontFamily: 'Inter',
+        fontSize: 13,
+        fontWeight: 400,
+
+    }
 });

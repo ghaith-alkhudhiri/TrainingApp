@@ -7,6 +7,10 @@ import SearchInput from '../Common/SearchInput';
 import ReviewItem from './Components/ReviewItem';
 import SelectableItem from '../Common/SelectableItem';
 
+interface Props {
+    navigation: any;
+}
+
 interface State {
     selectedOption: string | null;
 }
@@ -21,7 +25,7 @@ export class ShareBtn extends Component {
     }
 }
 
-export class CategoryDetails extends Component<any, State> {
+export class CategoryDetails extends Component<Props, State> {
     constructor(props: any){
         super(props);
         this.state = {
@@ -33,6 +37,10 @@ export class CategoryDetails extends Component<any, State> {
         this.setState({
             selectedOption: option
         });
+    }
+
+    navigateToClasses = () => {
+        this.props.navigation.navigate("Classes");
     }
 
     render() {
@@ -188,7 +196,7 @@ export class CategoryDetails extends Component<any, State> {
             heroImage 
             heroImagesUrls={[
                 "https://plus.unsplash.com/premium_photo-1669446008800-9a124b0fd3a2?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","https://plus.unsplash.com/premium_photo-1683133543401-edc31ed41140?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]} floatingBtn 
-            floatingBtnProps={{label: "View Classes", onPress: () => {}}}
+            floatingBtnProps={{label: "View Classes", onPress: this.navigateToClasses}}
             rightElement={<ShareBtn />}
             >
                 <View style={styles.container}>
