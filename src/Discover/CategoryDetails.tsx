@@ -5,6 +5,11 @@ import ShareIcon from '../Assets/Icons/ShareIcon';
 import CustomTabs from '../Common/CustomTabs';
 import SearchInput from '../Common/SearchInput';
 import ReviewItem from './Components/ReviewItem';
+import SelectableItem from '../Common/SelectableItem';
+
+interface State {
+    selectedOption: string | null;
+}
 
 export class ShareBtn extends Component {
     render(){
@@ -16,14 +21,29 @@ export class ShareBtn extends Component {
     }
 }
 
-export class CategoryDetails extends Component {
+export class CategoryDetails extends Component<any, State> {
+    constructor(props: any){
+        super(props);
+        this.state = {
+            selectedOption: null,
+        }
+    }
+
+    handleSelect = (option: string) => {
+        this.setState({
+            selectedOption: option
+        });
+    }
+
     render() {
+        const { selectedOption } = this.state;
         const galleryImages = [
             "https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         ]
+
 
         const reviews = [
             {
@@ -142,6 +162,16 @@ export class CategoryDetails extends Component {
                                 onChangeText={(text) => console.log("Search: ", text)}
                                 onFocus={() => console.log('Input focused')}
                             />
+                            <View style={styles.filterOptionsContainer}>
+                                {['All', "Latest", "Oldest"].map((label, index) => (
+                                    <SelectableItem
+                                        key={label}
+                                        label={label}
+                                        isSelected={selectedOption === label}
+                                        onPress={() => this.handleSelect(label)}
+                                    />
+                                ))}
+                            </View>
                         </View>
                         <View style={styles.reviewsContainer}>
                             {reviews.map((review, index) => (
@@ -267,7 +297,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     reviewsContainer: {
-
+    },
+    filterOptionsContainer: {
+        flexDirection: 'row',
+        gap: 6,
     }
 
 })
