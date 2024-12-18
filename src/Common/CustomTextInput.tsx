@@ -1,12 +1,15 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, View, ViewStyle } from 'react-native'
 import React, { Component } from 'react'
 
 interface Props {
-    label: string;
+    label?: string;
     placeholder: string;
+    placeholderTextColor?: string;
     value?: string;
+    icon?: any;
     onChangeText?: (text: string) => void;
     style?: object;
+    inputContainerStyle?: ViewStyle;
     variant?: 'default' | 'rounded' | 'outlined';
 }
 
@@ -41,19 +44,23 @@ export class CustomTextInput extends Component<Props, State> {
         }
     }
     render() {
-        const { label, placeholder, style} = this.props;
+        const { label, placeholder, placeholderTextColor, icon, style, inputContainerStyle} = this.props;
         const { inputValue } = this.state;
         const variantStyle = this.getVariantStyle();
         return (
         <View style={[styles.container, style]}>
             {label ? <Text style={styles.label}>{label}</Text>: null}
-            <TextInput 
-                style={[styles.input, variantStyle]}
-                placeholder={placeholder}
-                value={inputValue}
-                onChangeText={this.handleTextChange}
+            <View style={[styles.inputContainer, inputContainerStyle]}>
+                {icon && icon}
+                <TextInput 
+                    style={styles.input}
+                    placeholder={placeholder}
+                    placeholderTextColor={placeholderTextColor || '#999'}
+                    value={inputValue}
+                    onChangeText={this.handleTextChange}
 
-            />
+                />
+            </View>
         </View>
         )
     }
@@ -67,7 +74,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "#E2E8F0",
         backgroundColor: "#FFF",
-        paddingTop: 8,
+        paddingVertical: 8,
         paddingHorizontal: 16,
     },
     label: {
@@ -82,6 +89,15 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 400,
         lineHeight: 24
+    },
+    inputContainer: {
+        gap: 8,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    icon: {
+        width: 24,
+        height: 24,
     },
     rounded: {
 

@@ -6,6 +6,9 @@ import ScreenWrapper from '../Layout/ScreenWrapper';
 import ApplePayIcon from '../Assets/Images/applePay.png';
 import STCPayIcon from '../Assets/Images/stcPay.png';
 import madaIcon from '../Assets/Images/mada.png';
+import CheckoutSection from './CheckoutSection';
+import CustomTextInput from '../Common/CustomTextInput';
+import TicketIcon from '../Assets/Icons/TicketIcon';
 
 interface CheckoutState {
     selectedPaymentMethod: string;
@@ -49,20 +52,26 @@ export class Checkout extends Component<any, CheckoutState> {
         return (
         <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={{label: "Pay with "}}>
             <View style={styles.container}>
-                <Text style={styles.paymentMethodText}>Payment Method</Text>
-                <CustomRadioButton
-                    // label="Choose an option"
-                    options={paymentOptions}
-                    selectedOption={selectedPaymentMethod}
-                    textStyle={styles.optionLabelText}
-                    onOptionSelect={this.handleCheckoutMethodSelect}
-                    layout="column" // Use 'row' for horizontal layout
-                    optionStyle={{ justifyContent: 'space-between', flexDirection: "row-reverse" }}
-                    selectedOptionStyle={{ borderColor: 'blue' }}
-                    selectedTextStyle={{ color: '#0165FC' }}
-                    radioColor="#0165FC"
-                    selectedRadioColor="#0165FC"
-                    />
+                <CheckoutSection label='Payment Method'>
+                    <CustomRadioButton
+                        options={paymentOptions}
+                        selectedOption={selectedPaymentMethod}
+                        textStyle={styles.optionLabelText}
+                        onOptionSelect={this.handleCheckoutMethodSelect}
+                        layout="column" // Use 'row' for horizontal layout
+                        optionStyle={{ justifyContent: 'space-between', flexDirection: "row-reverse" }}
+                        selectedOptionStyle={{ borderColor: 'blue' }}
+                        selectedTextStyle={{ color: '#000000' }}
+                        radioColor="#0165FC"
+                        selectedRadioColor="#0165FC"
+                        />
+                </CheckoutSection>
+                <CheckoutSection label='Discount'>
+                    <CustomTextInput placeholder='Enter Promo Code' icon={<TicketIcon />} placeholderTextColor='#64748B' />
+                </CheckoutSection>
+                <CheckoutSection label='Payment summary'>
+                    <Text>hei</Text>
+                </CheckoutSection>
             </View>
         </ScreenWrapper>
         )
@@ -73,10 +82,10 @@ export default Checkout;
 
 const styles = StyleSheet.create({
     container: {
-        gap: 10
+        gap: 19
     },
     paymentMethodsContainer: {
-
+        gap: 19
     },
     optionLabelText: {
         color: '#000',
@@ -89,5 +98,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter',
         fontSize: 18,
         fontWeight: 600,
+    },
+    discountContainer: {
+        gap: 19,
     }
 });
