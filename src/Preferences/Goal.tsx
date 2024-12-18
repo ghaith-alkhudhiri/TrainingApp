@@ -47,7 +47,10 @@ export class Goal extends Component<Props, State> {
         </View>
         <CustomRadioButton 
             label='Gender'
-            options={['Lose Weight', 'Gain Weight']} 
+            options={[
+                {label: 'Lose Weight', value: 'lose', icon: null},
+                {label: "Gain Weight", value: 'gain', icon: null}
+            ]} 
             selectedOption={this.state.selectedOption} 
             onOptionSelect={this.handleSelectedOption} />
         <Text style={{fontSize: 15, fontWeight: '600', lineHeight: 18.75}}>Personal Information</Text>

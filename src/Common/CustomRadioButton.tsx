@@ -7,12 +7,19 @@ import {
   I18nManager,
   ViewStyle,
   TextStyle,
+  Image,
 } from 'react-native';
 import theme from '../Constants/theme';
 
+interface RadioButtonOption {
+  label: string;
+  value: string;
+  icon?: any;
+}
+
 interface RadioButtonProps {
   label?: string;
-  options: string[];
+  options: RadioButtonOption[];
   removeOptionText?: boolean;
   selectedOption: string;
   onOptionSelect: (option: string) => void;
@@ -22,6 +29,7 @@ interface RadioButtonProps {
   selectedOptionStyle?: ViewStyle;
   textStyle?: TextStyle;
   selectedTextStyle?: TextStyle;
+  radioCircleStyle?: ViewStyle;
   radioColor?: string;
   selectedRadioColor?: string;
   icons?: React.ReactElement<any>[];
@@ -53,6 +61,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
       selectedOptionStyle,
       textStyle,
       selectedTextStyle,
+      radioCircleStyle,
       radioColor,
       selectedRadioColor,
       icons,
@@ -72,19 +81,19 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
       >
         {label && <Text style={styles.label}>{label}</Text>}
         {options.map((option, index) => {
-          const isSelected = selectedOption === option;
+          const isSelected = selectedOption === option.value;
 
           return (
             <TouchableOpacity
-              key={option}
+              key={option.value}
               style={[
                 styles.option,
-                optionStyle,
                 isSelected && [styles.selectedOption, selectedOptionStyle],
                 removeOptionText && styles.removeOptionText,
-                { flexDirection: isRTL ? 'row-reverse' : 'row' }
+                { flexDirection: isRTL ? 'row-reverse' : 'row' },
+                optionStyle,
               ]}
-              onPress={() => this.handleOptionSelect(option)}
+              onPress={() => this.handleOptionSelect(option.value)}
             >
               {/* Icon or Circle */}
               {icons && icons[index] ? (
@@ -93,6 +102,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
                 <View
                   style={[
                     styles.radioCircle,
+                    radioCircleStyle,
                     { borderColor: isSelected ? selectedRadioColor ? selectedRadioColor : theme.primary : radioColor ? radioColor : '#D1D1D6' },
                   ]}
                 >
@@ -106,20 +116,27 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
                   )}
                 </View>
                 )}
-
-              {/* Optional Text */}
-              {removeOptionText ? (null) :
-                <Text
-                  style={[
-                    styles.text,
-                    textStyle,
-                    isSelected && selectedTextStyle,
-                    { textAlign: isRTL ? 'right' : 'left' },
-                  ]}
-                >
-                  {option}
-                </Text>
-            }
+              <View style={{gap : 13, flexDirection: 'row'}}>
+                {/* Render Option Icon */}
+                {option.icon && (
+                  <View style={styles.optionIconContainer}>
+                    <Image source={option.icon} style={{width: 26, height: 12, resizeMode: 'contain'}} />
+                  </View>
+                )}
+                {/* Optional Text */}
+                {removeOptionText ? (null) :
+                  <Text
+                    style={[
+                      styles.text,
+                      textStyle,
+                      isSelected && selectedTextStyle,
+                      { textAlign: isRTL ? 'right' : 'left' },
+                    ]}
+                  >
+                    {option.label}
+                  </Text>
+                }
+              </View>
             </TouchableOpacity>
           );
         })}
@@ -172,7 +189,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
     borderRadius: 20,
-    borderWidth: 2,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -198,6 +215,20 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     textTransform: 'capitalize',
   },
+  optionIconContainer: {
+    borderRadius: 2,
+    borderWidth: 0.5,
+    borderColor: '#000',
+    backgroundColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 4
+  },
+  optionIcon: {
+    width: 22,
+    height: 12,
+    resizeMode: 'contain'
+  }
 });
 
 export default CustomRadioButton;
