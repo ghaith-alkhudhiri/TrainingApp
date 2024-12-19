@@ -35,8 +35,8 @@ export class CheckoutItemsList extends Component<Props> {
         </View>
         {discount > 0 && (
             <View style={styles.item}>
-                <Text style={styles.itemCountName}>Discount</Text>
-                <Text style={styles.itemPriceText}>
+                <Text style={styles.discountText}>Discount</Text>
+                <Text style={styles.discountText}>
                 -{discount.toFixed(2)} {items[0]?.currency || ''}
                 </Text>
             </View>
@@ -76,5 +76,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 500,
         lineHeight: 18
-    }
+    },
+    discountText: {
+        color: '#0165FC',
+        fontSize: 14,
+        fontWeight: 600,
+        lineHeight: 18,
+    },
 })
