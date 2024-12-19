@@ -9,6 +9,7 @@ import madaIcon from '../Assets/Images/mada.png';
 import CheckoutSection from './CheckoutSection';
 import CustomTextInput from '../Common/CustomTextInput';
 import TicketIcon from '../Assets/Icons/TicketIcon';
+import CheckoutItemsList from './CheckoutItemsList';
 
 interface CheckoutState {
     selectedPaymentMethod: string;
@@ -49,6 +50,27 @@ export class Checkout extends Component<any, CheckoutState> {
             }
         ];
 
+        const paymentItems = [
+            {
+                count: 5,
+                name: "PT Sessions",
+                price: 200,
+                currency: "SR"
+            },
+            {
+                count: 1,
+                name: "Hatha Yoga Class",
+                price: 200,
+                currency: "SR"
+            },
+            {
+                count: 1,
+                name: "Weight loss OTM",
+                price: 200,
+                currency: "SR"
+            },
+        ]
+
         return (
         <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={{label: "Pay with "}}>
             <View style={styles.container}>
@@ -70,7 +92,7 @@ export class Checkout extends Component<any, CheckoutState> {
                     <CustomTextInput placeholder='Enter Promo Code' icon={<TicketIcon />} placeholderTextColor='#64748B' />
                 </CheckoutSection>
                 <CheckoutSection label='Payment summary'>
-                    <Text>hei</Text>
+                    <CheckoutItemsList items={paymentItems} discount={10} />
                 </CheckoutSection>
             </View>
         </ScreenWrapper>
