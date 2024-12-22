@@ -36,6 +36,10 @@ import DocumentViewer from './Tasks/DocumentViewer';
 import ProgressPhoto from './Tasks/ProgressPhoto';
 import Categories from './Discover/Categories';
 import CategoryDetails from './Discover/CategoryDetails';
+import ClassesPage from './Discover/ClassesPage';
+import ClassesDetails from './Classes/ClassesDetails';
+import Checkout from './Checkout/Checkout';
+import Receipt from './Checkout/Receipt';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -160,6 +164,10 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="ProgressPhoto" component={ProgressPhoto} />
             <Stack.Screen name="Categories" component={Categories} />
             <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
+            <Stack.Screen name="Classes" component={ClassesPage} />
+            <Stack.Screen name="ClassDetails" component={ClassesDetails} />
+            <Stack.Screen name="Checkout" component={Checkout} />
+            <Stack.Screen name="Receipt" component={Receipt} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (

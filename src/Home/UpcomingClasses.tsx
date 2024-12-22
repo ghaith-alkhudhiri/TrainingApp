@@ -60,6 +60,7 @@ export class UpcomingClasses extends Component {
                         <ClassCard
                             title={item.title}
                             coachName={item.trainer}
+                            navigation={item.trainer}
                             time={item.time}
                             price={item.price}
                             url={item.url}

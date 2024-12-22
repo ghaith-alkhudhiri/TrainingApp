@@ -17,6 +17,7 @@ module.exports = {
       },
     ],
     '@babel/plugin-syntax-flow',
+    '@babel/plugin-syntax-jsx',
     'react-native-reanimated/plugin',
   ],
   overrides: [

@@ -37,7 +37,18 @@ export class Data extends Component<Props, State> {
         });
     }
   render() {
-    
+    const genderOptions = [
+        {
+            label: "Male",
+            value: 'male',
+            icon: null,
+        },
+        {
+            label: "Female",
+            value: 'female',
+            icon: null,
+        }
+    ]
     return (
       <ScreenWrapper headerShown={false} floatingBtn={true} floatingBtnProps={{label: "Next", onPress: this.navigateToSuccessPage }}>
         <View>
@@ -46,7 +57,7 @@ export class Data extends Component<Props, State> {
         </View>
         <CustomRadioButton 
             label='Gender'
-            options={['Male', 'Female']} 
+            options={genderOptions} 
             selectedOption={this.state.selectedOption} 
             onOptionSelect={this.handleSelectedOption} />
         <Text style={{fontSize: 15, fontWeight: '600', lineHeight: 18.75}}>Personal Information</Text>

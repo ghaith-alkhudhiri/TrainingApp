@@ -1,16 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ViewStyle } from 'react-native'
 import React, { Component } from 'react'
 
 interface Props {
-    text: string;
+    text?: string;
+    containerStyle?: ViewStyle; 
 }
 export class LineDividier extends Component<Props> {
   render() {
-    const {text} = this.props;
+    const {text, containerStyle} = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle ]}>
         <View style={styles.line} />
-        <Text style={styles.text}>{text}</Text>
+        {text && (
+          <Text style={styles.text}>{text}</Text>
+        )}
         <View style={styles.line} />
       </View>
     )

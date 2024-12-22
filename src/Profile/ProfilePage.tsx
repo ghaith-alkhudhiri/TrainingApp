@@ -143,7 +143,10 @@ export class ProfileScreen extends Component<Props, State> {
             </SectionWrapper>
             <SectionWrapper title='Do you have any medical issues?'>
                 <CustomRadioButton
-                    options={['Yes', 'No']}
+                    options={[
+                        {label: 'Yes', value: 'yes' }, 
+                        {label: 'No', value: 'no' }
+                    ]}
                     selectedOption={this.state.selectedOption}
                     onOptionSelect={this.handleOptionSelect}
                     layout="column"
