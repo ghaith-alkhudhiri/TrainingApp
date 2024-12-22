@@ -2,7 +2,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { Component } from 'react'
 
 interface Props {
-    label: string;
+    label?: string;
     placeholder: string;
     value?: string;
     onChangeText?: (text: string) => void;

@@ -26,6 +26,7 @@ interface CheckBoxProps {
   boxColor?: string;
   selectedBoxColor?: string;
   icons?: React.ReactElement<any>[];
+  checkboxSquareStyle?: ViewStyle;
 }
 
 interface CheckBoxState {
@@ -64,6 +65,7 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
       boxColor,
       selectedBoxColor,
       icons,
+      checkboxSquareStyle,
     } = this.props;
     const { selectedOptions } = this.state;
 
@@ -101,6 +103,7 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
                 <View
                   style={[
                     styles.checkboxSquare,
+                    checkboxSquareStyle,
                     { backgroundColor: selectedBoxColor? selectedBoxColor : theme.primary },
                     { borderColor: selectedBoxColor? selectedBoxColor : theme.primary }
                   ]}
@@ -111,6 +114,7 @@ class CustomCheckBox extends Component<CheckBoxProps, CheckBoxState> {
                 <View
                   style={[
                     styles.checkboxSquare,
+                    checkboxSquareStyle,
                     { borderColor: boxColor? boxColor : '#D1D1D6' },
                   ]}
                 />
