@@ -11,6 +11,8 @@ const Stack = createStackNavigator();
 
 class HomeNavigation extends Component{
   render() {
+    console.log('HOME NAV');
+    
     return (
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomePage} options={{headerShown: false}} />

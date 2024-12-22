@@ -1,86 +1,150 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React, { Component } from 'react'
-import ClockIcon from '../Assets/Icons/ClockIcon';
-import EventCalendarIcon from '../Assets/Icons/EventCalendarIcon';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import theme from '../Constants/theme';
+import ClockIcon from '../Assets/Icons/ClockIcon';
+import CalendarIcon from '../Assets/Icons/CalendarIcon';
 
 interface Props {
-    imageUrl: string;
-    title: string;
-    duration: number;
-    date: Date;
+  imageUrl: string;
+  title: string;
+  tags: string[];
+  time: string;
+  date: string;
+  CTA?: string;
 }
 
-export class EventCard extends Component<Props> {
-    formatDate(date: Date): string {
-        const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-        return new Intl.DateTimeFormat('en-GB', options).format(date);
-      }
+export default class EventCard extends Component<Props> {
+  handleJoinEvent = () => {
+    console.log('Join Event Pressed');
+  };
+
   render() {
-    const {imageUrl, title, duration, date} = this.props;
+    const { imageUrl, title, tags, time, date, CTA } = this.props;
+
     return (
-      <View style={styles.container}>
-        <Image style={styles.image} source={{uri: imageUrl }} />
-        <View style={styles.contentContainer}>
-            <Text style={styles.title}>{title}</Text>
-            <View style={styles.detailsRow}>
-                <View style={styles.infoRow}>
-                    <ClockIcon fill={theme.primary} />
-                    <Text>{duration} hour</Text>
-                </View>
-                <View style={styles.infoRow}>
-                    <EventCalendarIcon fill={theme.primary} />
-                    <Text>{this.formatDate(date)}</Text>
-                </View>
+      <View style={styles.card}>
+        <View style={styles.infoContainer}>
+          <View>
+            <ImageBackground
+              resizeMode="cover"
+              style={styles.image}
+              imageStyle={{ top: 0 }}
+              source={{ uri: imageUrl }}
+            />
+
+            {/* Tags */}
+            <View style={styles.tagsContainer}>
+              {tags.map((tag, index) => (
+                <Text key={index} style={styles.tag}>{tag}</Text>
+              ))}
             </View>
+
+            {/* Event Details */}
+            <View style={styles.detailsContainer}>
+              <Text style={styles.title}>{title}</Text>
+
+              <View style={{ height: 1, backgroundColor: '#ECECEC' }} />
+
+              {/* Time and Date */}
+              <View style={styles.infoRow}>
+                <View style={styles.infoItem}>
+                  <ClockIcon />
+                  <Text style={styles.infoText}>{time}</Text>
+                </View>
+                <View style={styles.infoItem}>
+                  <CalendarIcon filled />
+                  <Text style={styles.infoText}>{date}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          
+          {/* Join Button */}
+          <TouchableOpacity style={styles.joinButton} onPress={this.handleJoinEvent}>
+            <Text style={styles.joinButtonText}>{CTA ? CTA : 'Join Event'}</Text>
+          </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default EventCard;
-
 const styles = StyleSheet.create({
-    container: {
-        width: 193,
-    },
-    title: {
-        color: '#000',
-        fontFamily: 'Inter',
-        fontSize: 15,
-        fontWeight: 500,
-        lineHeight: 21,
-    },
-    image: {
-        width: '100%',
-        height: 120,
-        borderTopLeftRadius: 7,
-        borderTopRightRadius: 7
-    },
-    contentContainer: {
-        paddingHorizontal: 10,
-        paddingVertical: 13,
-        borderRadius: 7,
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
-        borderWidth: 1,
-        borderColor: '#EEEEEE',
-        backgroundColor: '#FDFDFD',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4},
-        shadowOpacity: 0.05,
-        shadowRadius: 20,
-        elevation: 1,
-    },
-    detailsRow: {
-        flexDirection: 'row',
-        gap: 15,
-    },
-    infoRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 2,
-    }
-
-})
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 8,
+    elevation: 3,
+    margin: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 17,
+  },
+  infoContainer: {
+    gap: 13,
+  },
+  image: {
+    width: '100%',
+    height: 106,
+    resizeMode: 'cover',
+    marginBottom: 9,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  tag: {
+    backgroundColor: '#F2F7FF',
+    color: theme.primary,
+    fontSize: 10,
+    fontWeight: '500',
+    borderRadius: 7,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    fontFamily: theme.font,
+  },
+  detailsContainer: {
+    gap: 5,
+  },
+  title: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#000',
+    fontFamily: theme.font,
+    letterSpacing: -0.3,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    gap: 22,
+  },
+  infoItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  infoText: {
+    color: '#000',
+    fontFamily: theme.font,
+    fontSize: 11,
+    fontWeight: '400',
+    lineHeight: 21,
+  },
+  joinButton: {
+    backgroundColor: '#EAF2FF',
+    paddingVertical: 11,
+    alignItems: 'center',
+    borderRadius: 7,
+  },
+  joinButtonText: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: theme.primary,
+    fontFamily: theme.font,
+    letterSpacing: -0.3,
+  },
+});

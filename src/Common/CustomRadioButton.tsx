@@ -33,6 +33,8 @@ interface RadioButtonProps {
   radioColor?: string;
   selectedRadioColor?: string;
   icons?: React.ReactElement<any>[];
+  subInfo?: any;
+  radioCircleStyle?: ViewStyle;
 }
 
 interface RadioButtonState {
@@ -65,6 +67,8 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
       radioColor,
       selectedRadioColor,
       icons,
+      subInfo,
+      radioCircleStyle,
     } = this.props;
     const { selectedOption } = this.state;
 
@@ -82,6 +86,88 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
         {label && <Text style={styles.label}>{label}</Text>}
         {options.map((option, index) => {
           const isSelected = selectedOption === option.value;
+
+          // different style fo Radio with subInfo
+          if (subInfo) {
+            return (
+              <TouchableOpacity
+              key={option}
+              style={[
+                styles.option,
+                optionStyle,
+                isSelected && [styles.selectedOption, selectedOptionStyle],
+                removeOptionText && styles.removeOptionText,
+                {flexDirection: 'row', justifyContent: 'space-between'}
+              ]}
+              onPress={() => this.handleOptionSelect(option)}
+            >
+
+              {/* Text */}
+              <Text
+                  style={[
+                    styles.text,
+                    textStyle,
+                    isSelected && selectedTextStyle,
+                  ]}
+                >
+                  {option}
+                </Text>
+
+              {/* Icon or Circle and subInfo */}
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+
+                {subInfo[index] && (
+                  <View>
+                    <Text style={{
+                      color: '#000',
+                      textAlign: 'center',
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                      fontWeight: 500,
+                      letterSpacing: -0.3,
+                    }}>
+                      {subInfo[index][0]}
+                    </Text>
+                    <Text style={{
+                      color: '#797979',
+                      textAlign: 'center',
+                      fontFamily: 'Inter',
+                      fontSize: 11,
+                      fontWeight: 400,
+                      lineHeight: 9,
+                    }}>
+                      {subInfo[index][1]}
+                    </Text>
+                  </View>
+                )}
+                  
+                <View>
+                  {icons && icons[index] ? (
+                    React.cloneElement(icons[index], { selected: isSelected })
+                  ) : (
+                    <View
+                      style={[
+                        styles.radioCircle,
+                        radioCircleStyle,
+                        { borderColor: isSelected ? selectedRadioColor ? selectedRadioColor : theme.primary : radioColor ? radioColor : '#D1D1D6' },
+                        {marginRight: 0, marginLeft: 17}
+                      ]}
+                    >
+                      {isSelected && (
+                        <View
+                          style={[
+                            styles.selectedRb,
+                            { backgroundColor: selectedRadioColor ? selectedRadioColor : theme.primary },
+                          ]}
+                        />
+                      )}
+                    </View>
+                    )}
+                </View>
+              </View>
+            </TouchableOpacity>
+            )
+          }
 
           return (
             <TouchableOpacity

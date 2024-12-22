@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter',
     },
     secondaryButton: {
-      backgroundColor: '#FFD700',
+      backgroundColor: '#EAF2FF',
     },
     secondaryButtonText: {
-        color: '#000',
+        color: theme.primary,
     },
     outlineButton: {
         borderWidth: 2,
