@@ -78,7 +78,7 @@ export class MembershipDetail extends Component<NavProps, State> {
                         subInfo={[['100 RS', '3 Freeze'], ['50 RS', '2 times'], ['100', '2 sessions'], ['100', '2 classes']]}
                         containerStyle={{ gap: 13 }}
                         optionStyle={{ margin: 0, paddingHorizontal: 16 }}
-                        options={['Freeze', 'InBody Test', 'Personal Training', 'Classes']}
+                        options={[{label: 'Freeze', value: 'Freeze'}, {label: 'InBody Test', value: 'InBody Test'}, {label: 'Personal Training', value: 'Personal Training'}, {label: 'Classes', value: 'Classes'}]}
                         selectedOption={selectedOption}
                         onOptionSelect={(option) => this.setState({ selectedOption: option })}
                     />
@@ -96,7 +96,7 @@ export class MembershipDetail extends Component<NavProps, State> {
                         containerStyle={{ gap: 9 }}
                         optionStyle={{ padding: 0, margin: 0, borderWidth: 0 }}
                         radioCircleStyle={{marginLeft: 0, marginRight: 8}}
-                        options={['Yes', 'No']}
+                        options={[{label: 'Yes', value: 'Yes'}, {label: 'No', value: 'No'}]}
                         selectedOption={selectedOption2}
                         onOptionSelect={(option) => this.setState({ selectedOption: option })}
                     />
@@ -114,7 +114,12 @@ export class MembershipDetail extends Component<NavProps, State> {
                     <CustomRadioButton
                         containerStyle={{ gap: 13 }}
                         optionStyle={{ margin: 0, paddingHorizontal: 16 }}
-                        options={['Motivation and Improvement', 'Personalized training', 'Setting goals', 'Others']}
+                        options={[
+                          {label: 'Motivation and Improvement', value: 'Motivation and Improvement'},
+                          {label: 'Personalized training', value: 'Personalized training'},
+                          {label: 'Setting goals', value: 'Setting goals'},
+                          {label: 'Others', value: 'Others'}
+                          ]}
                         selectedOption={selectedOption3}
                         onOptionSelect={(option) => this.setState({ selectedOption: option })}
                     />

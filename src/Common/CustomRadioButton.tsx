@@ -34,7 +34,6 @@ interface RadioButtonProps {
   selectedRadioColor?: string;
   icons?: React.ReactElement<any>[];
   subInfo?: any;
-  radioCircleStyle?: ViewStyle;
 }
 
 interface RadioButtonState {
@@ -68,7 +67,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
       selectedRadioColor,
       icons,
       subInfo,
-      radioCircleStyle,
+      // radioCircleStyle,
     } = this.props;
     const { selectedOption } = this.state;
 
@@ -91,7 +90,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
           if (subInfo) {
             return (
               <TouchableOpacity
-              key={option}
+              key={option.value}
               style={[
                 styles.option,
                 optionStyle,
@@ -99,7 +98,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
                 removeOptionText && styles.removeOptionText,
                 {flexDirection: 'row', justifyContent: 'space-between'}
               ]}
-              onPress={() => this.handleOptionSelect(option)}
+              onPress={() => this.handleOptionSelect(option.value)}
             >
 
               {/* Text */}
@@ -110,7 +109,7 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
                     isSelected && selectedTextStyle,
                   ]}
                 >
-                  {option}
+                  {option.label}
                 </Text>
 
               {/* Icon or Circle and subInfo */}
