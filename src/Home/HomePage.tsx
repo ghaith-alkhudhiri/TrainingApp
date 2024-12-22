@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, Pressable, Image, ScrollView } from 'react-native'
 import React, { Component } from 'react'
 // import Home from '../components/Home';
-import Events from './Events';
+// import Events from './Events';
 import UpcomingClasses from './UpcomingClasses';
 import ScreenWrapper from '../Layout/ScreenWrapper';
 import AdvertisementBanner from './AdvertisementBanner';
@@ -121,7 +121,7 @@ export class HomePage extends Component<NavProps> {
               coach='Noor M. Ali'
               imageUrl={require('../Assets/Images/img.png')}
             />
-            <Events/>
+            {/* <Events/> */}
           </View>
         )
       },

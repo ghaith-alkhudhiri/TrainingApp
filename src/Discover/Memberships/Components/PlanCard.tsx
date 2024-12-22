@@ -52,6 +52,18 @@ export class PlanCard extends Component<Props> {
         shadowRadius: 10.4,
         elevation: 4,
         }}>
+            {tag && <Text style={{
+                color: '#FFF',
+                fontFamily: theme.font,
+                fontSize: 10,
+                fontWeight: 500,
+                backgroundColor: theme.primary,
+                paddingHorizontal: 8,
+                paddingVertical: 5,
+                borderRadius: 4,
+                alignSelf: 'flex-end',
+                }}>{tag}</Text>
+            }
             <View style={{
                 gap: 16,
 

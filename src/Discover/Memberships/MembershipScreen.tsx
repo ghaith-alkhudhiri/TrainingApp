@@ -1,12 +1,11 @@
 import { ListRenderItemInfo, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import ScreenWrapper from '../../Layout/ScreenWrapper'
-import CustomTabs from '../../Common/CustomTabs'
 import PlanCard from './Components/PlanCard'
-import SearchIcon from '../../Assets/Icons/SearchIcon'
 import { FlatList } from 'react-native'
 import { NavProps } from '../../types'
 import Search from '../../Assets/Icons/Search'
+import FilterSet from '../../Common/FilterSet'
 
 interface Plan {
   id: string;
@@ -41,6 +40,7 @@ export class MembershipScreen extends Component<NavProps, State> {
           price: 200,
           features: ['Feature information one', 'Feature information two', 'Feature information three'],
           userState: 'withMembership',
+          tag: 'Most Popular',
         },
         {
           id: '2',
@@ -133,11 +133,7 @@ export class MembershipScreen extends Component<NavProps, State> {
           <Search/>
         </View>
       }>
-          <CustomTabs styleType='small' tabs={[
-            {key: '1', label: 'Filters ˅', content: null,},
-            {key: '2', label: 'Price ˅', content: null,},
-            {key: '3', label: 'Level ˅', content: null,},
-          ]} />
+        <FilterSet filters={['Filters', 'Price', 'Level']} />
           <FlatList 
           data={this.state.plans} 
           keyExtractor={(item) => item.id}

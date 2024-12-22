@@ -22,6 +22,11 @@ interface Props {
     heroImageUrl?: string;
     scrollContainerStyle?: ViewStyle;
     childrenContainerStyle: object;
+    secondaryFloatingBtn?: boolean;
+    secondaryFloatingBtnProps?: {
+        label: string;
+        onPress: () => void;
+    }
 }
 
 interface State {
@@ -54,7 +59,7 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
     
     render() {
         const {screenHeight} = this.state;
-        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImageUrl, scrollContainerStyle} = this.props;
+        const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImageUrl, scrollContainerStyle, secondaryFloatingBtn, secondaryFloatingBtnProps} = this.props;
         console.log('Screen height', screenHeight);
         return (
             <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
@@ -92,10 +97,22 @@ export class ScreenWrapper extends Component<WrapperProps, State> {
                     </View>
                 </ScrollView>
                 <If condition={floatingBtn}>
-                    <View style={[styles.floatingButtonContainer, isWeb ? null : {paddingBottom: 29}]}>
+                    <View style={[
+                        styles.floatingButtonContainer, 
+                        isWeb ? null : {paddingBottom: 29},
+                        {flexDirection: secondaryFloatingBtn ? 'row': 'column'},
+                        {gap: secondaryFloatingBtn && 15}
+                        ]}>
                         {/* <Pressable style={[styles.floatingButton]} onPress={() => console.log('Floating button pressed')}>
                             <Text style={styles.buttonText}>+</Text>
                         </Pressable> */}
+                        <If condition={secondaryFloatingBtn}>
+                            <CustomButton 
+                            label={secondaryFloatingBtnProps?.label || 'Default Label' } 
+                            onPress={secondaryFloatingBtnProps?.onPress || (() => console.log("Button pressed"))} 
+                            styleType='outline'
+                            />
+                        </If>
                         <CustomButton 
                             label={floatingBtnProps?.label || 'Default Label' } 
                             onPress={floatingBtnProps?.onPress || (() => console.log("Button pressed"))} 
