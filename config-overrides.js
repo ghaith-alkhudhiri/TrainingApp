@@ -72,6 +72,7 @@ module.exports = override(
     path.resolve('src'), // Include your source code
     path.resolve('node_modules/@react-native/assets-registry'), // Include the problematic package
     path.resolve('node_modules/react-native-vector-icons'),
+    path.resolve('node_modules/react-native-qrcode-svg')
   ]),
 
   addBabelPreset('@babel/preset-react'),

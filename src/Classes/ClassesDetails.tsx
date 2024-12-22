@@ -12,9 +12,15 @@ import ClassSections from './ClassSections';
 interface Props {
     imagesUrls: string[]
     route: any;
+    navigation: any;
 }
 
 export class ClassesDetails extends Component<Props> {
+
+    navigateToCheckout = () => {
+        const { navigation } = this.props;
+        navigation.navigate('Checkout');
+    }
     render() {
     const { route } = this.props;
     const { url } = route.params;
@@ -41,9 +47,10 @@ export class ClassesDetails extends Component<Props> {
             label: 'Rating'
         }
         
-    ]
+    ];
+
     return (
-        <ScreenWrapper heroImage heroImagesUrls={url} floatingBtn floatingBtnProps={{label: "Book Class", onPress: () => console.log("Book class clicked")}}>
+        <ScreenWrapper heroImage heroImagesUrls={url} floatingBtn floatingBtnProps={{label: "Book Class", onPress: this.navigateToCheckout}}>
             <View style={styles.headerContainer}>
                 <Text style={styles.titleText}>Vinyasa Yoga</Text>
                 <Text style={styles.categoryText}>Hardcore and Yoga</Text>

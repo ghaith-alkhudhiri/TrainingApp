@@ -29,6 +29,14 @@ export class Checkout extends Component<any, CheckoutState> {
         console.log('Selected Option', option);
     }
 
+    navigateToSuccess  = () => {
+        this.props.navigation.navigate('success', {
+            title: "Payment Successful",
+            description: "You have successfully Paid for your items",
+            nextPage: "Receipt"
+        });
+    }
+
     render() {
         const { selectedPaymentMethod } = this.state;
 
@@ -48,6 +56,7 @@ export class Checkout extends Component<any, CheckoutState> {
                 value: "mada",
                 icon: madaIcon
             }
+            
         ];
 
         const paymentItems = [
@@ -72,7 +81,7 @@ export class Checkout extends Component<any, CheckoutState> {
         ]
 
         return (
-        <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={{label: "Pay with "}}>
+        <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={{label: "Pay with ", onPress: this.navigateToSuccess }}>
             <View style={styles.container}>
                 <CheckoutSection label='Payment Method'>
                     <CustomRadioButton

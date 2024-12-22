@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import LineDividier from '../Common/LineDivider';
+import ItemRow from './ItemRow';
 
 interface CheckoutItem {
     count: number;
@@ -23,10 +24,7 @@ export class CheckoutItemsList extends Component<Props> {
     return (
       <View style={styles.container}>
         {items.map((item, index) => (
-            <View key={index} style={styles.item}>
-                <Text style={styles.itemCountName}>{item.count} {item.name}</Text>
-                <Text style={styles.itemPriceText}>{item.price} {item.currency}</Text>
-            </View>
+            <ItemRow index={index} item={item} />
         ))}
         <LineDividier />
         <View style={styles.item}>

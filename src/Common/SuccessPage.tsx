@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import SuccessView from './SuccessView';
 import SuccessMark from '../Assets/Icons/SuccessMark';
 import { NavProps } from '../types';
+import ScreenWrapper from '../Layout/ScreenWrapper';
 
 interface Props {
     navigation?: any;
@@ -53,13 +54,14 @@ class SuccessPage extends Component<SuccessProps, State> {
         console.log("Route", route);
         console.log("Height changed", height);
         return (
-        <View style={[styles.container]}>
-            <SuccessView
-                image={SuccessMark}
-                title={title}
-                description={description}
-            />
-        </View>
+            <View style={styles.container}>
+                <SuccessView
+                    image={SuccessMark}
+                    // containerStyle={styles.container}
+                    title={title}
+                    description={description}
+                />
+            </View>
         )
     }
 }
@@ -69,5 +71,7 @@ export default SuccessPage;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
