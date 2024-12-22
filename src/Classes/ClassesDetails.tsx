@@ -50,7 +50,7 @@ export class ClassesDetails extends Component<Props> {
     ];
 
     return (
-        <ScreenWrapper heroImage heroImagesUrls={url} floatingBtn floatingBtnProps={{label: "Book Class", onPress: this.navigateToCheckout}}>
+        <ScreenWrapper heroImage heroImagesUrls={url} floatingBtn floatingBtnProps={[{label: "Book Class", onPress: this.navigateToCheckout}]}>
             <View style={styles.headerContainer}>
                 <Text style={styles.titleText}>Vinyasa Yoga</Text>
                 <Text style={styles.categoryText}>Hardcore and Yoga</Text>

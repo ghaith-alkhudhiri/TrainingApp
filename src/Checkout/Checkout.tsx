@@ -81,7 +81,7 @@ export class Checkout extends Component<any, CheckoutState> {
         ]
 
         return (
-        <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={{label: "Pay with ", onPress: this.navigateToSuccess }}>
+        <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={[{label: "Pay with ", onPress: this.navigateToSuccess }]}>
             <View style={styles.container}>
                 <CheckoutSection label='Payment Method'>
                     <CustomRadioButton

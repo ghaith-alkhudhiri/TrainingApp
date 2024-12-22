@@ -7,6 +7,12 @@
     import { isAndroid, isIOS, isWeb } from '../Utils/PlatformUtil';
     import CustomButton from '../Common/CustomButton';
 
+
+    interface FloatingButtonProps {
+        label: string;
+        onPress: () => void;
+    }
+
     interface Props {
         children: any;
         withoutHeader: boolean;
@@ -14,19 +20,16 @@
         rightElement?: ReactNode;
         navigation?: any;
         floatingBtn?: boolean;
-        floatingBtnProps?: {
-            label: string;
-            onPress: () => void;
-        }
+        floatingBtnProps?: FloatingButtonProps[];
         heroImage?: boolean;
         heroImagesUrls?: string[];
         scrollContainerStyle?: ViewStyle;
         childrenContainerStyle: object;
-        secondaryFloatingBtn?: boolean;
-    secondaryFloatingBtnProps?: {
-        label: string;
-        onPress: () => void;
-    }
+        //     secondaryFloatingBtn?: boolean;
+        // secondaryFloatingBtnProps?: {
+        //     label: string;
+        //     onPress: () => void;
+        // }
 }
 
     interface State {
@@ -65,7 +68,7 @@
         
         render() {
             const {screenHeight, selectedHeroImage} = this.state;
-            const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle, secondaryFloatingBtn, secondaryFloatingBtnProps} = this.props;
+            const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle} = this.props;
             console.log('Screen height', screenHeight);
             return (
                 <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
@@ -119,23 +122,22 @@
                         <View style={[
                         styles.floatingButtonContainer, 
                         isWeb ? null : {paddingBottom: 29},
-                        {flexDirection: secondaryFloatingBtn ? 'row': 'column'},
-                        {gap: secondaryFloatingBtn && 15}
                         ]}>
                             {/* <Pressable style={[styles.floatingButton]} onPress={() => console.log('Floating button pressed')}>
                                 <Text style={styles.buttonText}>+</Text>
                             </Pressable> */}
-                            <If condition={secondaryFloatingBtn}>
-                            <CustomButton 
-                            label={secondaryFloatingBtnProps?.label || 'Default Label' } 
-                            onPress={secondaryFloatingBtnProps?.onPress || (() => console.log("Button pressed"))} 
-                            styleType='outline'
-                            />
-                        </If>
-                        <CustomButton 
+                        
+                        {/* <CustomButton 
                                 label={floatingBtnProps?.label || 'Default Label' } 
                                 onPress={floatingBtnProps?.onPress || (() => console.log("Button pressed"))} 
-                                />
+                                /> */}
+                        {floatingBtn && floatingBtnProps.length > 0 && floatingBtnProps.map((btn, index) => (
+                            <CustomButton
+                                key={index}
+                                label={btn.label}
+                                onPress={btn.onPress}
+                            />
+                        ))}
                         </View>
                     </If>
                 </View>
