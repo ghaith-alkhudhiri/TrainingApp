@@ -7,7 +7,7 @@ interface Props {
     onPress: () => void;
     buttonStyle?: StyleProp<ViewStyle>;
     textStyle?: StyleProp<TextStyle>;
-    styleType?: 'secondary' | 'outline' | 'disabled';
+    styleType?: 'normal' | 'secondary' | 'outline' | 'disabled';
     counter?: boolean;
     counterLabel?: string;
     number?: number;
@@ -17,24 +17,24 @@ export class CustomButton extends Component<Props> {
   render() {
     const {label, onPress, buttonStyle, textStyle, styleType, counter, counterLabel, number} = this.props;
     let containerStyle: StyleProp<ViewStyle> = [styles.btnContainer];
-        let textStyling: StyleProp<TextStyle> = [styles.btnText];
+    let textStyling: StyleProp<TextStyle> = [styles.btnText];
 
-        switch (styleType) {
-            case 'secondary':
-                containerStyle.push(styles.secondaryButton);
-                textStyling.push(styles.secondaryButtonText);
-                break;
-            case 'outline':
-                containerStyle.push(styles.outlineButton);
-                textStyling.push(styles.outlineButtonText);
-                break;
-            case 'disabled':
-                containerStyle.push(styles.disabledButton);
-                textStyling.push(styles.disabledButtonText);
-                break;
-            default:
-                break;
-        }
+    switch (styleType) {
+        case 'secondary':
+            containerStyle.push(styles.secondaryButton);
+            textStyling.push(styles.secondaryButtonText);
+            break;
+        case 'outline':
+            containerStyle.push(styles.outlineButton);
+            textStyling.push(styles.outlineButtonText);
+            break;
+        case 'disabled':
+            containerStyle.push(styles.disabledButton);
+            textStyling.push(styles.disabledButtonText);
+            break;
+        default:
+            break;
+    }
 
     return (
         <>        

@@ -1,71 +1,64 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { Component } from 'react'
-import CustomTextInput from '../Common/CustomTextInput';
-import ModalDropdown from '../Common/ModalDropdown';
-import Dropdown from '../Common/Dropdown';
-// import ModalDropdown from '../Common/ModalDropdown';
+import React, { Component, createRef } from 'react';
+import { View, Button, Text, StyleSheet } from 'react-native';
+import CustomBottomSheet from '../Common/CustomBottomSheet'; // Adjust the import according to your project structure
 
 interface AppState {
-    selectedOption: string;
+    isBottomSheetVisible: boolean;
 }
 
-export class TestPage extends Component<{}, AppState>{
-    constructor(props: {}){
+export class TestPage extends Component<{}, AppState> {
+    bottomSheetRef = createRef<any>();
+
+    constructor(props: {}) {
         super(props);
         this.state = {
-            selectedOption: '',
+            isBottomSheetVisible: false,
         };
     }
 
-    handleValueChange = (value: string) => {
-        this.setState({selectedOption: value});
+    toggleBottomSheet = () => {
+        console.log("Bottom Sheet Toggled", this.state.isBottomSheetVisible);
+        this.setState({ isBottomSheetVisible: !this.state.isBottomSheetVisible });
+    };
+
+    closeBottomSheet = () => {
+        if (this.bottomSheetRef.current) {
+            this.bottomSheetRef.current.closeAnimation();
+        }
     };
 
     render() {
-        const {selectedOption} = this.state;
-        const options = ['Option1', 'Option2', 'Option3', 'Option4'];
+        const { isBottomSheetVisible } = this.state;
+
         return (
-        <View style={styles.container}>
-            <CustomTextInput label='UserName' placeholder='Enter your username' variant="rounded" value="" onChangeText={(text) => console.log(text)} />
-            <ModalDropdown
-                options={options}
-                selectedValue={selectedOption}
-                onValueChange={this.handleValueChange}
-            />
-            {selectedOption ? (
-                <Text style={styles.selectedText}>
-                    You selected: {selectedOption}
-                </Text>
-            ) : (
-                <Text style={styles.placeholderText}>Please select an option</Text>
-            )}
-            <View style={{marginHorizontal: 10}}>
-                <Dropdown
-                    options={options}
-                    selectedValue={this.state.selectedOption}
-                    onValueChange={this.handleValueChange}
-                />
-                <Text>Hello</Text>
+            <View style={styles.container}>
+                <Button title="Toggle Bottom Sheet" onPress={this.toggleBottomSheet} />
+                <CustomBottomSheet
+                    ref={this.bottomSheetRef}
+                    visible={isBottomSheetVisible}
+                    onClose={this.toggleBottomSheet}
+                >
+                    <View style={styles.content}>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis sequi, enim illum rem neque tempore ullam numquam nostrum, saepe, hic ipsum vel fugiat ipsa maiores praesentium quia a repellendus excepturi!</Text>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis sequi, enim illum rem neque tempore ullam numquam nostrum, saepe, hic ipsum vel fugiat ipsa maiores praesentium quia a repellendus excepturi!</Text>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis sequi, enim illum rem neque tempore ullam numquam nostrum, saepe, hic ipsum vel fugiat ipsa maiores praesentium quia a repellendus excepturi!</Text>
+                        <Button title="Close" onPress={this.closeBottomSheet} />
+                    </View>
+                </CustomBottomSheet>
             </View>
-        </View>
-        )
+        );
     }
 }
-
-export default TestPage;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
     },
-    selectedText: {
-        marginTop: 20,
-        fontSize: 16,
-        color: 'green',
+    content: {
+        padding: 16,
     },
-    placeholderText: {
-        marginTop: 20,
-        fontSize: 16,
-        color: '#888',
-    },
-})
+});
+
+export default TestPage;

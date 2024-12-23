@@ -48,7 +48,9 @@ class Receipt extends Component<Props, State> {
     render() {
         const { windowWidth } = this.state;
         return (
-            <ScreenWrapper title="E-Receipt" floatingBtn floatingBtnProps={[{label: "Go To Home", onPress: this.navigateToHome},{label: "Go To Home", onPress: this.navigateToHome},]}>
+            <ScreenWrapper title="E-Receipt" floatingBtn floatingBtnProps={[
+                {label: "Go To Home", onPress: this.navigateToHome },
+                ]}>
                 <View style={styles.container}>
                     <View style={styles.qrCodeContainer}>
                         <QRCode value="https://www.google.com" size={windowWidth * 0.5} />

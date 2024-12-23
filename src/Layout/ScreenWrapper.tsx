@@ -11,6 +11,7 @@
     interface FloatingButtonProps {
         label: string;
         onPress: () => void;
+        type?: 'normal' | 'secondary' | 'outline' | 'disabled';
     }
 
     interface Props {
@@ -35,6 +36,7 @@
     interface State {
         screenHeight: number;
         selectedHeroImage: string;
+        floatingButtonHeight: number;
     }
 
     type WrapperProps = NavProps & Props;
@@ -48,6 +50,7 @@
             this.state = {
                 screenHeight: Dimensions.get('window').height,
                 selectedHeroImage: props.heroImagesUrls?.[0] || 'https://images.unsplash.com/photo-1534096210335-a3b961613bb5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                floatingButtonHeight: 0,
             }
         }
         componentDidMount() {
@@ -67,12 +70,12 @@
         }
         
         render() {
-            const {screenHeight, selectedHeroImage} = this.state;
+            const {screenHeight, selectedHeroImage, floatingButtonHeight} = this.state;
             const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle} = this.props;
             console.log('Screen height', screenHeight);
             return (
                 <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
-                    <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, floatingBtn && {marginBottom: 80}, heroImage && {paddingHorizontal: 0, paddingTop: 0}]}>
+                    <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, {paddingBottom: floatingButtonHeight, marginBottom: 10}, heroImage && {paddingHorizontal: 0, paddingTop: 0}]}>
                         <If condition={heroImage}>
                             <ImageBackground
                                 source={{uri: selectedHeroImage }}
@@ -122,7 +125,12 @@
                         <View style={[
                         styles.floatingButtonContainer, 
                         isWeb ? null : {paddingBottom: 29},
-                        ]}>
+                        ]}
+                        onLayout={(event) => {
+                            const {height} = event.nativeEvent.layout;
+                            this.setState({floatingButtonHeight: height});
+                        }}
+                        >
                             {/* <Pressable style={[styles.floatingButton]} onPress={() => console.log('Floating button pressed')}>
                                 <Text style={styles.buttonText}>+</Text>
                             </Pressable> */}
@@ -136,6 +144,7 @@
                                 key={index}
                                 label={btn.label}
                                 onPress={btn.onPress}
+                                styleType={btn.type}
                             />
                         ))}
                         </View>
