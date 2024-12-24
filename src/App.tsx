@@ -43,6 +43,7 @@ import Receipt from './Checkout/Receipt';
 import EventDetails from './Discover/Events/EventDetails';
 import AllEvents from './Discover/Events/AllEvents';
 import EventCard from './Discover/Events/EventCard';
+import CartPage from './Cart/CartPage';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -170,6 +171,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Classes" component={ClassesPage} />
             <Stack.Screen name="ClassDetails" component={ClassesDetails} />
             <Stack.Screen name="Checkout" component={Checkout} />
+            <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
             <Stack.Screen name="EventCard" component={EventCard} />
             <Stack.Screen name="EventDetails" component={EventDetails} />
