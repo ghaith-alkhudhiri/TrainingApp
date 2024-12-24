@@ -63,20 +63,63 @@
 
 // export default TestPage;
 
+// Switch Test
+// import React, { Component } from 'react';
+// import { View, Text, StyleSheet } from 'react-native';
+// import Switch from '../Common/Switch'; // Adjust the import according to your project structure
+
+// interface AppState {
+//     isSwitchOn: boolean;
+// }
+
+// export class TestPage extends Component<{}, AppState> {
+//     constructor(props: {}) {
+//         super(props);
+//         this.state = {
+//             isSwitchOn: false,
+//         };
+//     }
+
+//     toggleSwitch = (value: boolean) => {
+//         this.setState({ isSwitchOn: value });
+//     };
+
+//     render() {
+//         const { isSwitchOn } = this.state;
+
+//         return (
+//             <View style={styles.container}>
+//                 <Text>Switch is {isSwitchOn ? 'On' : 'Off'}</Text>
+//                 <Switch
+//                     value={isSwitchOn}
+//                     onValueChange={this.toggleSwitch}
+//                     trackColor={{ false: '#D1D1D6', true: '#0165FC' }}
+//                     thumbColor="#f4f3f4"
+//                 />
+//             </View>
+//         );
+//     }
+// }
+
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//     },
+// });
+
+// export default TestPage;
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Switch from '../Common/Switch'; // Adjust the import according to your project structure
+import Accordion from '../Common/Accordion';
 
-interface AppState {
-    isSwitchOn: boolean;
-}
 
-export class TestPage extends Component<{}, AppState> {
+export class TestPage extends Component<{}> {
     constructor(props: {}) {
         super(props);
-        this.state = {
-            isSwitchOn: false,
-        };
+        
     }
 
     toggleSwitch = (value: boolean) => {
@@ -84,17 +127,23 @@ export class TestPage extends Component<{}, AppState> {
     };
 
     render() {
-        const { isSwitchOn } = this.state;
-
+        const accordionItems = [
+            {
+                title: 'Item 1',
+                content: 'Content for item 1',
+            },
+            {
+                title: 'Item 2',
+                content: 'Content for item 2',
+            },
+            {
+                title: 'Item 3',
+                content: 'Content for item 3',
+            },
+        ]
         return (
             <View style={styles.container}>
-                <Text>Switch is {isSwitchOn ? 'On' : 'Off'}</Text>
-                <Switch
-                    value={isSwitchOn}
-                    onValueChange={this.toggleSwitch}
-                    trackColor={{ false: '#D1D1D6', true: '#0165FC' }}
-                    thumbColor="#f4f3f4"
-                />
+                <Accordion items={accordionItems} />
             </View>
         );
     }
@@ -103,8 +152,6 @@ export class TestPage extends Component<{}, AppState> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });
 

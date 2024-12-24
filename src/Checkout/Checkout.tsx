@@ -3,14 +3,13 @@ import React, { Component } from 'react'
 import CustomRadioButton from '../Common/CustomRadioButton';
 import ScreenWrapper from '../Layout/ScreenWrapper';
 
-import ApplePayIcon from '../Assets/Images/applePay.png';
 import STCPayIcon from '../Assets/Images/stcPay.png';
 import madaIcon from '../Assets/Images/mada.png';
 import CheckoutSection from './CheckoutSection';
 import CustomTextInput from '../Common/CustomTextInput';
 import TicketIcon from '../Assets/Icons/TicketIcon';
 import CheckoutItemsList from './CheckoutItemsList';
-
+import ApplePayIcon from '../Assets/Images/applePayIcon.png';
 interface CheckoutState {
     selectedPaymentMethod: string;
 }
@@ -19,7 +18,7 @@ export class Checkout extends Component<any, CheckoutState> {
     constructor(props: any){
         super(props);
         this.state = {
-            selectedPaymentMethod: 'Option 1',
+            selectedPaymentMethod: 'stc',
         };
     }
 
@@ -78,10 +77,23 @@ export class Checkout extends Component<any, CheckoutState> {
                 price: 200,
                 currency: "SR"
             },
-        ]
+        ];
+
+        let floatingBtnProps;
+        switch(selectedPaymentMethod){
+            case 'stc':
+                floatingBtnProps = [{ label: "Pay with STC Pay", onPress: this.navigateToSuccess }];
+                break;
+            case 'apple':
+                floatingBtnProps = [{ label: "Pay with", onPress: this.navigateToSuccess, type: 'apple'}];
+                break;
+            case 'mada':
+                floatingBtnProps = [{ label: "Pay with Mada", onPress: this.navigateToSuccess}];
+                break;
+        }
 
         return (
-        <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={[{label: "Pay with ", onPress: this.navigateToSuccess }]}>
+        <ScreenWrapper title="Checkout" style={styles.container} floatingBtn floatingBtnProps={floatingBtnProps}>
             <View style={styles.container}>
                 <CheckoutSection label='Payment Method'>
                     <CustomRadioButton
