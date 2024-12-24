@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
-import theme from '../Constants/theme';
-import ClockIcon from '../Assets/Icons/ClockIcon';
-import CalendarIcon from '../Assets/Icons/CalendarIcon';
+import theme from '../../Constants/theme';
+import ClockIcon from '../../Assets/Icons/ClockIcon';
+import CalendarIcon from '../../Assets/Icons/CalendarIcon';
 
 interface Props {
   imageUrl: string;

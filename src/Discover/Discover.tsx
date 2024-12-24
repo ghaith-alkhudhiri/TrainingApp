@@ -6,8 +6,9 @@ import Header from '../Home/Header'
 import { NavProps } from '../types'
 import SearchInput from '../Common/SearchInput'
 import CustomButton from '../Common/CustomButton'
-import EventCard from '../Events/EventCard'
+import EventCard from './Events/EventCard'
 import SectionHeader from '../Home/SectionHeader'
+import PersonalTrainerCard from './PersonalTrainers/PersonalTrainerCard'
 
 export class Discover extends Component<NavProps> {
   render() {
@@ -50,6 +51,32 @@ export class Discover extends Component<NavProps> {
                   date='23 July 2024'
                   />
                 </ScrollView>
+
+                <SectionHeader title="Our Trainer" onPress={()=>{navigation.navigate('AllTrainers')}} />
+                <PersonalTrainerCard 
+                name="Noor M. Ali"
+                imageUrl={require('../Assets/Images/noor.png')}
+                tags={['Hatha yoga', 'Yin yoga']}
+                position="Yoga Trainer"
+                rating={4.5}
+                reviews={23}
+                />
+                <PersonalTrainerCard 
+                name="Noor M. Ali"
+                imageUrl={require('../Assets/Images/noor.png')}
+                tags={['Hatha yoga', 'Yin yoga']}
+                position="Yoga Trainer"
+                rating={4.5}
+                reviews={23}
+                />
+                <PersonalTrainerCard 
+                name="Noor M. Ali"
+                imageUrl={require('../Assets/Images/noor.png')}
+                tags={['Hatha yoga', 'Yin yoga']}
+                position="Yoga Trainer"
+                rating={4.5}
+                reviews={23}
+                />
             </View>
             {/* <CustomButton onPress={()=>{navigation.navigate('Memberships')}}/> */}
             {/* <CustomButton onPress={()=>{navigation.navigate('AllEvents')}}/> */}
