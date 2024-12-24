@@ -22,7 +22,7 @@ export class ClassSection extends Component<Props> {
         {details && details.length > 0 && (
             <View style={styles.detailsContainer}>
                 {details.map((row, index) => (
-                    <View style={styles.rowContainer}>
+                    <View key={index} style={styles.rowContainer}>
                         <Text style={styles.detailTitle}>{row.title}</Text>
                         <Text style={styles.detailValue}>{row.value}</Text>
                     </View>

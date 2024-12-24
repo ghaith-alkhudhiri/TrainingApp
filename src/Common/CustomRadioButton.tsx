@@ -34,6 +34,7 @@ interface RadioButtonProps {
   selectedRadioColor?: string;
   icons?: React.ReactElement<any>[];
   subInfo?: any;
+  SegmentedControl?: boolean;
 }
 
 interface RadioButtonState {
@@ -67,11 +68,45 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
       selectedRadioColor,
       icons,
       subInfo,
+      SegmentedControl
     } = this.props;
     const { selectedOption } = this.state;
 
     const isRTL = I18nManager.isRTL;
     const isRowLayout = layout === 'row';
+
+    if (SegmentedControl) {
+      return (
+        <View style={[
+          { flexDirection: isRTL ? 'row-reverse' : 'row' },
+          isRowLayout ? styles.row : styles.column,
+          {gap: 12}
+        ]}>
+          {options.map((option, index) => {
+            const isSelected = selectedOption === option.value;
+            return (
+              <TouchableOpacity
+                key={option.value}
+                style={[
+                  styles.groupButton,
+                  isSelected && styles.selectedGroupButton,
+                ]}
+                onPress={() => this.handleOptionSelect(option.value)}
+              >
+                <Text
+                  style={[
+                    styles.groupButtonText,
+                    isSelected && styles.selectedGroupButtonText,
+                  ]}
+                >
+                  {option.label}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      );
+    }    
 
     return (
       <View
@@ -84,7 +119,6 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
         {label && <Text style={styles.label}>{label}</Text>}
         {options.map((option, index) => {
           const isSelected = selectedOption === option.value;
-
           // different style fo Radio with subInfo
           if (subInfo) {
             return (
@@ -312,7 +346,28 @@ const styles = StyleSheet.create({
     width: 22,
     height: 12,
     resizeMode: 'contain'
-  }
+  },
+  groupButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 23,
+    borderRadius: 8,
+    backgroundColor: '#F4F6F9',
+    height: 43,
+  },
+  selectedGroupButton: {
+    backgroundColor: theme.primary,
+  },
+  groupButtonText: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#080B11',
+    lineHeight: 18.75,
+    fontFamily: theme.font,
+  },
+  selectedGroupButtonText: {
+    color: '#FFFFFF',
+  },
+  
 });
 
 export default CustomRadioButton;

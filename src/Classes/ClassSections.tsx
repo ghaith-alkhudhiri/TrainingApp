@@ -41,7 +41,7 @@ export class ClassSections extends Component {
       <View style={styles.container}>
         {
             sections.map((section, index) => (
-                <ClassSection title={section.title} description={section.description} details={section.details} />
+                <ClassSection key={index} title={section.title} description={section.description} details={section.details} />
             ))
         }
       </View>

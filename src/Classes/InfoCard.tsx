@@ -8,6 +8,9 @@ interface Props {
 }
 
 export class InfoCard extends Component<Props> {
+  static map(arg0: (infoCard: any, index: any) => import("react/jsx-runtime").JSX.Element): React.ReactNode {
+      throw new Error('Method not implemented.');
+  }
   render() {
     const {icon, value, label} = this.props;
     return (
@@ -31,6 +34,8 @@ export default InfoCard;
 const styles = StyleSheet.create({
     infoCardContainer: {
         gap: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     infoIconContainer: {
         padding: 10,
@@ -38,6 +43,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 9,
         backgroundColor: '#EAF2FF',
+        width: 45,
+        height: 45,
     },
     levelTypeText: {
         color: '#0165FC',
