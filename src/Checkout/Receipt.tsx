@@ -53,7 +53,7 @@ class Receipt extends Component<Props, State> {
                 ]}>
                 <View style={styles.container}>
                     <View style={styles.qrCodeContainer}>
-                        <QRCode value="https://www.google.com" size={windowWidth * 0.5} />
+                        <QRCode value="https://www.google.com" color='#000000' size={windowWidth * 0.5} />
                     </View>
                     <View style={styles.itemsContainer}>
                         {receiptItems.map((item, index) => (
