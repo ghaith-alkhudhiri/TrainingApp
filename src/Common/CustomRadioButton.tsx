@@ -67,7 +67,6 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
       selectedRadioColor,
       icons,
       subInfo,
-      // radioCircleStyle,
     } = this.props;
     const { selectedOption } = this.state;
 
