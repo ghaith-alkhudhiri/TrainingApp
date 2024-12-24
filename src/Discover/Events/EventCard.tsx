@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from
 import theme from '../../Constants/theme';
 import ClockIcon from '../../Assets/Icons/ClockIcon';
 import CalendarIcon from '../../Assets/Icons/CalendarIcon';
+import { NavProps } from '../../types';
 
 interface Props {
   imageUrl: string;
@@ -13,10 +14,13 @@ interface Props {
   CTA?: string;
 }
 
-export default class EventCard extends Component<Props> {
+type CardProps = Props & NavProps;
+
+export default class EventCard extends Component<CardProps> {
   handleJoinEvent = () => {
-    console.log('Join Event Pressed');
-  };
+    const { navigation, ...eventProps } = this.props;
+    navigation.navigate('EventDetails', { ...eventProps });
+  };  
 
   render() {
     const { imageUrl, title, tags, time, date, CTA } = this.props;

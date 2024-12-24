@@ -28,6 +28,8 @@ export class Discover extends Component<NavProps> {
                   tags={['Monthly Challenge', 'Fitness']}
                   time='3:00 - 4:00 PM'
                   date='23 July 2024'
+                  navigation={navigation}
+                  route={route}
                   />
                   <EventCard 
                   title='Weight loss of the month' 
@@ -35,6 +37,8 @@ export class Discover extends Component<NavProps> {
                   tags={['Monthly Challenge', 'Fitness']}
                   time='3:00 - 4:00 PM'
                   date='23 July 2024'
+                  navigation={navigation}
+                  route={route}
                   />
                   <EventCard 
                   title='Weight loss of the month' 
@@ -42,6 +46,8 @@ export class Discover extends Component<NavProps> {
                   tags={['Monthly Challenge', 'Fitness']}
                   time='3:00 - 4:00 PM'
                   date='23 July 2024'
+                  navigation={navigation}
+                  route={route}
                   />
                   <EventCard 
                   title='Weight loss of the month' 
@@ -49,6 +55,8 @@ export class Discover extends Component<NavProps> {
                   tags={['Monthly Challenge', 'Fitness']}
                   time='3:00 - 4:00 PM'
                   date='23 July 2024'
+                  navigation={navigation}
+                  route={route}
                   />
                 </ScrollView>
 
