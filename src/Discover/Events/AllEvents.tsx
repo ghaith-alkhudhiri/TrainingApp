@@ -1,10 +1,10 @@
 import { ListRenderItemInfo, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
-import ScreenWrapper from '../Layout/ScreenWrapper'
+import ScreenWrapper from '../../Layout/ScreenWrapper'
 import { FlatList } from 'react-native'
-import { NavProps } from '../types'
-import Search from '../Assets/Icons/Search'
-import FilterSet from '../Common/FilterSet'
+import { NavProps } from '../../types'
+import Search from '../../Assets/Icons/Search'
+import FilterSet from '../../Common/FilterSet'
 import EventCard from './EventCard'
 
 interface Event {
@@ -38,7 +38,7 @@ export class AllEvents extends Component<NavProps, State> {
       {
         id: '1',
         title: 'Weight loss of the month',
-        imageUrl: require('../Assets/Images/noor.png'),
+        imageUrl: require('../../Assets/Images/noor.png'),
         tags: ['Monthly Challenge', 'Fitness'],
         time: '3:00 - 4:00 PM',
         date: '23 July 2024',
@@ -46,7 +46,7 @@ export class AllEvents extends Component<NavProps, State> {
       {
         id: '2',
         title: 'Studio Family',
-        imageUrl: require('../Assets/Images/noor.png'),
+        imageUrl: require('../../Assets/Images/noor.png'),
         tags: ['Monthly Challenge', 'Fitness'],
         time: '3:00 - 4:00 PM',
         date: '23 July 2024',
@@ -54,7 +54,7 @@ export class AllEvents extends Component<NavProps, State> {
       {
         id: '3',
         title: 'Studio Family',
-        imageUrl: require('../Assets/Images/noor.png'),
+        imageUrl: require('../../Assets/Images/noor.png'),
         tags: ['Monthly Challenge', 'Fitness'],
         time: '3:00 - 4:00 PM',
         date: '23 July 2024',

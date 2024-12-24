@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // For icons
-import theme from '../Constants/theme'; // Use your theme file
+import theme from '../../Constants/theme'; // Use your theme file
 
 export default class EventPage extends Component {
   handleGetTickets = () => {
@@ -14,7 +14,7 @@ export default class EventPage extends Component {
         {/* Header with image */}
         <View style={styles.imageContainer}>
           <Image
-            source={require('../Assets/Images/img.png')} // Replace with your image URL
+            source={require('../../Assets/Images/img.png')} // Replace with your image URL
             style={styles.image}
           />
           <View style={styles.headerActions}>
