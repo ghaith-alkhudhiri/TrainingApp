@@ -31,15 +31,27 @@ export default class CartPage extends Component<{}, State> {
         title='Cart'
         scrollContainerStyle={{paddingHorizontal: 25}}
         floatingBtn
-        floatingBtnProps={{
-          label: 'Checkout',
-          onPress: console.log('Checkout'),
-        }}
-        secondaryFloatingBtn
-        secondaryFloatingBtnProps={{
-          label: 'Add Items',
-          onPress: console.log('Add Items'),
-        }}
+        floatingBtnProps={
+          [
+            {
+              label: 'Add Items',
+              onPress: console.log("Add Items"),
+              type: 'outline'
+            },
+            {
+              label: 'Checkout',
+              onPress: console.log('Checkout'),
+            }
+        ]
+        }
+        floatingBtnRowGap={2}
+        floatingBtnLayout='row'
+        floatingBtnColumnGap={15}
+        // secondaryFloatingBtn
+        // secondaryFloatingBtnProps={{
+        //   label: 'Add Items',
+        //   onPress: console.log('Add Items'),
+        // }}
       >
         <View style={{gap: 19}}>
           {/* Membership Details */}

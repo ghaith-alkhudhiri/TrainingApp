@@ -21,6 +21,9 @@
         rightElement?: ReactNode;
         navigation?: any;
         floatingBtn?: boolean;
+        floatingBtnLayout?: "row" | "column";
+        floatingBtnRowGap?: number;
+        floatingBtnColumnGap?: number;
         floatingBtnProps?: FloatingButtonProps[];
         heroImage?: boolean;
         heroImagesUrls?: string[];
@@ -71,7 +74,7 @@
         
         render() {
             const {screenHeight, selectedHeroImage, floatingButtonHeight} = this.state;
-            const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle} = this.props;
+            const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnLayout = 'column', floatingBtnRowGap = 10, floatingBtnColumnGap = 10, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle} = this.props;
             console.log('Screen height', screenHeight);
             return (
                 <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
@@ -86,7 +89,7 @@
                                     navigation={this.props.navigation} 
                                     route={this.props.route} 
                                     backEnabled={true} 
-                                    title={title} 
+                                    title={title}
                                     rightElement={rightElement}
                                     backContainerStyle={{left: 25}}
                                     rightContainerStyle={{right: 25}}
@@ -123,7 +126,9 @@
                     </ScrollView>
                     <If condition={floatingBtn}>
                         <View style={[
-                        styles.floatingButtonContainer, 
+                        styles.floatingButtonContainer,
+                        floatingBtnLayout === 'row' ? styles.rowLayout : styles.columnLayout,
+                        {rowGap: floatingBtnRowGap, columnGap: floatingBtnColumnGap},
                         isWeb ? null : {paddingBottom: 29},
                         ]}
                         onLayout={(event) => {
@@ -219,6 +224,12 @@
             backgroundColor: '#FCFCFC',
             alignSelf: 'center',
             borderRadius: 11,
+        },
+        rowLayout: {
+            flexDirection: 'row',
+        },
+        columnLayout: {
+            flexDirection: 'column',
         },
         heroImageContainer: {
             width: 49,
