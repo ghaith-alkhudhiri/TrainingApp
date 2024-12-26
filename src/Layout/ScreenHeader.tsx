@@ -14,6 +14,8 @@ interface Props {
     containerStyle?: StyleProp<ViewStyle>;
     backContainerStyle?: StyleProp<ViewStyle>;
     rightContainerStyle?: StyleProp<ViewStyle>;
+    leftElementEnabled?: boolean;
+    leftElement?: ReactNode;
 }
 type HeaderProps = NavProps & Props;
 
@@ -29,7 +31,7 @@ export class ScreenHeader extends Component<HeaderProps> {
         }
     };
     render() {
-        const {backEnabled, title, rightElement, containerStyle, backContainerStyle, rightContainerStyle} = this.props;
+        const {backEnabled, title, rightElement, containerStyle, backContainerStyle, rightContainerStyle, leftElementEnabled, leftElement} = this.props;
         return (
         <View style={[styles.container, containerStyle]}>
             
@@ -39,10 +41,10 @@ export class ScreenHeader extends Component<HeaderProps> {
                 </If>
             </View>
             <Pressable style={[styles.backContainer, backContainerStyle]} onPress={this.handleGoBack}>
-                <If condition={backEnabled}>
-                    {/* <BackArrowIcon width={20} height={20} color="#1E232C" /> */}
+                {backEnabled ? <BackArrowIcon width={20} height={20} color="#1E232C"/> : leftElementEnabled ? leftElement : null}
+                {/* <If condition={backEnabled}>
                     <ArrowLeft width={20} height={20} color="#1E232C"/>
-                </If>
+                </If> */}
             </Pressable>
                 {/* <View style={{ width: 41 }} /> */}
             <View style={[styles.rightContainer, rightContainerStyle]}>
