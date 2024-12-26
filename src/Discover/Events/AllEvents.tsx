@@ -73,6 +73,8 @@ export class AllEvents extends Component<NavProps, State> {
         time={item.time}
         date={item.date}
         CTA={item.CTA}
+        navigation={this.props.navigation}
+        route={this.props.route}
       />
     );
   };

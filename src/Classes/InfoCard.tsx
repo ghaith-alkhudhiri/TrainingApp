@@ -31,6 +31,8 @@ export default InfoCard;
 const styles = StyleSheet.create({
     infoCardContainer: {
         gap: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     infoIconContainer: {
         padding: 10,
@@ -38,6 +40,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 9,
         backgroundColor: '#EAF2FF',
+        width: 45,
+        height: 45,
     },
     levelTypeText: {
         color: '#0165FC',

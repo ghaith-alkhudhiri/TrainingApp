@@ -76,6 +76,8 @@ export class AllTrainers extends Component<NavProps, State> {
         rating={item.rating}
         reviews={item.reviews}
         position={item.position}
+        navigation={this.props.navigation}
+        route={this.props.route}
         />
     );
   };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Star from '../../Assets/Icons/Star';
 import theme from '../../Constants/theme';
+import { NavProps } from '../../types';
 
 interface Props {
   imageUrl: string;
@@ -12,9 +13,12 @@ interface Props {
   position: string;
 }
 
-export default class PersonalTrainerCard extends Component<Props> {
+type CardProps = Props & NavProps;
+
+export default class PersonalTrainerCard extends Component<CardProps> {
   handleBookNow = () => {
-    console.log('Book Now Pressed');
+    const { navigation, ...trainerProps } = this.props;
+    navigation.navigate('TrainerProfile', { ...trainerProps });
   };
 
   render() {

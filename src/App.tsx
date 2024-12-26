@@ -40,7 +40,14 @@ import ClassesPage from './Discover/ClassesPage';
 import ClassesDetails from './Classes/ClassesDetails';
 import Checkout from './Checkout/Checkout';
 import Receipt from './Checkout/Receipt';
+import EventDetails from './Discover/Events/EventDetails';
+import AllEvents from './Discover/Events/AllEvents';
+import EventCard from './Discover/Events/EventCard';
 import CartPage from './Cart/CartPage';
+import AllTrainers from './Discover/PersonalTrainers/AllTrainers';
+import PersonalTrainerCard from './Discover/PersonalTrainers/PersonalTrainerCard';
+import TrainerProfile from './Discover/PersonalTrainers/TrainerProfile';
+import Shop from './Shop/Shop';
 import You from './You/You';
 
 // const Tab = createBottomTabNavigator();
@@ -171,7 +178,6 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
-            <Stack.Screen name="You" component={You} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (
