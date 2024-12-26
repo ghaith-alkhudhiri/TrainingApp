@@ -1,26 +1,28 @@
-import { Share, StyleSheet, Text, View } from 'react-native'
+import { Image, Share, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import ScreenWrapper from '../../Layout/ScreenWrapper';
 import InfoCard from '../../Classes/InfoCard';
-import CalendarIcon from '../../Assets/Icons/CalendarIcon';
-import ClockIcon from '../../Assets/Icons/ClockIcon';
-import LocationIcon from '../../Assets/Icons/LocationIcon';
-import StopWatchFilled from '../../Assets/Icons/StopWatchFilled';
 import { NavProps } from '../../types';
 import ShareIcon from '../../Assets/Icons/ShareIcon';
 import theme from '../../Constants/theme';
 import Dropdown from '../../Common/Dropdown';
 import CustomRadioButton from '../../Common/CustomRadioButton';
+import LevelIcon from '../../Assets/Icons/LevelIcon';
+import PriceIcon from '../../Assets/Icons/PriceIcon';
+import RatingIcon from '../../Assets/Icons/RatingIcon';
+import SeatsIcon from '../../Assets/Icons/SeatsIcon';
+import ReviewSection from '../../Common/ReviewSection';
+import DatePickerInput from '../../Common/DatePickerInput';
 
 interface Props {
     route: {
         params: {
-          imageUrl: string;
-          title: string;
-          tags: string[];
-          time: string;
-          date: string;
-          CTA?: string;
+            imageUrl: string;
+            name: string;
+            tags?: string[];
+            rating: number;
+            reviews: number;
+            position: string;
         };
       };
 }
@@ -30,10 +32,10 @@ interface State {
     currentStep: number;
 }
 
-type DetailsProps = Props & NavProps;
+type ProfileProps = Props & NavProps;
 
-export class EventDetails extends Component<DetailsProps, State> {
-    constructor(props: DetailsProps) {
+export class TrainerProfile extends Component<ProfileProps, State> {
+    constructor(props: ProfileProps) {
         super(props);
     
         this.state = {
@@ -48,35 +50,33 @@ export class EventDetails extends Component<DetailsProps, State> {
         if (currentStep < 2) {
             this.setState({ currentStep: currentStep + 1 });
         } else {
-            // Handle form submission here
             console.log('Form submitted:', this.state);
-            // this.props.navigation.navigate('Review');      
         }
     };
     
     renderStep = () => {
-    const { imageUrl, title, tags, time, date, CTA } = this.props.route.params;
+    const { name, imageUrl, tags, rating, reviews, position } = this.props.route.params;
     const { currentStep, showFullText } = this.state;
     const infoCards = [
         {
-            icon: <CalendarIcon height={24} width={24} filled />,
-            value: "24th",
-            label: "June"
+            icon: <LevelIcon />,
+            value: "Expert",
+            label: "Train"
         },
         {
-            icon: <ClockIcon width={34} height={33} />,
-            value: "4:00",
-            label: "PM"
-        },
-        {
-            icon: <StopWatchFilled />,
+            icon: <SeatsIcon />,
             value: "2",
-            label: "Hour"
+            label: "Years Exp."
         },
         {
-            icon: <LocationIcon />,
-            value: "Bahrain",
-            label: 'Manama'
+            icon: <RatingIcon />,
+            value: "4.5",
+            label: "Rating"
+        },
+        {
+            icon: <PriceIcon />,
+            value: "200",
+            label: 'Review'
         }
         
     ];
@@ -88,8 +88,8 @@ export class EventDetails extends Component<DetailsProps, State> {
         return (
             <View>
                 <View style={styles.headerContainer}>
-                    <Text style={styles.titleText}>{title}</Text>
-                    <Text style={styles.categoryText}>{tags.join(', ')}</Text>
+                    <Text style={styles.titleText}>{name}</Text>
+                    <Text style={styles.categoryText}>{position}</Text>
                 </View>
                 <View>
                     <View style={styles.infoContainer}>
@@ -103,7 +103,7 @@ export class EventDetails extends Component<DetailsProps, State> {
                             fontSize: 18,
                             fontWeight: '600',
                             letterSpacing: -0.3,
-                            }}>About the event</Text>
+                            }}>About</Text>
                         <View style={{height: 1, backgroundColor: '#E1E1E1'}} />
                         <Text style={{
                             color: '#797979',
@@ -134,23 +134,40 @@ export class EventDetails extends Component<DetailsProps, State> {
                                 fontSize: 18,
                                 fontWeight: '600',
                                 letterSpacing: -0.3,
-                                }}>Event Agenda</Text>
+                                }}>Working hours</Text>
                             <View style={{height: 1, backgroundColor: '#E1E1E1'}} />
                             <View style={{gap: 10}}>
                                 <View style={styles.agendaContainer}>
-                                    <Text style={styles.agendaTitle}>Registration</Text>
-                                    <Text style={styles.agendaTime}>04:00 - 04:30</Text>
+                                    <Text style={styles.agendaTitle}>Sunday</Text>
+                                    <Text style={styles.agendaTime}>00:00 - 00:00</Text>
                                 </View>
                                 <View style={styles.agendaContainer}>
-                                    <Text style={styles.agendaTitle}>Sharing Results</Text>
-                                    <Text style={styles.agendaTime}>04:30 - 05:30</Text>
+                                    <Text style={styles.agendaTitle}>Monday</Text>
+                                    <Text style={styles.agendaTime}>00:00 - 00:00</Text>
                                 </View>
                                 <View style={styles.agendaContainer}>
-                                    <Text style={styles.agendaTitle}>Giveaways and rewords</Text>
-                                    <Text style={styles.agendaTime}>05:30 - 06:00</Text>
+                                    <Text style={styles.agendaTitle}>Tuesday</Text>
+                                    <Text style={styles.agendaTime}>00:00 - 00:00</Text>
+                                </View>
+                                <View style={styles.agendaContainer}>
+                                    <Text style={styles.agendaTitle}>Wednesday</Text>
+                                    <Text style={styles.agendaTime}>00:00 - 00:00</Text>
+                                </View>
+                                <View style={styles.agendaContainer}>
+                                    <Text style={styles.agendaTitle}>Thursday</Text>
+                                    <Text style={styles.agendaTime}>00:00 - 00:00</Text>
                                 </View>
                             </View>
                         </View>
+                    </View>
+                    <View style={{marginTop: 23}}>
+                        <Text style={{color: '#000',
+                                fontFamily: theme.primary,
+                                fontSize: 18,
+                                fontWeight: '600',
+                                letterSpacing: -0.3,
+                                }}>Reviews</Text>
+                        <ReviewSection />
                     </View>
                 </View>
             </View>
@@ -160,7 +177,7 @@ export class EventDetails extends Component<DetailsProps, State> {
             <View style={{gap: 20}}>
                 <View style={{gap: 14}}>
                     <View style={styles.headerContainer}>
-                        <Text style={styles.titleText}>{title}</Text>
+                        <Text style={styles.titleText}>{name}</Text>
                         <Text style={styles.categoryText}>{tags.join(', ')}</Text>
                     </View>
                     <View style={{height: 1, backgroundColor: '#E7EFFF'}} />
@@ -171,7 +188,37 @@ export class EventDetails extends Component<DetailsProps, State> {
                         fontWeight: '400',
                         lineHeight: 17.5,
                         textTransform: 'uppercase'
-                    }}>Event Details</Text>
+                    }}>Appointment Details</Text>
+                </View>
+                <View style={{gap: 19}}>
+                    <Text style={{
+                        color: '#000',
+                        fontFamily: theme.font,
+                        fontSize: 18,
+                        fontWeight: '600',
+                        letterSpacing: -0.3,
+                    }}>Start Date</Text>
+                    <DatePickerInput onDateChange={()=>{}} />
+                </View>
+                <View style={{gap: 19}}>
+                    <Text style={{
+                        color: '#000',
+                        fontFamily: theme.font,
+                        fontSize: 18,
+                        fontWeight: '600',
+                        letterSpacing: -0.3,
+                    }}>Time</Text>
+                    <CustomRadioButton SegmentedControl options={[{ label: '7:00  PM', value: '7:00  PM' }, { label: '7:30  PM', value: '7:30  PM' }, { label: '8:00  PM', value: '8:00  PM' }]} selectedOption={'7:00  PM'} onOptionSelect={()=>{}} layout='row' />
+                </View>
+                <View style={{gap: 19}}>
+                    <Text style={{
+                        color: '#000',
+                        fontFamily: theme.font,
+                        fontSize: 18,
+                        fontWeight: '600',
+                        letterSpacing: -0.3,
+                    }}>Select Duration</Text>
+                    <Dropdown options={['30 minutes', '45 minutes', '1 hour']} selectedValue='30 minutes' onValueChange={()=>{}} />
                 </View>
                 <View style={{gap: 19}}>
                     <Text style={{
@@ -190,18 +237,8 @@ export class EventDetails extends Component<DetailsProps, State> {
                         fontSize: 18,
                         fontWeight: '600',
                         letterSpacing: -0.3,
-                    }}>Select Group</Text>
-                    <CustomRadioButton SegmentedControl options={[{ label: 'Group A', value: 'Group A' }, { label: 'Group B', value: 'Group B' }]} selectedOption={'Group A'} onOptionSelect={()=>{}} layout='row' />
-                </View>
-                <View style={{gap: 19}}>
-                    <Text style={{
-                        color: '#000',
-                        fontFamily: theme.font,
-                        fontSize: 18,
-                        fontWeight: '600',
-                        letterSpacing: -0.3,
-                    }}>Tickets</Text>
-                    <CustomRadioButton options={[{ label: 'Regular Seat', value: 'Regular Seat' }, { label: 'VIP Seat', value: 'VIP Seat' }]} selectedOption={'Regular Seat'} onOptionSelect={()=>{}} subInfo={[['100 RS', '20 seats left'], ['500 RS', '10 seats left']]} />
+                    }}>Select Package</Text>
+                    <CustomRadioButton options={[{ label: '1 Session', value: '1 Session' }, { label: '5 Session', value: '5 Session' }]} selectedOption={'1 Session'} onOptionSelect={()=>{}} subInfo={[['20 RS', '/30 mins'], ['200 RS', '/30 mins']]} />
                 </View>
             </View>
         )
@@ -211,10 +248,9 @@ export class EventDetails extends Component<DetailsProps, State> {
     render() {
         const { currentStep } = this.state;
         const isLastStep = currentStep === 2;
-        const { imageUrl, title, tags, time, date, CTA } = this.props.route.params;
 
         return (
-            <ScreenWrapper heroImage heroImagesUrls={[imageUrl]} floatingBtn floatingBtnProps={[{
+            <ScreenWrapper profileImage profileImageUrl={this.props.route.params.imageUrl} heroImage heroImagesUrls={['https://snworksceo.imgix.net/cav/8d443aec-2090-4e9e-8793-6b95d830d89f.sized-1000x1000.JPG?w=1000']} floatingBtn floatingBtnProps={[{
                 label: isLastStep ? 'Next' : 'Next',
                 onPress: this.handleNextPress
             }]} rightElement={
@@ -227,7 +263,7 @@ export class EventDetails extends Component<DetailsProps, State> {
         );
     }
 }
-    export default EventDetails;
+    export default TrainerProfile;
     
     const styles = StyleSheet.create({
         headerContainer: {
