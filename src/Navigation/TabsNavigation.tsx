@@ -53,7 +53,7 @@ const TabsNavigation = () => {
             component={Test}
             options={{
                 headerShown: false,
-                tabBarIcon: ({color, size}) => <ProfileIcon />
+                tabBarIcon: ({color, size}) => <ProfileIcon color='#9DB2CE'/>
             }}
         />
     </Tab.Navigator>

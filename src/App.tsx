@@ -41,6 +41,7 @@ import ClassesDetails from './Classes/ClassesDetails';
 import Checkout from './Checkout/Checkout';
 import Receipt from './Checkout/Receipt';
 import CartPage from './Cart/CartPage';
+import You from './You/You';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -50,7 +51,7 @@ const tabs = [
   { title: 'Discover', icon: <DiscoverIcon />, component: Test, path: 'discover' },
   { title: 'Calendar', icon: <CalendarIcon />, component: Test, path: 'calendar' },
   { title: 'Shop', icon: <ShopIcon />, component: Test, path: 'shop' },
-  { title: 'You', icon: <ProfileIcon />, component: Test, path: 'profile' },
+  { title: 'You', icon: <ProfileIcon color="#9DB2CE" />, component: Test, path: 'profile' },
 ];
 
 const config = {
@@ -137,7 +138,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='test'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Categories'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -170,6 +171,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
+            <Stack.Screen name="You" component={You} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (

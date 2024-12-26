@@ -96,7 +96,7 @@ const NavigationControls= ({ currentIndex, totalSteps, stepsStyle = 'normal', bu
                 onPress={onNext}
                 // disabled={currentIndex === totalSteps - 1}
             >
-                <RightArrowIcon />
+                <RightArrowIcon fill={"#FFF"} />
 
             </Pressable>
         </View>

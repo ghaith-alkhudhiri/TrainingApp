@@ -26,9 +26,11 @@
         floatingBtnColumnGap?: number;
         floatingBtnProps?: FloatingButtonProps[];
         heroImage?: boolean;
+        headerContainerStyle?: ViewStyle;
         heroImagesUrls?: string[];
         scrollContainerStyle?: ViewStyle;
         childrenContainerStyle: object;
+        scrollViewContainerStyle?: ViewStyle;
         //     secondaryFloatingBtn?: boolean;
         // secondaryFloatingBtnProps?: {
         //     label: string;
@@ -74,11 +76,11 @@
         
         render() {
             const {screenHeight, selectedHeroImage, floatingButtonHeight} = this.state;
-            const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnLayout = 'column', floatingBtnRowGap = 10, floatingBtnColumnGap = 10, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle} = this.props;
+            const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnLayout = 'column', floatingBtnRowGap = 10, floatingBtnColumnGap = 10, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle, scrollViewContainerStyle, headerContainerStyle} = this.props;
             console.log('Screen height', screenHeight);
             return (
                 <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
-                    <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, {paddingBottom: floatingButtonHeight, marginBottom: 10}, heroImage && {paddingHorizontal: 0, paddingTop: 0}]}>
+                    <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, {paddingBottom: floatingButtonHeight, marginBottom: 10}, heroImage && {paddingHorizontal: 0, paddingTop: 0}, scrollViewContainerStyle]}>
                         <If condition={heroImage}>
                             <ImageBackground
                                 source={{uri: selectedHeroImage }}
@@ -111,13 +113,15 @@
                         </If>
                         <If condition={!heroImage}>
                             <If condition={!withoutHeader}>
-                                <ScreenHeader
-                                    navigation={this.props.navigation} 
-                                    route={this.props.route} 
-                                    backEnabled={true} 
-                                    title={title} 
-                                    rightElement={rightElement} 
-                                />
+                                <View style={[styles.headerContainer, headerContainerStyle]}>
+                                    <ScreenHeader
+                                        navigation={this.props.navigation} 
+                                        route={this.props.route} 
+                                        backEnabled={true} 
+                                        title={title} 
+                                        rightElement={rightElement} 
+                                    />
+                                </View>
                             </If>
                         </If>
                         <View style={[styles.childrenContainer, childrenContainerStyle]}>
@@ -168,12 +172,15 @@
         },
         innerContainer: {
             // flexGrow: 1,
-            paddingHorizontal: 10,
+            paddingHorizontal: 0,
             paddingTop: 5,
             paddingBottom: 40,
         },
         childrenContainer: {
             gap: 22,
+        },
+        headerContainer: {
+            paddingHorizontal: 24,
         },
         floatingButtonContainer: {
             position: 'absolute',

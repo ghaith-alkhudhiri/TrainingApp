@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
         borderRadius: 33,
     },
     container: {
-
+        
     },
     title: {
         color: '#000',

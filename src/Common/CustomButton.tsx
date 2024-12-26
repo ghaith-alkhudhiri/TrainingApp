@@ -2,24 +2,29 @@ import { Pressable, StyleProp, StyleSheet, Text, TextStyle, ViewStyle, Image } f
 import React, { Component } from 'react'
 import theme from '../Constants/theme';
 import { View } from 'react-native';
+import { container } from 'webpack';
 const ApplePayWhite = require('../Assets/Images/applePayWhite.png');
 interface Props {
     label?: string;
     onPress: () => void;
     buttonStyle?: StyleProp<ViewStyle>;
     textStyle?: StyleProp<TextStyle>;
-    styleType?: 'normal' | 'secondary' | 'outline' | 'disabled' | 'apple';
+    styleType?: 'normal' | 'secondary' | 'outline' | 'disabled' | 'apple' | 'rounded';
     counter?: boolean;
+    icon?: any;
     counterLabel?: string;
     number?: number;
 }
 
 export class CustomButton extends Component<Props> {
   render() {
-    const {label, onPress, buttonStyle, textStyle, styleType, counter, counterLabel, number} = this.props;
-    let containerStyle: StyleProp<ViewStyle> = [styles.btnContainer];
+    const {label, onPress, buttonStyle, icon, textStyle, styleType, counter, counterLabel, number} = this.props;
+    let containerStyle: StyleProp<ViewStyle> = [];
     let textStyling: StyleProp<TextStyle> = [styles.btnText];
 
+    if(styleType !== 'rounded') {
+        containerStyle.push(styles.btnContainer)
+    }
     switch (styleType) {
         case 'secondary':
             containerStyle.push(styles.secondaryButton);
@@ -36,6 +41,12 @@ export class CustomButton extends Component<Props> {
         case 'apple':
             containerStyle.push(styles.appleButton);
             textStyling.push(styles.appleButtonText);
+            break;
+        case 'rounded':
+            console.log("Rounded Button styles")
+            containerStyle.push(styles.roundedButton);
+            textStyling.push(styles.rounedButtonText);
+            break
         default:
             break;
     }
@@ -43,13 +54,18 @@ export class CustomButton extends Component<Props> {
     return (
         <>        
         {!counter &&
-            <Pressable style={[containerStyle, buttonStyle]} onPress={onPress} disabled={styleType === 'disabled'}>
-                <Text style={[textStyling, textStyle]}>{label}</Text>
+            <Pressable style={[containerStyle, styleType !== 'rounded' && buttonStyle]} onPress={onPress} disabled={styleType === 'disabled'}>
+                {styleType !== 'rounded' && (
+                    <Text style={[textStyling, textStyle]}>{label}</Text>
+                )}
                 {styleType === 'apple' && (
                     <View style={{width: 55, height: 22}}>
                         <Image source={ApplePayWhite} style={{width: '100%', height: '100%'}} resizeMode='contain'  />
                     </View>
                 )}
+                {styleType === 'rounded' && (<View style={styles.iconContainer}>
+                    {icon}
+                </View>)}
             </Pressable>
         }
         {counter && number && number > 0 ?
@@ -130,5 +146,29 @@ const styles = StyleSheet.create({
     },
     appleButtonText: {
         color: '#FFF',
+    },
+    roundedButton: {
+        flexShrink: 0,
+        width: 40,
+        height: 40,
+        // padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
+        backgroundColor: '#FFF',
+        borderWidth: 1,
+        borderColor: '#E6E6E6',
+        borderRadius: 20,
+    },
+    rounedButtonText: {
+
+    },
+    iconContainer: {
+        width: 20,
+        height: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        overflow: 'hidden',
     }
 });

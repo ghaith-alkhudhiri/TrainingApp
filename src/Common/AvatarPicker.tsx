@@ -9,6 +9,8 @@ import PenIcon from '../Assets/Icons/PenIcon';
 interface AvatarPickerProps {
     containerStyle?: ViewStyle;
     editContainerStyle?: ViewStyle;
+    isPicker?: boolean;
+    imageUri?: string;
 }
 
 interface AvatarPickerState {
@@ -36,18 +38,21 @@ export class AvatarPicker extends Component<AvatarPickerProps, AvatarPickerState
         }
     }
   render() {
-    const {containerStyle, editContainerStyle} = this.props;
+    const {containerStyle, editContainerStyle, imageUri, isPicker} = this.props;
     const { selectedImage} = this.state;
+    const displayImage = isPicker ? selectedImage: imageUri;
     return (
       <View style={[styles.container, containerStyle]}>
-        {selectedImage ? (
-            <Image source={{uri: selectedImage}} style={styles.image} />
+        {displayImage ? (
+            <Image source={{uri: displayImage}} style={styles.image} />
         ): (
             <PersonIcon />
         )}
-        <TouchableOpacity style={[styles.editContainer, editContainerStyle]} onPress={this.handlePickImage}>
-            <PenIcon />
-        </TouchableOpacity>
+        {isPicker && (
+            <TouchableOpacity style={[styles.editContainer, editContainerStyle]} onPress={this.handlePickImage}>
+                <PenIcon />
+            </TouchableOpacity>
+        )}
       </View>
     )
   }
