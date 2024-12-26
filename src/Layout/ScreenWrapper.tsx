@@ -34,6 +34,8 @@
         //     label: string;
         //     onPress: () => void;
         // }
+        profileImage?: boolean;
+        profileImageUrl?: string;
 }
 
     interface State {
@@ -94,6 +96,12 @@
                                     backContainerStyle={{left: 25}}
                                     rightContainerStyle={{right: 25}}
                                 />
+
+                                <If condition={this.props.profileImage}>
+                                    <View style={{ position: 'absolute', bottom: -200, left: '50%', transform: [{ translateX: '-50%' }], zIndex: 1 }}>
+                                        <Image source={{ uri: this.props.profileImageUrl }} style={{ width: 125, height: 117, borderRadius: 14, borderWidth: 6, borderColor: '#FFF', }} resizeMode='cover' />
+                                    </View>
+                                </If>    
                                     {heroImagesUrls &&  heroImagesUrls.length > 1 && (
                                         <View style={styles.imageSelectorContainer}>
                                             {heroImagesUrls.map((heroImage) => (
@@ -120,7 +128,9 @@
                                 />
                             </If>
                         </If>
-                        <View style={[styles.childrenContainer, childrenContainerStyle]}>
+                        <View style={[styles.childrenContainer, childrenContainerStyle,
+                            this.props.profileImage ? {paddingTop: 30} : null
+                        ]}>
                             {this.props.children}
                         </View>
                     </ScrollView>

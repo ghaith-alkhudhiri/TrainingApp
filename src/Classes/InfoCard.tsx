@@ -8,9 +8,6 @@ interface Props {
 }
 
 export class InfoCard extends Component<Props> {
-  static map(arg0: (infoCard: any, index: any) => import("react/jsx-runtime").JSX.Element): React.ReactNode {
-      throw new Error('Method not implemented.');
-  }
   render() {
     const {icon, value, label} = this.props;
     return (
