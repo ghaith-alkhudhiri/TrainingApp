@@ -58,6 +58,8 @@ import EWallet from './You/EWallet';
 import MyFamily from './You/MyFamily';
 import MyAnalysis from './You/MyAnalysis';
 import AboutGym from './You/AboutGym';
+import ShopCategoryPage from './Shop/ShopCategoryPage';
+import ProductPage from './Shop/ProductPage';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -154,7 +156,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='You'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Product'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -197,6 +199,15 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
+            <Stack.Screen name="EventCard" component={EventCard} />
+            <Stack.Screen name="EventDetails" component={EventDetails} />
+            <Stack.Screen name="AllEvents" component={AllEvents} />
+            <Stack.Screen name="TrainerCard" component={PersonalTrainerCard} />
+            <Stack.Screen name="TrainerProfile" component={TrainerProfile} />
+            <Stack.Screen name="AllTrainers" component={AllTrainers} />
+            <Stack.Screen name="Shop" component={Shop} />
+            <Stack.Screen name="ShopCat" component={ShopCategoryPage} />
+            <Stack.Screen name="Product" component={ProductPage} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (
