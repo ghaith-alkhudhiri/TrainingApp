@@ -191,6 +191,13 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
+            <Stack.Screen name="EventCard" component={EventCard} />
+            <Stack.Screen name="EventDetails" component={EventDetails} />
+            <Stack.Screen name="AllEvents" component={AllEvents} />
+            <Stack.Screen name="TrainerCard" component={PersonalTrainerCard} />
+            <Stack.Screen name="TrainerProfile" component={TrainerProfile} />
+            <Stack.Screen name="AllTrainers" component={AllTrainers} />
+            <Stack.Screen name="Shop" component={Shop} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (
