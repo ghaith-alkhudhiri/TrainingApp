@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import theme from '../../Constants/theme';
 
 const { width } = Dimensions.get('window');
 
@@ -82,22 +83,24 @@ const styles = StyleSheet.create({
     },
     image: {
         width,
-        height: 200,
+        height: 175,
+        borderRadius: 13,
     },
     indicatorContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 10,
+        gap: 8,
     },
     indicator: {
         width: 10,
         height: 10,
         borderRadius: 5,
-        backgroundColor: '#ccc',
-        marginHorizontal: 5,
+        backgroundColor: '#D9D9D9',
+        // marginHorizontal: 5,
     },
     activeIndicator: {
-        backgroundColor: '#000',
+        backgroundColor: theme.primary,
     },
 });
 

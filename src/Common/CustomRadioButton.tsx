@@ -35,6 +35,7 @@ interface RadioButtonProps {
   icons?: React.ReactElement<any>[];
   subInfo?: any;
   SegmentedControl?: boolean;
+  Swatch?: boolean;
 }
 
 interface RadioButtonState {
@@ -68,7 +69,8 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
       selectedRadioColor,
       icons,
       subInfo,
-      SegmentedControl
+      SegmentedControl,
+      Swatch
     } = this.props;
     const { selectedOption } = this.state;
 
@@ -106,7 +108,32 @@ class CustomRadioButton extends Component<RadioButtonProps, RadioButtonState> {
           })}
         </View>
       );
-    }    
+    }   
+    
+    if(Swatch) {
+      return (
+        <View style={[
+          { flexDirection: isRTL ? 'row-reverse' : 'row' },
+          isRowLayout ? styles.row : styles.column,
+          {gap: 12}
+        ]}>
+          {options.map((option, index) => {
+            const isSelected = selectedOption === option.label;
+            return (
+              <TouchableOpacity
+                key={option.label}
+                style={[
+                  {backgroundColor: option.value},
+                  styles.swatch,
+                  isSelected && styles.selectedSwatch,
+                ]}
+                onPress={() => this.handleOptionSelect(option.label)}
+              />
+            );
+          })}
+        </View>
+      )
+    }
 
     return (
       <View
@@ -367,7 +394,15 @@ const styles = StyleSheet.create({
   selectedGroupButtonText: {
     color: '#FFFFFF',
   },
-  
+  swatch: {
+    width: 32,
+    height: 32,
+    borderRadius: 32,
+  },
+  selectedSwatch: {
+    borderWidth: 5,
+    borderColor: '#000',
+  },
 });
 
 export default CustomRadioButton;

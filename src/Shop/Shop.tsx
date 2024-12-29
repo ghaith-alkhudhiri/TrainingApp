@@ -12,6 +12,7 @@ import ArrowRight from '../Assets/Icons/ArrowRight'
 import ItemCard from './Components/ItemCard'
 import Slideshow from './Components/Slideshow'
 import SelectableItem from '../Common/SelectableItem'
+import SectionHeader from '../Home/SectionHeader'
 
 interface ShopState {
   selectedLabel: string;
@@ -23,9 +24,9 @@ export class Shop extends Component<NavProps, ShopState> {
   };
   render() {
     const images = [
-      require('../Assets/Images/noor.png'),
-      require('../Assets/Images/mat.png'),
-      require('../Assets/Images/bottle.png'),
+      require('../Assets/Images/banner.png'),
+      require('../Assets/Images/banner.png'),
+      require('../Assets/Images/banner.png'),
     ];
     return (
       <ScreenWrapper withoutHeader>
@@ -189,6 +190,54 @@ export class Shop extends Component<NavProps, ShopState> {
 
           <View style={{paddingHorizontal: 24}}>
             <Slideshow images={images} />
+          </View>
+
+          <View style={{gap: 13}}>
+
+            <View style={{paddingHorizontal: 24}}>
+              <SectionHeader title='Best Sellers'/>
+            </View>
+
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+                <View style={{gap: 11, flexDirection: 'row'}}>
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad.png')} rating={3.4} />
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad2.png')} rating={3.4} />
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/TamarranLogo.png')} rating={3.4} />
+                </View>
+            </ScrollView>
+
+          </View>
+
+          <View style={{gap: 13}}>
+
+            <View style={{paddingHorizontal: 24}}>
+              <SectionHeader title='You Might Like'/>
+            </View>
+
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+                <View style={{gap: 11, flexDirection: 'row'}}>
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad.png')} rating={3.4} />
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad2.png')} rating={3.4} />
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/TamarranLogo.png')} rating={3.4} />
+                </View>
+            </ScrollView>
+
+          </View>
+
+          <View style={{gap: 13}}>
+
+            <View style={{paddingHorizontal: 24}}>
+              <SectionHeader title='Sport Ware'/>
+            </View>
+
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+                <View style={{gap: 11, flexDirection: 'row'}}>
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad.png')} rating={3.4} />
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad2.png')} rating={3.4} />
+                  <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/TamarranLogo.png')} rating={3.4} />
+                </View>
+            </ScrollView>
+
           </View>
         </View>
       </ScreenWrapper>
