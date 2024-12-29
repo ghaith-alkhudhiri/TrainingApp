@@ -49,6 +49,12 @@ import PersonalTrainerCard from './Discover/PersonalTrainers/PersonalTrainerCard
 import TrainerProfile from './Discover/PersonalTrainers/TrainerProfile';
 import Shop from './Shop/Shop';
 import You from './You/You';
+import Settings from './You/Settings';
+import MembershipsSettings from './You/MembershipsSettings';
+import ClassesSettings from './You/ClassesSettings';
+import WorkoutsSettings from './You/WorkoutsSettings';
+import MyOrders from './You/MyOrders';
+import EWallet from './You/EWallet';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -145,7 +151,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Categories'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='You'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -175,6 +181,12 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
             <Stack.Screen name="Classes" component={ClassesPage} />
             <Stack.Screen name="You" component={You} />
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="MembershipsSettings" component={MembershipsSettings} />
+            <Stack.Screen name="ClassesSettings" component={ClassesSettings} />
+            <Stack.Screen name="WorkoutsSettings" component={WorkoutsSettings} />
+            <Stack.Screen name="MyOrders" component={MyOrders} />
+            <Stack.Screen name="EWallet" component={EWallet} />
             <Stack.Screen name="ClassDetails" component={ClassesDetails} />
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
