@@ -15,49 +15,66 @@ import NoteTextIcon from '../Assets/Icons/NoteText';
 import RightArrowIcon from '../Assets/Icons/RightArrowIcon';
 import RightChevron from '../Assets/Icons/RightChevron';
 
+interface Props {
+    navigation: any;
+}
 
 
-class You extends Component {
+class You extends Component<Props> {
+    navigateToSettings = () => {
+        this.props.navigation.navigate('Settings');
+    }
+
     render() {
         const listItems = [
             {
                 icon: <ProfileIcon color="#0165FC" />,
                 title: "Your Profile",
+                screen: "ProfileSettings",
             },
             {
                 icon: <CrowIcon />,
                 title: "My Memberships",
+                screen: "MembershipsSettings",
             },
             {
                 icon: <CalendarIcon color='#0165FC' />,
                 title: "My Classes",
+                screen: "ClassesSettings"
             },
             {
                 icon: <CupIcon />,
                 title: "My Workout",
+                screen: "WorkoutsSettings",
             },
             {
                 icon: <ShoppingIcon />,
                 title: "My Orders",
+                screen: "MyOrders",
             },
             {
                 icon: <EmptyWallet />,
                 title: "E-Wallet",
+                screen: "EWallet",
             },
             {
                 icon: <Profile2Users />,
                 title: "My Family",
+                screen: "MyFamily",
             },
             {
                 icon: <NoteTextIcon />,
                 title: "My Analysis",
+                screen: "MyAnalysis",
             }
-        ]
+        ];
+
+        
         return (
             <ScreenWrapper title="You" scrollViewContainerStyle={{paddingHorizontal: 0}} style={styles.container} rightElement={
             <CustomButton 
                 styleType='rounded'
-                onPress={() => console.log("settings button clicked")} 
+                onPress={this.navigateToSettings} 
                 icon={<SettingsIcon />} />}>
                     <View style={styles.avatarContainer}>
                         <AvatarPicker isPicker={false} imageUri='https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg' />
