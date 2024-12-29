@@ -6,6 +6,7 @@
     import withNavProps from '../Navigation/WithNavProps';
     import { isAndroid, isIOS, isWeb } from '../Utils/PlatformUtil';
     import CustomButton from '../Common/CustomButton';
+import theme from '../Constants/theme';
 
 
     interface FloatingButtonProps {
@@ -38,6 +39,12 @@
         // }
         profileImage?: boolean;
         profileImageUrl?: string;
+        heroImageStyle?: ViewStyle;
+        floatingObject?: {
+            label: string;
+            price: string;
+        };
+        floatingBtnContainer?: ViewStyle;
 }
 
     interface State {
@@ -78,8 +85,27 @@
         
         render() {
             const {screenHeight, selectedHeroImage, floatingButtonHeight} = this.state;
-            const { withoutHeader, title, rightElement, navigation,childrenContainerStyle, floatingBtn, floatingBtnLayout = 'column', floatingBtnRowGap = 10, floatingBtnColumnGap = 10, floatingBtnProps, heroImage, heroImagesUrls, scrollContainerStyle, scrollViewContainerStyle, headerContainerStyle} = this.props;
-            console.log('Screen height', screenHeight);
+            const { 
+                withoutHeader,
+                title,
+                rightElement,
+                navigation,
+                childrenContainerStyle,
+                floatingBtn,
+                floatingBtnLayout = 'column',
+                floatingBtnRowGap = 10,
+                floatingBtnColumnGap = 10,
+                floatingBtnProps,
+                heroImage,
+                heroImagesUrls,
+                scrollContainerStyle,
+                scrollViewContainerStyle,
+                headerContainerStyle,
+                heroImageStyle,
+                floatingObject,
+                floatingBtnContainer,
+            } = this.props;
+            // console.log('Screen height', screenHeight);
             return (
                 <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
                     <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, {paddingBottom: floatingButtonHeight, marginBottom: 10}, heroImage && {paddingHorizontal: 0, paddingTop: 0}, scrollViewContainerStyle]}>
@@ -87,7 +113,7 @@
                             <ImageBackground
                                 source={{uri: selectedHeroImage }}
                                 resizeMode='cover'
-                                style={styles.heroImageBackground}
+                                style={[styles.heroImageBackground, heroImageStyle]}
                             >
                                 <ScreenHeader
                                     navigation={this.props.navigation} 
@@ -106,9 +132,9 @@
                                 </If>    
                                     {heroImagesUrls &&  heroImagesUrls.length > 1 && (
                                         <View style={styles.imageSelectorContainer}>
-                                            {heroImagesUrls.map((heroImage) => (
+                                            {heroImagesUrls.map((heroImage, index) => (
                                                 <Pressable 
-                                                    key={heroImage} 
+                                                    key={`${heroImage}-${index}`} 
                                                     style={styles.heroImageContainer}
                                                     onPress={() => this.handleImageSelect(heroImage)}
                                                     >
@@ -144,6 +170,7 @@
                         floatingBtnLayout === 'row' ? styles.rowLayout : styles.columnLayout,
                         {rowGap: floatingBtnRowGap, columnGap: floatingBtnColumnGap},
                         isWeb ? null : {paddingBottom: 29},
+                        floatingBtnContainer
                         ]}
                         onLayout={(event) => {
                             const {height} = event.nativeEvent.layout;
@@ -158,6 +185,24 @@
                                 label={floatingBtnProps?.label || 'Default Label' } 
                                 onPress={floatingBtnProps?.onPress || (() => console.log("Button pressed"))} 
                                 /> */}
+                        {floatingObject &&
+                            <View>
+                                <Text style={{
+                                    color: '#000',
+                                    fontFamily: theme.font,
+                                    fontSize: 14,
+                                    fontWeight: 400,
+                                    lineHeight: 17,
+                                }}>{floatingObject.label}</Text>
+                                <Text style={{
+                                    color: '#000',
+                                    fontFamily: theme.font,
+                                    fontSize: 18,
+                                    fontWeight: 600,
+                                    letterSpacing: -0.3,
+                                }}>{floatingObject.price}</Text>
+                            </View>
+                        }
                         {floatingBtn && floatingBtnProps.length > 0 && floatingBtnProps.map((btn, index) => (
                             <CustomButton
                                 key={index}
