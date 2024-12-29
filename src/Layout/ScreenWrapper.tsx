@@ -188,6 +188,7 @@
         },
         childrenContainer: {
             gap: 22,
+            paddingHorizontal: 24,
         },
         headerContainer: {
             paddingHorizontal: 24,

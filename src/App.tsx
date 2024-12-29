@@ -55,6 +55,9 @@ import ClassesSettings from './You/ClassesSettings';
 import WorkoutsSettings from './You/WorkoutsSettings';
 import MyOrders from './You/MyOrders';
 import EWallet from './You/EWallet';
+import MyFamily from './You/MyFamily';
+import MyAnalysis from './You/MyAnalysis';
+import AboutGym from './You/AboutGym';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -182,11 +185,14 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Classes" component={ClassesPage} />
             <Stack.Screen name="You" component={You} />
             <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="AboutGym" component={AboutGym} />
             <Stack.Screen name="MembershipsSettings" component={MembershipsSettings} />
             <Stack.Screen name="ClassesSettings" component={ClassesSettings} />
             <Stack.Screen name="WorkoutsSettings" component={WorkoutsSettings} />
             <Stack.Screen name="MyOrders" component={MyOrders} />
             <Stack.Screen name="EWallet" component={EWallet} />
+            <Stack.Screen name="MyFamily" component={MyFamily} />
+            <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
             <Stack.Screen name="ClassDetails" component={ClassesDetails} />
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />

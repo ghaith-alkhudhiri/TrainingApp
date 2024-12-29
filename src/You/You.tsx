@@ -26,6 +26,7 @@ class You extends Component<Props> {
     }
 
     render() {
+        const { navigation } =  this.props;
         const listItems = [
             {
                 icon: <ProfileIcon color="#0165FC" />,
@@ -71,18 +72,25 @@ class You extends Component<Props> {
 
         
         return (
-            <ScreenWrapper title="You" scrollViewContainerStyle={{paddingHorizontal: 0}} style={styles.container} rightElement={
-            <CustomButton 
-                styleType='rounded'
-                onPress={this.navigateToSettings} 
-                icon={<SettingsIcon />} />}>
+            <ScreenWrapper 
+                title="You" 
+                scrollViewContainerStyle={{paddingHorizontal: 0}} 
+                style={styles.container} 
+                childrenContainerStyle={{paddingHorizontal: 0}}
+                rightElement={
+                    <CustomButton 
+                        styleType='rounded'
+                        onPress={this.navigateToSettings} 
+                        icon={<SettingsIcon />} 
+                    />
+                }>
                     <View style={styles.avatarContainer}>
                         <AvatarPicker isPicker={false} imageUri='https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg' />
                         <Text style={styles.userNameText}>{"User Name"}</Text>
                     </View>
                     <View>
                         {listItems.map((item, index) => (
-                            <Pressable key={index} style={styles.listItem} onPress={() => console.log(item.title)}>
+                            <Pressable key={index} style={styles.listItem} onPress={() => navigation.navigate(item.screen)}>
                                 <View style={styles.contentContainer}>
                                     {item.icon}
                                     <Text style={styles.text}>{item.title}</Text>
