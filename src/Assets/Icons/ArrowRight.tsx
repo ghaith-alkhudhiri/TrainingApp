@@ -7,7 +7,7 @@ interface Props {
     color?: string,
 }
 
-class SvgComponent extends Component<Props> {
+class ArrowRight extends Component<Props> {
   render() {
     const { width = 7, height = 12, color = "#F4F6F9" } = this.props;
     return (
@@ -30,4 +30,4 @@ class SvgComponent extends Component<Props> {
   }
 }
 
-export default SvgComponent;
+export default ArrowRight;
