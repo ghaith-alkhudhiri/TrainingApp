@@ -1,15 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TextStyle, View } from 'react-native'
 import React, { Component } from 'react'
 
 interface Props {
     icon?: any;
     value?: string;
     label?: string;
+    textStyle?: TextStyle;
 }
 
 export class InfoCard extends Component<Props> {
   render() {
-    const {icon, value, label} = this.props;
+    const {icon, value, label, textStyle} = this.props;
     return (
         <View style={styles.infoCardContainer}>
             {/* Icon */}
@@ -18,8 +19,8 @@ export class InfoCard extends Component<Props> {
                 {icon}
             </View>
             <View style={styles.infoTextContainer}>
-                <Text style={styles.levelTypeText}>{value}</Text>
-                <Text style={styles.levelText}>{label}</Text>
+                <Text style={[styles.levelTypeText, textStyle]}>{value}</Text>
+                <Text style={[styles.levelText, textStyle]}>{label}</Text>
             </View>
         </View>
     )
@@ -55,10 +56,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter',
         fontSize: 13,
         fontWeight: 400,
+        textAlign: 'center',
         lineHeight: 16.25,
     },
     infoTextContainer: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: 40,
     }
 });

@@ -233,6 +233,7 @@ import theme from '../Constants/theme';
         },
         childrenContainer: {
             gap: 22,
+            paddingHorizontal: 24,
         },
         headerContainer: {
             paddingHorizontal: 24,
