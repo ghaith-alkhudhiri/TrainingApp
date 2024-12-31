@@ -7,6 +7,7 @@ import ScreenWrapper from '../Layout/ScreenWrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '../Constants/theme';
 import Switch from '../Common/Switch';
+import CustomButton from '../Common/CustomButton';
 
 interface Membership {
     id: string;
@@ -116,17 +117,18 @@ class MembershipsSettings extends Component<MembershipsSettingsProps, Membership
             {/* Top Section */}
             <View style={styles.header}>
                 <Text style={styles.title}>{item.date}</Text>
+                { item.status === 'Active' &&
                 <View style={styles.remindContainer}>
-                <Text style={styles.remindText}>Remind me</Text>
-                
-                <Switch
-                    value={item.isRemindOn}
-                    onValueChange={() => this.toggleReminder(item.id)}
-                    trackColor={{ false: '#D1D1D6', true: theme.primary }}
-                    thumbColor='white'
-                    style={{width: 48, height: 24}}
-                />
+                    <Text style={styles.remindText}>Remind me</Text>
+                    <Switch
+                        value={item.isRemindOn}
+                        onValueChange={() => this.toggleReminder(item.id)}
+                        trackColor={{ false: '#D1D1D6', true: theme.primary }}
+                        thumbColor='white'
+                        style={{width: 48, height: 24}}
+                    />
                 </View>
+                }
             </View>
 
             {/* Divider */}
@@ -153,6 +155,22 @@ class MembershipsSettings extends Component<MembershipsSettingsProps, Membership
                     <Text style={[styles.remindText, styles.subtitle, {color: theme.primary}]}>{item.duration}</Text>
                 </View>
             </View>
+
+            { (item.status === 'Finished' || item.status === 'Freezed') && 
+                <>
+                <View style={styles.divider} />
+                <CustomButton label={item.status === 'Finished' ? 'Resubscribe' : 'Unfreeze'} onPress={() => { /* handle button press */ }} 
+                buttonStyle={{margin: 0, paddingVertical: 11}} 
+                textStyle={{
+                    color: '#EAF2FF',
+                    fontFamily: theme.font,
+                    fontSize: 14,
+                    fontWeight: 500,
+                    letterSpacing: -0.3,
+                }}
+                />
+                </>
+            }
         </View>
       );
 
