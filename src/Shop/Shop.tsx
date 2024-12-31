@@ -13,6 +13,7 @@ import ItemCard from './Components/ItemCard'
 import Slideshow from './Components/Slideshow'
 import SelectableItem from '../Common/SelectableItem'
 import SectionHeader from '../Home/SectionHeader'
+import Timer from './Components/Timer'
 
 interface ShopState {
   selectedLabel: string;
@@ -74,7 +75,7 @@ export class Shop extends Component<NavProps, ShopState> {
                   fontWeight: 400,
                   lineHeight: 1,
                 }}>Ends in:</Text>
-                <View style={{flexDirection: 'row', gap: 2, justifyContent: 'center', alignItems: 'center'}}>
+                {/* <View style={{flexDirection: 'row', gap: 2, justifyContent: 'center', alignItems: 'center'}}>
                   <View style={{width: 26, height: 'auto', backgroundColor: '#EAF2FF', borderRadius: 3, padding: 4, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{
                       color: theme.primary,
@@ -116,7 +117,8 @@ export class Shop extends Component<NavProps, ShopState> {
                       lineHeight: 17,
                     }}>25</Text>
                   </View>
-                </View>
+                </View> */}
+                <Timer initialTime={3600} />
                 <ArrowRight width={21} height={21} color={theme.primary} />
               </View>
             </View>
