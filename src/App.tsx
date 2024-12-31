@@ -60,6 +60,9 @@ import MyAnalysis from './You/MyAnalysis';
 import AboutGym from './You/AboutGym';
 import ShopCategoryPage from './Shop/ShopCategoryPage';
 import ProductPage from './Shop/ProductPage';
+import ContactUs from './You/ContactUs';
+import HelpCenter from './You/HelpCenter';
+import NotificationsSettings from './You/NotificationsSettings';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -156,7 +159,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Product'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='You'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -188,10 +191,12 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="You" component={You} />
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen name="AboutGym" component={AboutGym} />
+            <Stack.Screen name="ContactUs" component={ContactUs} />
             <Stack.Screen name="MembershipsSettings" component={MembershipsSettings} />
             <Stack.Screen name="ClassesSettings" component={ClassesSettings} />
             <Stack.Screen name="WorkoutsSettings" component={WorkoutsSettings} />
             <Stack.Screen name="MyOrders" component={MyOrders} />
+            <Stack.Screen name="NotificationsSettings" component={NotificationsSettings} />
             <Stack.Screen name="EWallet" component={EWallet} />
             <Stack.Screen name="MyFamily" component={MyFamily} />
             <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
@@ -199,6 +204,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
+            <Stack.Screen name="HelpCenter" component={HelpCenter} />
             <Stack.Screen name="EventCard" component={EventCard} />
             <Stack.Screen name="EventDetails" component={EventDetails} />
             <Stack.Screen name="AllEvents" component={AllEvents} />

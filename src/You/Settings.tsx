@@ -10,6 +10,9 @@ import LogoutIcon from '../Assets/Icons/LogoutIcon';
 import RightChevron from '../Assets/Icons/RightChevron';
 import ListItem from './Components/ListItem';
 import ContactUsIcon from '../Assets/Icons/ContactUsIcon';
+import NotificationIcon from '../Assets/Icons/NotificationIcon';
+import NotificationBingIcon from '../Assets/Icons/NotificationBingIcon';
+import NotificationOutlineIcon from '../Assets/Icons/NotificationOutlineIcon';
 
 interface State {
     notificationsEnabled: boolean;
@@ -50,6 +53,11 @@ class Settings extends Component<Props, State> {
                 icon: <RadarIcon />,
                 title: "Help Center",
                 screen: "HelpCenter",
+            },
+            {
+                icon: <NotificationOutlineIcon />,
+                title: "Notifications Settings",
+                screen: "NotificationsSettings"
             },
             {
                 icon: <LockIcon />,

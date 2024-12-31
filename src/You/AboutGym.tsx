@@ -30,7 +30,7 @@ const center = {
 function MapComponent(){
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: ''
+        googleMapsApiKey: 'AIzaSyCTbjKtgndrHSoFzipZpk1NuoW0QxBgV3s'
     });
 
     if (!isLoaded) {
@@ -113,12 +113,8 @@ class AboutGym extends Component {
                             <Text style={styles.sectionTitle}>Address</Text>
                             <LineDividier />
                             <Text style={styles.locationDetailsText}>Location details</Text>
-                            <View style={styles.facilitiesContainer}>
-                                {facilities.map((facility, index) => (
-                                    <View style={styles.infoCard}>
-                                        <InfoCard key={index} icon={facility.icon} value={facility.value} label={facility.label} />
-                                    </View>
-                                ))}
+                            <View style={styles.mapContainer}>
+                                <MapComponent />
                             </View>
                         </View>
                     </View>
@@ -249,6 +245,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 400,
         lineHeight: 18,
+    },
+    mapContainer: {
+        width: "100%",
+        height: 300,
+        marginVertical: 10,
+        borderRadius: 8,
+        overflow: 'hidden',
     }
 });
 
