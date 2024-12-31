@@ -5,6 +5,7 @@ import ScreenWrapper from '../Layout/ScreenWrapper';
 import CalendarIcon from '../Assets/Icons/CalendarIcon';
 import Clock from '../Assets/Icons/Clock';
 import StopWatch from '../Assets/Icons/StopWatch';
+import ProductCard from './Components/ProductCard';
 
 interface State {
   items: { name: string; details: string; price: number }[];
@@ -76,6 +77,8 @@ export default class CartPage extends Component<{}, State> {
               </View>
             </View>
           </View>
+
+          <ProductCard />
 
           {/* Payment Summary */}
           <Text style={styles.sectionTitle}>Payment summary</Text>
