@@ -55,6 +55,9 @@ import ClassesSettings from './You/ClassesSettings';
 import WorkoutsSettings from './You/WorkoutsSettings';
 import MyOrders from './You/MyOrders';
 import EWallet from './You/EWallet';
+import MyFamily from './You/MyFamily';
+import MyAnalysis from './You/MyAnalysis';
+import AboutGym from './You/AboutGym';
 import ShopCategoryPage from './Shop/ShopCategoryPage';
 import ProductPage from './Shop/ProductPage';
 
@@ -202,6 +205,9 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="WorkoutsSettings" component={WorkoutsSettings} />
             <Stack.Screen name="MyOrders" component={MyOrders} />
             <Stack.Screen name="EWallet" component={EWallet} />
+            <Stack.Screen name="AboutGym" component={AboutGym} />
+            <Stack.Screen name="MyFamily" component={MyFamily} />
+            <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (

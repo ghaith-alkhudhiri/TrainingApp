@@ -1,49 +1,97 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Switch } from 'react-native';
+import { View, Text, StyleSheet, Switch, Pressable } from 'react-native';
+import ScreenWrapper from '../Layout/ScreenWrapper';
+import PeopleIcon from '../Assets/Icons/PeopleIcon';
+import MessageIcon from '../Assets/Icons/MessageIcon';
+import RadarIcon from '../Assets/Icons/RadarIcon';
+import LockIcon from '../Assets/Icons/LockIcon';
+import ProfileDeleteIcon from '../Assets/Icons/ProfileDeleteIcon';
+import LogoutIcon from '../Assets/Icons/LogoutIcon';
+import RightChevron from '../Assets/Icons/RightChevron';
+import ListItem from './Components/ListItem';
+import ContactUsIcon from '../Assets/Icons/ContactUsIcon';
 
 interface State {
     notificationsEnabled: boolean;
 }
 
-class Settings extends Component<{}, State> {
-    constructor(props: {}) {
+interface Props {
+    navigation: any;
+}
+
+class Settings extends Component<Props, State> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             notificationsEnabled: false,
         };
     }
 
+    
+
     toggleNotifications = () => {
         this.setState({ notificationsEnabled: !this.state.notificationsEnabled });
     };
 
     render() {
+        const {navigation} =  this.props;
+        const listItems = [
+            {
+                icon: <PeopleIcon />,
+                title: "About Gymname",
+                screen: "AboutGym",
+            },           
+            {
+                icon: <ContactUsIcon />,
+                title: "Contact us",
+                screen: "ContactUs",
+            },
+            {
+                icon: <RadarIcon />,
+                title: "Help Center",
+                screen: "HelpCenter",
+            },
+            {
+                icon: <LockIcon />,
+                title: "Privacy Policy",
+                screen: "PrivacyPolicy",
+            },
+            {
+                icon: <ProfileDeleteIcon />,
+                title: "Delete Account",
+                screen: "DeleteAccount",
+            },
+            {
+                icon: <LogoutIcon />,
+                title: "Language",
+                screen: "Language",
+            },
+            {
+                icon: <LogoutIcon />,
+                title: "Log out",
+                screen: "LogOut",
+            }
+
+        ];
+
         return (
-            <View style={styles.container}>
-                <Text style={styles.header}>Settings</Text>
-                <View style={styles.setting}>
-                    <Text style={styles.settingText}>Enable Notifications</Text>
-                    <Switch
-                        value={this.state.notificationsEnabled}
-                        onValueChange={this.toggleNotifications}
-                    />
-                </View>
-            </View>
+            <ScreenWrapper title="Settings" childrenContainerStyle={{paddingHorizontal: 0}}>
+               <View>
+                    {listItems.map((item, index) => (
+                        <>
+                            <ListItem key={index} icon={item.icon} title={item.title} screen={item.screen} navigation={navigation}  />
+                            {(index === 2 || index === 5 || index === 8) && (
+                                <View style={{height: 10, backgroundColor: "#F4F4F4"}} />
+                            )}
+                        </>
+                    ))}
+                    </View>
+            </ScreenWrapper>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    },
-    header: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
     setting: {
         flexDirection: 'row',
         justifyContent: 'space-between',
