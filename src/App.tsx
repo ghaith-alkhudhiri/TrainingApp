@@ -63,6 +63,7 @@ import ProductPage from './Shop/ProductPage';
 import ContactUs from './You/ContactUs';
 import HelpCenter from './You/HelpCenter';
 import NotificationsSettings from './You/NotificationsSettings';
+import PrivacyPolicy from './You/PrivacyPolicy';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -197,6 +198,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="WorkoutsSettings" component={WorkoutsSettings} />
             <Stack.Screen name="MyOrders" component={MyOrders} />
             <Stack.Screen name="NotificationsSettings" component={NotificationsSettings} />
+            <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
             <Stack.Screen name="EWallet" component={EWallet} />
             <Stack.Screen name="MyFamily" component={MyFamily} />
             <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
