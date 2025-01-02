@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import CustomBottomSheet from '../Common/CustomBottomSheet'; // Adjust the import according to your project structure
+import ScreenWrapper from '../Layout/ScreenWrapper';
 
 interface AppState {
     isBottomSheetVisible: boolean;
@@ -31,7 +32,11 @@ export class TestPage extends Component<{}, AppState> {
         const { isBottomSheetVisible } = this.state;
 
         return (
-            <View style={styles.container}>
+            <ScreenWrapper 
+                title="Test Page" 
+                scrollViewContainerStyle={{flex: 1}}
+                childrenContainerStyle={{flex: 1}}
+                style={styles.container}>
                 <Button title="Toggle Bottom Sheet" onPress={this.toggleBottomSheet} />
                 <CustomBottomSheet
                     ref={this.bottomSheetRef}
@@ -45,7 +50,7 @@ export class TestPage extends Component<{}, AppState> {
                         <Button title="Close" onPress={this.closeBottomSheet} />
                     </View>
                 </CustomBottomSheet>
-            </View>
+            </ScreenWrapper>
         );
     }
 }

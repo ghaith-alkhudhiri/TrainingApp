@@ -7,12 +7,17 @@ interface ListItemProps {
     title: string;
     screen: string;
     navigation: any;
+    onPress?: any;
 }
 
 class ListItem extends Component<ListItemProps> {
     handlePress = () => {
-        const { navigation, screen } = this.props;
-        navigation.navigate(screen);
+        const { navigation, screen, onPress } = this.props;
+        if(onPress){
+            onPress();
+        }else if(screen){
+            navigation.navigate(screen);
+        }
     };
 
     render() {

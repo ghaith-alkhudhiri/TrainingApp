@@ -23,6 +23,7 @@ import theme from '../Constants/theme';
         navigation?: any;
         floatingBtn?: boolean;
         floatingBtnLayout?: "row" | "column";
+        fullScreenChildren: boolean;
         floatingBtnRowGap?: number;
         floatingBtnColumnGap?: number;
         floatingBtnProps?: FloatingButtonProps[];
@@ -89,6 +90,7 @@ import theme from '../Constants/theme';
                 withoutHeader,
                 title,
                 rightElement,
+                fullScreenChildren,
                 navigation,
                 childrenContainerStyle,
                 floatingBtn,
@@ -105,10 +107,12 @@ import theme from '../Constants/theme';
                 floatingObject,
                 floatingBtnContainer,
             } = this.props;
+
+            const ContainerComponent = fullScreenChildren ? View : ScrollView
             // console.log('Screen height', screenHeight);
             return (
                 <View style={[styles.wrapper, {maxHeight: screenHeight}]}>
-                    <ScrollView style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, {paddingBottom: floatingButtonHeight, marginBottom: 10}, heroImage && {paddingHorizontal: 0, paddingTop: 0}, scrollViewContainerStyle]}>
+                    <ContainerComponent style={[scrollContainerStyle ? scrollContainerStyle :  styles.innerContainer, {paddingBottom: floatingButtonHeight, marginBottom: 10}, heroImage && {paddingHorizontal: 0, paddingTop: 0}, scrollViewContainerStyle]}>
                         <If condition={heroImage}>
                             <ImageBackground
                                 source={{uri: selectedHeroImage }}
@@ -163,7 +167,7 @@ import theme from '../Constants/theme';
                         ]}>
                             {this.props.children}
                         </View>
-                    </ScrollView>
+                    </ContainerComponent>
                     <If condition={floatingBtn}>
                         <View style={[
                         styles.floatingButtonContainer,

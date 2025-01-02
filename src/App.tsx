@@ -64,6 +64,8 @@ import ContactUs from './You/ContactUs';
 import HelpCenter from './You/HelpCenter';
 import NotificationsSettings from './You/NotificationsSettings';
 import PrivacyPolicy from './You/PrivacyPolicy';
+import DeleteAccountForm from './You/DeleteAccountForm';
+import Language from './You/Language';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -160,7 +162,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='You'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='MyFamily'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -191,6 +193,8 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Classes" component={ClassesPage} />
             <Stack.Screen name="You" component={You} />
             <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="DeleteAccount" component={DeleteAccountForm} />
+            <Stack.Screen name="Language" component={Language} />
             <Stack.Screen name="AboutGym" component={AboutGym} />
             <Stack.Screen name="ContactUs" component={ContactUs} />
             <Stack.Screen name="MembershipsSettings" component={MembershipsSettings} />
