@@ -159,7 +159,7 @@ class MembershipsSettings extends Component<MembershipsSettingsProps, Membership
             { (item.status === 'Finished' || item.status === 'Freezed') && 
                 <>
                 <View style={styles.divider} />
-                <CustomButton label={item.status === 'Finished' ? 'Resubscribe' : 'Unfreeze'} onPress={() => { /* handle button press */ }} 
+                <CustomButton label={item.status === 'Finished' ? 'Resubscribe' : 'Unfreeze'} onPress={() => { item.status === 'Finished' ? this.props.navigation.navigate('ReviewSummary') : this.props.navigation.navigate('MembershipForm', {title: 'Unfreeze Membership'})}} 
                 buttonStyle={{margin: 0, paddingVertical: 11}} 
                 textStyle={{
                     color: '#EAF2FF',
@@ -195,6 +195,7 @@ class MembershipsSettings extends Component<MembershipsSettingsProps, Membership
                 key: 'active',
                 label: 'Active',
                 content: (
+                    <>
                     <FlatList
                     data={ongoingMemberships}
                     renderItem={this.renderMembershipItem}
@@ -202,6 +203,9 @@ class MembershipsSettings extends Component<MembershipsSettingsProps, Membership
                     showsHorizontalScrollIndicator={false}
                     ItemSeparatorComponent={() => <View style={styles.separator} />}
                     />
+                    <CustomButton label='Cancel Membership' onPress={() => { this.props.navigation.navigate('MembershipForm', { title: 'Cancel Membership' }) }} />
+                    <CustomButton label='Freeze Membership' onPress={() => { this.props.navigation.navigate('MembershipForm', { title: 'Freeze Membership' }) }} />
+                    </>
                 )
             },
             {
@@ -233,11 +237,10 @@ class MembershipsSettings extends Component<MembershipsSettingsProps, Membership
         ];
 
         return (
-            <ScreenWrapper scrollContainerStyle={{padding: 0, gap: 0}} withoutHeader childrenContainerStyle={{gap: 0}}>
+            <ScreenWrapper scrollContainerStyle={{padding: 0, gap: 0}} withoutHeader childrenContainerStyle={{padding: 0, gap: 0}}>
                 <View style={{paddingHorizontal: 25,}}>
-                    <ScreenHeader title='My Workouts' backEnabled navigation={this.props.navigation} route={this.props.route} />
+                    <ScreenHeader title='My Memberships' backEnabled navigation={this.props.navigation} route={this.props.route} />
                 </View>
-                
                 <CustomTabs styleType='underline' tabs={tabs} tabBarStyle={{paddingHorizontal: 0}} />
             </ScreenWrapper>
         );

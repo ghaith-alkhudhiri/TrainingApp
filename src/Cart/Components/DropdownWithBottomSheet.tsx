@@ -372,6 +372,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CustomRadioButton from '../../Common/CustomRadioButton';
 import theme from '../../Constants/theme';
 import CustomButton from '../../Common/CustomButton';
+import HeroImage from '../../Common/HeroImage';
 
 const { width } = Dimensions.get('window');
 
@@ -419,12 +420,13 @@ class DropdownWithBottomSheet extends Component<{}, State> {
           onClose={this.closeBottomSheet}
         >
           <View style={{gap: 23, paddingTop: 24}}>
-            <ImageBackground
-                source={require('../../Assets/Images/item.jpg')}
-                resizeMode='cover'
-                style={[{height: 225,
-                  width: '100%'}]}
-            />
+            <HeroImage navigation={undefined} route={undefined} 
+            heroImagesUrls={[
+              require('../../Assets/Images/item.jpg'), 
+              require('../../Assets/Images/item.jpg'), 
+              require('../../Assets/Images/item.jpg')
+              ]}
+              />
             <View style={{gap: 19}}>
               <Text style={styles.title}>Select Size</Text>
               <CustomRadioButton 

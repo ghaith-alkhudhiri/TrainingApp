@@ -30,7 +30,7 @@ export default class CartPage extends Component<{}, State> {
     return (
       <ScreenWrapper
         title='Cart'
-        scrollContainerStyle={{paddingHorizontal: 25}}
+        // scrollContainerStyle={{paddingHorizontal: 25}}
         floatingBtn
         floatingBtnProps={
           [
