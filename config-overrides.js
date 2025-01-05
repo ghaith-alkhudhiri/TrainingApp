@@ -72,7 +72,7 @@ module.exports = override(
     path.resolve('src'), // Include your source code
     path.resolve('node_modules/@react-native/assets-registry'), // Include the problematic package
     path.resolve('node_modules/react-native-vector-icons'),
-    path.resolve('node_modules/react-native-qrcode-svg')
+    path.resolve('node_modules/react-native-qrcode-svg'),
   ]),
 
   addBabelPreset('@babel/preset-react'),
@@ -90,6 +90,7 @@ module.exports = override(
       'react-native-gesture-handler': 'react-native-gesture-handler/gesture-handler.web.js', // Use web-specific handler
       'react-native-maps': 'react-native-web-maps', // Replace with web-compatible maps
       'react-native': 'react-native-web', // Replace core RN with RN Web
+      'react-native-linear-gradient': 'react-native-web-linear-gradient'
     };
 
     // Add support for font loading

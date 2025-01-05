@@ -66,6 +66,9 @@ import NotificationsSettings from './You/NotificationsSettings';
 import PrivacyPolicy from './You/PrivacyPolicy';
 import DeleteAccountForm from './You/DeleteAccountForm';
 import Language from './You/Language';
+import TopUp from './You/TopUp';
+import AmountInputScreen from './You/AmountInput';
+import AmountInput from './You/AmountInput';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -162,7 +165,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='MyFamily'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='You'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -204,6 +207,8 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="NotificationsSettings" component={NotificationsSettings} />
             <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
             <Stack.Screen name="EWallet" component={EWallet} />
+            <Stack.Screen name="Topup" component={TopUp} />
+            <Stack.Screen name="AmountInput" component={AmountInput} />
             <Stack.Screen name="MyFamily" component={MyFamily} />
             <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
             <Stack.Screen name="ClassDetails" component={ClassesDetails} />

@@ -4,17 +4,18 @@ import React, { Component } from 'react'
 interface Props {
     text?: string;
     containerStyle?: ViewStyle; 
+    lineStyle?: ViewStyle;
 }
 export class LineDividier extends Component<Props> {
   render() {
-    const {text, containerStyle} = this.props;
+    const {text, containerStyle, lineStyle} = this.props;
     return (
       <View style={[styles.container, containerStyle ]}>
-        <View style={styles.line} />
+        <View style={[styles.line, lineStyle]} />
         {text && (
           <Text style={styles.text}>{text}</Text>
         )}
-        <View style={styles.line} />
+        <View style={[styles.line, lineStyle]} />
       </View>
     )
   }

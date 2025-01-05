@@ -116,7 +116,7 @@ class MyFamily extends Component<any, State> {
                     )}
                 <Sheet 
                     isOpen={isBottomSheetVisible} 
-                    rootId="root"
+                    // rootId="root"
                     onClose={() => this.toggleBottomSheet()}
                     detent='content-height'
                     // snapPoints={[600, 400, 200, 0]}
