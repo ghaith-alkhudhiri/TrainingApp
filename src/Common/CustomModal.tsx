@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Modal, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, Modal, Text, TouchableOpacity, ScrollView, TextStyle } from 'react-native';
 
 export interface Action {
     text: string;
@@ -15,6 +15,7 @@ interface CustomModalProps {
     description?: string;
     children?: React.ReactNode;
     actions: Action[];
+    descriptionStyle?: TextStyle;
     closeIcon?: React.ReactNode;
     animationType?: 'none' | 'slide' | 'fade';
     options?: string[];
@@ -40,7 +41,7 @@ class CustomModal extends React.Component<CustomModalProps, CustomModalState> {
     }
 
     render() {
-        const { onClose, title, description, children, actions, closeIcon, animationType, options, onSelectOption } = this.props;
+        const { onClose, title, description, children, actions, closeIcon, animationType, descriptionStyle, options, onSelectOption } = this.props;
         const { visible } = this.state;
 
         return (
@@ -57,9 +58,9 @@ class CustomModal extends React.Component<CustomModalProps, CustomModalState> {
                     {closeIcon ? closeIcon : <Text style={styles.defaultCloseIcon}>✕</Text>}
                     </TouchableOpacity>
                   </View>
-                  <View>
+                  <View style={styles.contentContainer}>
                     <Text style={styles.title}>{title}</Text>
-                    {description && <Text style={styles.description}>{description}</Text>}
+                    {description && <Text style={[styles.description, descriptionStyle]}>{description}</Text>}
                     {options && (
                       <ScrollView style={styles.optionsContainer}>
                         {options.map((option, index) => (
@@ -125,6 +126,9 @@ const styles = StyleSheet.create({
   closeIcon: {
     alignSelf: 'flex-end'
   },
+  contentContainer: {
+    gap: 6,
+  },
   defaultCloseIcon: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -138,8 +142,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
   },
   description: {
-    fontSize: 13,
-    marginTop: 5,
+    fontSize: 14,
     textAlign: 'justify',
     color: '#797979',
     fontWeight: '400',

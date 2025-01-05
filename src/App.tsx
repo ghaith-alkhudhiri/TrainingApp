@@ -60,6 +60,12 @@ import MyAnalysis from './You/MyAnalysis';
 import AboutGym from './You/AboutGym';
 import ShopCategoryPage from './Shop/ShopCategoryPage';
 import ProductPage from './Shop/ProductPage';
+import ContactUs from './You/ContactUs';
+import HelpCenter from './You/HelpCenter';
+import NotificationsSettings from './You/NotificationsSettings';
+import PrivacyPolicy from './You/PrivacyPolicy';
+import DeleteAccountForm from './You/DeleteAccountForm';
+import Language from './You/Language';
 import MembershipForm from './You/MembershipForm';
 import ReviewSummary from './Cart/ReviewSummary';
 
@@ -158,7 +164,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='MembershipsSettings'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='MyFamily'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -187,11 +193,27 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Categories" component={Categories} />
             <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
             <Stack.Screen name="Classes" component={ClassesPage} />
+            <Stack.Screen name="You" component={You} />
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="DeleteAccount" component={DeleteAccountForm} />
+            <Stack.Screen name="Language" component={Language} />
+            <Stack.Screen name="AboutGym" component={AboutGym} />
+            <Stack.Screen name="ContactUs" component={ContactUs} />
+            <Stack.Screen name="MembershipsSettings" component={MembershipsSettings} />
+            <Stack.Screen name="ClassesSettings" component={ClassesSettings} />
+            <Stack.Screen name="WorkoutsSettings" component={WorkoutsSettings} />
+            <Stack.Screen name="MyOrders" component={MyOrders} />
+            <Stack.Screen name="NotificationsSettings" component={NotificationsSettings} />
+            <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+            <Stack.Screen name="EWallet" component={EWallet} />
+            <Stack.Screen name="MyFamily" component={MyFamily} />
+            <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
             <Stack.Screen name="ClassDetails" component={ClassesDetails} />
             <Stack.Screen name="ReviewSummary" component={ReviewSummary} />
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
+            <Stack.Screen name="HelpCenter" component={HelpCenter} />
             <Stack.Screen name="EventCard" component={EventCard} />
             <Stack.Screen name="EventDetails" component={EventDetails} />
             <Stack.Screen name="AllEvents" component={AllEvents} />

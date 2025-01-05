@@ -148,10 +148,13 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, Easing, LayoutChangeEvent } from 'react-native';
 import LineDividier from './LineDivider';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ChevronUp from '../Assets/Icons/ChevronUp';
+import ChevronDown from '../Assets/Icons/ChevronDown';
 
 interface AccordionItem {
     title: string;
-    content: string;
+    content: any;
+    icon?: any;
 }
 
 interface AccordionProps {
@@ -212,19 +215,23 @@ class Accordion extends Component<AccordionProps, AccordionState> {
                     return (
                         <View key={index} style={styles.accordionItem}>
                             <TouchableOpacity style={[styles.accordionTitleContainer, activeIndex === index && styles.expandedAccordionTitleContainer]} onPress={() => this.handleClick(index)}>
-                                <Text style={[styles.accordionTitle]}>{item.title}</Text>
-                                <Icon
+                                <View style={styles.infoContainer}>
+                                    {item.icon && item.icon}
+                                    <Text style={[styles.accordionTitle]}>{item.title}</Text>
+                                </View>
+                                {/* <Icon
                                     name={activeIndex === index ? 'chevron-up' : 'chevron-down'}
                                     size={20}
                                     color='#000'
                                     style={styles.chevronIcon}
-                                />
+                                /> */}
+                                {activeIndex === index ? <ChevronUp /> : <ChevronDown />}
                             </TouchableOpacity>
                             <Animated.View style={{ height, overflow: 'hidden' }}>
                                 <View onLayout={(event) => this.setContentHeight(index, event)}>
                                     <LineDividier containerStyle={{ paddingHorizontal: 12 }} />
                                     <View style={[styles.accordionContent]}>
-                                        <Text style={[styles.contentText]}>{item.content}</Text>
+                                        {item.content}
                                     </View>
                                 </View>
                             </Animated.View>
@@ -269,6 +276,11 @@ const styles = StyleSheet.create({
     },
     expandedAccordionTitleContainer: {
         paddingBottom: 0
+    },
+    infoContainer: {
+        flexDirection: 'row',
+        gap: 10,
+        alignItems: 'center',
     },
     contentText: {
         color: '#797979',
