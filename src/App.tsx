@@ -60,6 +60,8 @@ import MyAnalysis from './You/MyAnalysis';
 import AboutGym from './You/AboutGym';
 import ShopCategoryPage from './Shop/ShopCategoryPage';
 import ProductPage from './Shop/ProductPage';
+import MembershipForm from './You/MembershipForm';
+import ReviewSummary from './Cart/ReviewSummary';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -186,6 +188,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
             <Stack.Screen name="Classes" component={ClassesPage} />
             <Stack.Screen name="ClassDetails" component={ClassesDetails} />
+            <Stack.Screen name="ReviewSummary" component={ReviewSummary} />
             <Stack.Screen name="Checkout" component={Checkout} />
             <Stack.Screen name="Cart" component={CartPage} />
             <Stack.Screen name="Receipt" component={Receipt} />
@@ -208,6 +211,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="AboutGym" component={AboutGym} />
             <Stack.Screen name="MyFamily" component={MyFamily} />
             <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
+            <Stack.Screen name="MembershipForm" component={MembershipForm} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (
