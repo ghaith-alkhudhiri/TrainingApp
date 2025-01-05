@@ -103,8 +103,8 @@ class AboutGym extends Component {
                             <LineDividier />
                             <View style={styles.facilitiesContainer}>
                                 {facilities.map((facility, index) => (
-                                    <View style={styles.infoCard}>
-                                        <InfoCard key={index} icon={facility.icon} value={facility.value} label={facility.label} />
+                                    <View key={index} style={styles.infoCard}>
+                                        <InfoCard icon={facility.icon} value={facility.value} label={facility.label} />
                                     </View>
                                 ))}
                             </View>

@@ -31,7 +31,7 @@ class You extends Component<Props> {
             {
                 icon: <ProfileIcon color="#0165FC" />,
                 title: "Your Profile",
-                screen: "ProfileSettings",
+                screen: "Profile",
             },
             {
                 icon: <CrowIcon />,

@@ -68,6 +68,8 @@ import DeleteAccountForm from './You/DeleteAccountForm';
 import Language from './You/Language';
 import MembershipForm from './You/MembershipForm';
 import ReviewSummary from './Cart/ReviewSummary';
+import Reschedule from './You/Reschedule';
+import AddReview from './You/AddReview';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -164,7 +166,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='AboutGym'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='ClassesSettings'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -224,6 +226,8 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="ShopCat" component={ShopCategoryPage} />
             <Stack.Screen name="Product" component={ProductPage} />
             <Stack.Screen name="MembershipForm" component={MembershipForm} />
+            <Stack.Screen name="Reschedule" component={Reschedule} />
+            <Stack.Screen name="AddReview" component={AddReview} />
             <Stack.Screen name="Main" component={TabsNavigation} />
           </Stack.Navigator>
           ): (

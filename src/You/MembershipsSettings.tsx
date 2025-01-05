@@ -237,10 +237,7 @@ class MembershipsSettings extends Component<MembershipsSettingsProps, Membership
         ];
 
         return (
-            <ScreenWrapper scrollContainerStyle={{padding: 0, gap: 0}} withoutHeader childrenContainerStyle={{padding: 0, gap: 0}}>
-                <View style={{paddingHorizontal: 25,}}>
-                    <ScreenHeader title='My Memberships' backEnabled navigation={this.props.navigation} route={this.props.route} />
-                </View>
+            <ScreenWrapper title='My Memberships' childrenContainerStyle={{padding: 0, gap: 0}}>
                 <CustomTabs styleType='underline' tabs={tabs} tabBarStyle={{paddingHorizontal: 0}} />
             </ScreenWrapper>
         );
@@ -276,8 +273,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.05,
         shadowRadius: 20,
         elevation: 20,
-        marginLeft: 24,
-        marginRight: 27,
+        marginHorizontal: 20,
       },
       header: {
         flexDirection: 'row',
