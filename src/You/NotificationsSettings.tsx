@@ -136,7 +136,7 @@ class NotificationsSettings extends Component<{}, State> {
         return (
             <ScreenWrapper title="Notification Settings">
                 {sections.map((section, sectionIndex) => (
-                    <View style={styles.sectionContainer}>
+                    <View key={sectionIndex} style={styles.sectionContainer}>
                         <Text style={styles.sectionTitle}>{section.title}</Text>
                             {section.content.map((setting, settingIndex) => (
                                 <View key={settingIndex} style={styles.settingContainer}>

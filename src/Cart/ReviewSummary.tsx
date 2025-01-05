@@ -28,7 +28,7 @@ interface State {
 
 type Props = NavProps & Membership;
 
-export default class BookingSummary extends Component<Props, State> {
+export default class ReviewSummary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -67,7 +67,7 @@ componentDidMount() {
       <ScreenWrapper 
       title='Review Summary' 
       childrenContainerStyle={{gap: 20}} 
-      scrollContainerStyle={{paddingHorizontal: 24}}
+      // scrollContainerStyle={{paddingHorizontal: 24}}
       floatingBtn
       floatingBtnProps={{
         label: 'Next',
