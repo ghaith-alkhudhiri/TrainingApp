@@ -99,9 +99,8 @@ class Settings extends Component<Props, State> {
             <ScreenWrapper title="Settings" childrenContainerStyle={{paddingHorizontal: 0}}>
                <View>
                     {listItems.map((item, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             <ListItem 
-                                key={index} 
                                 icon={item.icon} 
                                 title={item.title} 
                                 screen={item.screen} 
@@ -111,7 +110,7 @@ class Settings extends Component<Props, State> {
                             {(index === 2 || index === 5 || index === 8) && (
                                 <View style={{height: 10, backgroundColor: "#F4F4F4"}} />
                             )}
-                        </>
+                        </React.Fragment>
                     ))}
                     </View>
 
