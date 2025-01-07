@@ -40,7 +40,7 @@ export class Goal extends Component<Props, State> {
   render() {
     
     return (
-      <ScreenWrapper headerShown={false} floatingBtn={true} floatingBtnProps={{label: 'Next', onPress: this.navigateToDataPage }}>
+      <ScreenWrapper headerShown={false} floatingBtn floatingBtnProps={[{label: 'Next', onPress: this.navigateToDataPage }]}>
         <View>
             <Text style={styles.h1}>Your Goal</Text>
             <Text style={styles.description}>What are your current goals for your body figure?</Text>

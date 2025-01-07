@@ -5,6 +5,7 @@ import theme from '../Constants/theme'
 import Star from '../Assets/Icons/Star'
 import CustomTextInput from '../Common/CustomTextInput'
 import { NavProps } from '../types'
+import { Image } from 'react-native'
 
 interface State {
   rating: number;
@@ -28,13 +29,33 @@ export class AddReview extends Component<NavProps, State> {
     const {item} = this.props.route.params;
     
     return (
-      <ScreenWrapper heroImage heroImagesUrls={[]} childrenContainerStyle={{gap: 20, marginTop: 27}}
+      <ScreenWrapper 
+        {...(item.title && item.type ? { heroImage: true, heroImagesUrls: [], childrenContainerStyle: {gap: 20, marginTop: 27} } : {childrenContainerStyle: {gap: 20}})} 
       floatingBtn floatingBtnProps={[{label: 'Submit', onPress: ()=> {this.props.navigation.navigate('success', {title: 'Added Successfully', description: 'Your review on your class has been added successfully!'})}}]}
       >
-        <View>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.info}>{item.type}</Text>
-        </View>
+        {(item.title && item.type) && (
+          <View>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.info}>{item.type}</Text>
+          </View>
+        )}
+        {item.items && (
+          <View style={[styles.row, {gap: 12}]}>
+              <Image source={item.items[0].images[0] || {uri : 'https://via.placeholder.com/150'}} 
+              style={{
+                  width: 88,
+                  aspectRatio: 1,
+                  borderRadius: 7,
+              }}
+              resizeMode='cover'
+              />
+              <View>
+                  <Text style={styles.title}>{item.items[0].title}</Text>
+                  <Text style={styles.subTitle}>Size: {item.items[0].size} | Color: {item.items[0].color}</Text>
+                  <Text style={styles.title}>{item.items[0].price} RS</Text>
+              </View>
+          </View>
+        )}
         <View style={styles.divider} />
         <View style={{gap: 10}}>
           <Text style={styles.subTitle}>Your rating of the class </Text>
@@ -50,6 +71,17 @@ export class AddReview extends Component<NavProps, State> {
           <Text style={styles.subTitle}>Add your review</Text>
           <CustomTextInput placeholder={'Write your review'} inputContainerStyle={{paddingBottom: 100}} />
         </View>
+        {item.items && (
+          <Pressable onPress={()=>{}}>
+            <Text style={{
+              color: theme.primary,
+              fontFamily: theme.font,
+              fontSize: 14,
+              fontWeight: 600,
+              lineHeight: 17.5,
+            }}>Add photos</Text>
+          </Pressable>
+      )}
       </ScreenWrapper>
     )
   }
@@ -82,5 +114,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 600,
     lineHeight: 17.5,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })

@@ -43,7 +43,7 @@ export class CustomButton extends Component<Props> {
             textStyling.push(styles.appleButtonText);
             break;
         case 'rounded':
-            console.log("Rounded Button styles")
+            // console.log("Rounded Button styles")
             containerStyle.push(styles.roundedButton);
             textStyling.push(styles.rounedButtonText);
             break

@@ -12,16 +12,10 @@ import AddIcon from '../Assets/Icons/Add';
 
 interface Order {
     id: string;
-    items: {title: string, images: string[], price: string}[];
-    size: string;
-    color: string;
+    items: {title: string, images?: string[], price: string, size?: number, color?: string}[];
     price: number;
     status: 'Active' | 'Completed' | 'Canceled';
-    orderStatus: 'Order Placed' | 'In Progress' | 'Shipped' | 'Delivered';
-    stageOneDateTime?: string;
-    stageTwoDateTime?: string;
-    stageThreeDateTime?: string;
-    stageFourDateTime?: string;
+    steps: { title: string, timestamp: string, icon: string, isCompleted: boolean }[];
     trackingId: number;
     dateTime: string;
     isNotifyOn?: boolean,
@@ -49,22 +43,57 @@ class MyOrders extends Component<MyOrdersProps, MyOrdersState> {
             {
                 id: '43243',
                 items: [
-                    { title: 'Item 1', images: ['image1.png'], price: '10.00' },
-                    { title: 'Item 2', images: ['image2.png'], price: '20.00' }
+                    { title: 'Item 1', images: [require('../Assets/Images/item.jpg')], price: '10.00', size: 21, color: 'pink' },
+                    { title: 'Item 2', images: [require('../Assets/Images/item.jpg')], price: '20.00', size: 23, color: 'red' }
                 ],
-                size: 'M',
-                color: 'Red',
                 price: 30.00,
                 status: 'Active',
-                orderStatus: 'Order Placed',
-                stageOneDateTime: '2023-01-01T10:00:00Z',
-                stageTwoDateTime: '2023-01-02T10:00:00Z',
-                stageThreeDateTime: '2023-01-03T10:00:00Z',
-                stageFourDateTime: '2023-01-04T10:00:00Z',
+                steps: [
+                    { title: 'Order Placed', timestamp: '23 Aug 2023, 03:05 AM', icon: 'cart-outline', isCompleted: true },
+                    { title: 'In Progress', timestamp: '23 Aug 2023, 03:05 AM', icon: 'progress-clock', isCompleted: true },
+                    { title: 'Shipped', timestamp: 'Expected 02 Sep 2023', icon: 'truck-delivery-outline', isCompleted: false },
+                    { title: 'Delivered', timestamp: '23 Aug 2023, 03:05 AM', icon: 'package-variant', isCompleted: false },
+                  ],
                 trackingId: 123456,
                 dateTime: '2023-01-01T09:00:00Z',
                 isNotifyOn: true
-            }
+            },
+            {
+                id: '432435',
+                items: [
+                    { title: 'Item 1', images: [require('../Assets/Images/item.jpg')], price: '10.00', size: 21, color: 'pink' },
+                    { title: 'Item 2', images: [require('../Assets/Images/item.jpg')], price: '20.00', size: 23, color: 'red' }
+                ],
+                price: 30.00,
+                status: 'Completed',
+                steps: [
+                    { title: 'Order Placed', timestamp: '23 Aug 2023, 03:05 AM', icon: 'cart-outline', isCompleted: true },
+                    { title: 'In Progress', timestamp: '23 Aug 2023, 03:05 AM', icon: 'progress-clock', isCompleted: true },
+                    { title: 'Shipped', timestamp: 'Expected 02 Sep 2023', icon: 'truck-delivery-outline', isCompleted: true },
+                    { title: 'Delivered', timestamp: '23 Aug 2023, 03:05 AM', icon: 'package-variant', isCompleted: true },
+                  ],
+                trackingId: 123456,
+                dateTime: '2023-01-01T09:00:00Z',
+                isNotifyOn: true
+            },
+            {
+                id: '432439',
+                items: [
+                    { title: 'Item 1', images: [require('../Assets/Images/item.jpg')], price: '10.00', size: 21, color: 'pink' },
+                    { title: 'Item 2', images: [require('../Assets/Images/item.jpg')], price: '20.00', size: 23, color: 'red' }
+                ],
+                price: 30.00,
+                status: 'Canceled',
+                steps: [
+                    { title: 'Order Placed', timestamp: '23 Aug 2023, 03:05 AM', icon: 'cart-outline', isCompleted: true },
+                    { title: 'In Progress', timestamp: '23 Aug 2023, 03:05 AM', icon: 'progress-clock', isCompleted: true },
+                    { title: 'Shipped', timestamp: 'Expected 02 Sep 2023', icon: 'truck-delivery-outline', isCompleted: true },
+                    { title: 'Delivered', timestamp: '23 Aug 2023, 03:05 AM', icon: 'package-variant', isCompleted: true },
+                  ],
+                trackingId: 123456,
+                dateTime: '2023-01-01T09:00:00Z',
+                isNotifyOn: true
+            },
         ];
         setTimeout(() => {
             this.setState({ orders: sampleOrders, loading: false });
@@ -108,15 +137,18 @@ class MyOrders extends Component<MyOrdersProps, MyOrdersState> {
             <View style={{gap: 2}}>
                 <View style={styles.row}>
                     <Icon name="copy-outline" size={16} color="#007AFF" />
-                    <Text style={[styles.notifyText, styles.subtitle]}> Booking ID: </Text>
-                    <TouchableOpacity>
-                        <Text style={[styles.notifyText, styles.subtitle, {color: theme.primary}]}>{item.id}</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <View style={styles.row}>
+                    <Text style={[styles.notifyText, styles.subtitle]}> Order Status: </Text>
+                    <Text style={[styles.notifyText, styles.subtitle, {color: theme.primary}]}>{item.steps[0].title}</Text>
+                </View>
+                <View style={styles.row}>
                     <Icon name="time-outline" size={16} color="#007AFF" />
-                    <Text style={[styles.notifyText, styles.subtitle]}> Duration: </Text>
-                    <Text style={[styles.notifyText, styles.subtitle, {color: theme.primary}]}>{item.id}</Text>
+                    <Text style={[styles.notifyText, styles.subtitle]}> Date and Time: </Text>
+                    <Text style={[styles.notifyText, styles.subtitle, {color: theme.primary}]}>{item.steps[0].timestamp}</Text>
+                </View>
+                <View style={styles.row}>
+                    <Icon name="copy-outline" size={16} color="#007AFF" />
+                    <Text style={[styles.notifyText, styles.subtitle]}> Total Amount: </Text>
+                    <Text style={[styles.notifyText, styles.subtitle, {color: theme.primary}]}>{item.items[0].price} RS</Text>
                 </View>
             </View>
 
@@ -140,7 +172,7 @@ class MyOrders extends Component<MyOrdersProps, MyOrdersState> {
                     />
                 )}
                 <CustomButton label={item.status === 'Active' ? 'Track' : item.status === 'Completed' ? 'Add Review' : 'Re-Order'} 
-                    onPress={() => { item.status === 'Completed' ? this.props.navigation.navigate('ReviewSummary') : item.status === 'Active' ? this.props.navigation.navigate('Reschedule', {item}) : this.props.navigation.navigate('ContactUs')}} 
+                    onPress={() => { item.status === 'Completed' ? this.props.navigation.navigate('AddReview', {item}) : item.status === 'Active' ? this.props.navigation.navigate('Track', {item}) : this.props.navigation.navigate('Cart')}} 
                     buttonStyle={{margin: 0, paddingVertical: 11}} 
                     textStyle={{
                         color: '#EAF2FF',
