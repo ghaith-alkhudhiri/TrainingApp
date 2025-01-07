@@ -50,7 +50,7 @@ export class Data extends Component<Props, State> {
         }
     ]
     return (
-      <ScreenWrapper headerShown={false} floatingBtn={true} floatingBtnProps={{label: "Next", onPress: this.navigateToSuccessPage }}>
+      <ScreenWrapper headerShown={false} floatingBtn={true} floatingBtnProps={[{label: "Next", onPress: this.navigateToSuccessPage }]}>
         <View>
             <Text style={styles.h1}>Your Data</Text>
             <Text style={styles.description}>To give you the best journey, we need to learn more about you</Text>

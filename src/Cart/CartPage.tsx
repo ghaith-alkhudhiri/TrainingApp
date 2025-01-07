@@ -36,12 +36,12 @@ export default class CartPage extends Component<{}, State> {
           [
             {
               label: 'Add Items',
-              onPress: console.log("Add Items"),
+              onPress: ()=>{}, //console.log("Add Items"),
               type: 'outline'
             },
             {
               label: 'Checkout',
-              onPress: console.log('Checkout'),
+              onPress: ()=>{}, //console.log('Checkout'),
             }
         ]
         }

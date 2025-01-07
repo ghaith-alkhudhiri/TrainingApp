@@ -56,7 +56,7 @@ import WorkoutsSettings from './You/WorkoutsSettings';
 import MyOrders from './You/MyOrders';
 import EWallet from './You/EWallet';
 import MyFamily from './You/MyFamily';
-import MyAnalysis from './You/MyAnalysis';
+import MyAnalysis from './You/MyAnalysis/MyAnalysis';
 import AboutGym from './You/AboutGym';
 import ShopCategoryPage from './Shop/ShopCategoryPage';
 import ProductPage from './Shop/ProductPage';
@@ -74,6 +74,8 @@ import ReviewSummary from './Cart/ReviewSummary';
 import Reschedule from './You/Reschedule';
 import AddReview from './You/AddReview';
 import TrackPage from './You/TrackPage';
+import MyGoals from './You/MyAnalysis/MyGoals';
+import Metrics from './You/MyAnalysis/Metrics';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -235,6 +237,8 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Reschedule" component={Reschedule} />
             <Stack.Screen name="AddReview" component={AddReview} />
             <Stack.Screen name="Track" component={TrackPage} />
+            <Stack.Screen name="MyGoals" component={MyGoals} />
+            <Stack.Screen name="Metrics" component={Metrics} />
             <Stack.Screen name="Main" component={TabsNavigation} />
             <Stack.Screen name="Home" component={HomePage} />
           </Stack.Navigator>
