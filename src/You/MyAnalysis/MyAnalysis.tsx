@@ -37,7 +37,7 @@ class MyAnalysis extends Component<NavProps> {
             {
                 icon: <Profile2Users />,
                 title: "InBody Results",
-                screen: "MyFamily",
+                screen: "InBodyResults",
             },
         ];
         return (

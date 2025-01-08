@@ -76,6 +76,7 @@ import AddReview from './You/AddReview';
 import TrackPage from './You/TrackPage';
 import MyGoals from './You/MyAnalysis/MyGoals';
 import Metrics from './You/MyAnalysis/Metrics';
+import InBodyResults from './You/MyAnalysis/InBodyResults';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -239,6 +240,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Track" component={TrackPage} />
             <Stack.Screen name="MyGoals" component={MyGoals} />
             <Stack.Screen name="Metrics" component={Metrics} />
+            <Stack.Screen name="InBodyResults" component={InBodyResults} />
             <Stack.Screen name="Main" component={TabsNavigation} />
             <Stack.Screen name="Home" component={HomePage} />
           </Stack.Navigator>
