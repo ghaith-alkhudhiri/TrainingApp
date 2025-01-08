@@ -183,7 +183,7 @@ class ToDoSection extends Component<NavProps, State> {
         />
 
         {/* Tasks Section */}
-        <SectionHeader containerStyle={{marginBottom: 0, marginTop: 13}} title='Tasks' onPress={()=>{}} />
+        <SectionHeader containerStyle={{marginBottom: 0, marginTop: 13}} title='Tasks' onPress={()=>{this.props.navigation.navigate('Tasks')}} />
         <FlatList
           data={tasks}
           renderItem={this.renderTaskItem}

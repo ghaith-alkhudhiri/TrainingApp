@@ -12,6 +12,7 @@ interface CustomTabsProps {
     activeTabTextStyle?: TextStyle;
     tabContentStyle?: ViewStyle;
     styleType?: 'large' | 'small' | 'underline';
+    onTabChange?: (key: string) => void;
 }
 
 interface CustomTabsState {
@@ -33,6 +34,11 @@ export class CustomTabs extends Component<CustomTabsProps, CustomTabsState> {
 
     setActiveTab = (key: string) => {
         this.setState({ activeTab: key });
+        
+        if (this.props.onTabChange) {
+            this.props.onTabChange(key);
+        }
+
     }
 
     render() {

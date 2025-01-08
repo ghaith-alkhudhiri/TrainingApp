@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from 'react-native'
+import { Pressable, ScrollView, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import CollectionBanner from './Components/CollectionBanner'
 import Basket from '../Assets/Icons/Basket'
@@ -37,12 +37,12 @@ export class Shop extends Component<NavProps, ShopState> {
           backEnabled={false} 
           title='Shop'
           rightElement={
-            <View style={{padding: 10, borderRadius: 57,borderWidth: 1, borderColor: '#E6E6E6',}}>
+            <Pressable onPress={()=>this.props.navigation.navigate('Cart')} style={{padding: 10, borderRadius: 57,borderWidth: 1, borderColor: '#E6E6E6',}}>
               <Basket/>
-            </View>
+            </Pressable>
           }
-          backContainerStyle={{left: 25}}
-          rightContainerStyle={{right: 25}}
+          // backContainerStyle={{left: 25}}
+          // rightContainerStyle={{right: 25}}
           leftElementEnabled
           leftElement={
             <View style={{padding: 10, borderRadius: 57,borderWidth: 1, borderColor: '#E6E6E6',}}>
@@ -51,7 +51,7 @@ export class Shop extends Component<NavProps, ShopState> {
           }
         />
         <View style={{gap: 24}}>
-          <View style={{gap: 16, paddingHorizontal: 24}}>
+          <View style={{gap: 16, }}>
             <CollectionBanner category='Active Ware' imageUrl={require('../Assets/Images/image29.png')} onPress={()=>{}} />
             <CollectionBanner category='Water Bottle' imageUrl={require('../Assets/Images/bottle.png')} onPress={()=>{}} />
             <CollectionBanner category='Yoga Mat' imageUrl={require('../Assets/Images/mat.png')} onPress={()=>{}} />
@@ -59,7 +59,7 @@ export class Shop extends Component<NavProps, ShopState> {
 
           <View style={{gap: 13}}>
 
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 24}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between',  }}>
               <Text style={{
                 color: '#000',
                 fontFamily: theme.font,
@@ -123,7 +123,7 @@ export class Shop extends Component<NavProps, ShopState> {
               </View>
             </View>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ }}>
                 <View style={{gap: 6, flexDirection: 'row'}}>
                 {/* {['All', 'Newest', 'Popular', 'Set'].map((label, index) => (
                   <SelectableItem
@@ -180,7 +180,7 @@ export class Shop extends Component<NavProps, ShopState> {
                 </View>
             </ScrollView>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ }}>
                 <View style={{gap: 11, flexDirection: 'row'}}>
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad.png')} rating={3.4} />
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad2.png')} rating={3.4} />
@@ -190,17 +190,17 @@ export class Shop extends Component<NavProps, ShopState> {
 
           </View>
 
-          <View style={{paddingHorizontal: 24}}>
+          <View style={{ }}>
             <Slideshow images={images} />
           </View>
 
           <View style={{gap: 13}}>
 
-            <View style={{paddingHorizontal: 24}}>
+            <View style={{ }}>
               <SectionHeader title='Best Sellers'/>
             </View>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ }}>
                 <View style={{gap: 11, flexDirection: 'row'}}>
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad.png')} rating={3.4} />
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad2.png')} rating={3.4} />
@@ -212,11 +212,11 @@ export class Shop extends Component<NavProps, ShopState> {
 
           <View style={{gap: 13}}>
 
-            <View style={{paddingHorizontal: 24}}>
+            <View style={{ }}>
               <SectionHeader title='You Might Like'/>
             </View>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ }}>
                 <View style={{gap: 11, flexDirection: 'row'}}>
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad.png')} rating={3.4} />
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad2.png')} rating={3.4} />
@@ -228,11 +228,11 @@ export class Shop extends Component<NavProps, ShopState> {
 
           <View style={{gap: 13}}>
 
-            <View style={{paddingHorizontal: 24}}>
+            <View style={{ }}>
               <SectionHeader title='Sport Ware'/>
             </View>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingLeft: 24}}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ }}>
                 <View style={{gap: 11, flexDirection: 'row'}}>
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad.png')} rating={3.4} />
                   <ItemCard title='Two piece set' price={200} imageUrl={require('../Assets/Images/ad2.png')} rating={3.4} />

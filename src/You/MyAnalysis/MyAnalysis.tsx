@@ -37,13 +37,13 @@ class MyAnalysis extends Component<NavProps> {
             {
                 icon: <Profile2Users />,
                 title: "InBody Results",
-                screen: "MyFamily",
+                screen: "InBodyResults",
             },
         ];
         return (
             <ScreenWrapper title='My Analysis' childrenContainerStyle={{gap: 24, paddingHorizontal: 0}}>
                 <View style={{paddingLeft: 25, paddingRight: 23}}>
-                    <SectionHeader title='Metrics' onPress={()=>{}} />
+                    <SectionHeader title='Metrics' onPress={()=> this.props.navigation.navigate('Metrics')} />
                     <MetricsCard navigation={navigation} route={this.props.route} />
                 </View>
                 <View>

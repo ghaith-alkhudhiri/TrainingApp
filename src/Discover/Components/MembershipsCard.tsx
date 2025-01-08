@@ -77,7 +77,7 @@ export class MembershipsCard extends Component<Props, State> {
     
     return (
       <View>
-        <SectionHeader title='Memberships' onPress={()=>{navigation.navigate('Memberships')}}/>
+        <SectionHeader title='Memberships' onPress={()=>{navigation.navigate('Memberships', {navigation: navigation, route: route})}}/>
         <View>
             <FlatList
             data={memberships}

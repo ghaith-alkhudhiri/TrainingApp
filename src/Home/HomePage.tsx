@@ -106,7 +106,7 @@ export class HomePage extends Component<NavProps> {
               description="Don't miss out on our membership benefits"
               cta='Shop now'
             />
-            <UpcomingClasses />
+            <UpcomingClasses navigation={navigation} route={route} />
             <AdvertisementBanner 
               imageUrl={require('../Assets/Images/ad2.png')}
               title="New Collection"
@@ -154,11 +154,11 @@ export class HomePage extends Component<NavProps> {
     ];
     return (
         <ScreenWrapper withoutHeader={true}>
-          <View style={{paddingHorizontal: 14, gap: 17}}>
+          {/* <View style={{paddingHorizontal: 14, gap: 17}}> */}
             <Header navigation={navigation} route={route} />
             <SearchInput />
             <CustomTabs styleType='small' tabs={tabs} />
-          </View>
+          {/* </View> */}
         </ScreenWrapper>
     );
   };

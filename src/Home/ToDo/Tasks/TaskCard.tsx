@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
-import If from '../Common/If';
-import CheckIcon from '../Assets/Icons/CheckIcon';
+import If from '../../../Common/If';
+import CheckIcon from '../../../Assets/Icons/CheckIcon';
 import { Task } from './TasksPage';
 
 interface Props {

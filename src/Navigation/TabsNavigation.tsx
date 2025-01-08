@@ -1,6 +1,5 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-// import HomePage from '../Home/HomePage';
 import HomeNavigation from './HomeNavigation';
 import HomeIcon from '../Assets/Icons/HomeIcon';
 import DiscoverIcon from '../Assets/Icons/DiscoverIcon';
@@ -9,7 +8,8 @@ import ShopIcon from '../Assets/Icons/ShopIcon';
 import ProfileIcon from '../Assets/Icons/ProfileIcon';
 import Test from '../Test';
 import DiscoverNavigation from './DiscoverNavigation';
-import MembershipDetail from '../Discover/Memberships/MembershipDetail';
+import Shop from '../Shop/Shop';
+import You from '../You/You';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +26,7 @@ const TabsNavigation = () => {
         />
         <Tab.Screen 
             name="Discover" 
-            component={MembershipDetail}
+            component={DiscoverNavigation}
             options={{
                 headerShown: false,
                 tabBarIcon: ({color, size}) => <DiscoverIcon />
@@ -42,7 +42,7 @@ const TabsNavigation = () => {
         />
         <Tab.Screen
             name="Shop"
-            component={Test}
+            component={Shop}
             options={{
                 headerShown: false,
                 tabBarIcon: ({color, size}) => <ShopIcon />
@@ -50,7 +50,7 @@ const TabsNavigation = () => {
         />
         <Tab.Screen
             name="You"
-            component={Test}
+            component={You}
             options={{
                 headerShown: false,
                 tabBarIcon: ({color, size}) => <ProfileIcon color='#9DB2CE'/>

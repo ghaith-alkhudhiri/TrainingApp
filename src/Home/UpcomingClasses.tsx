@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import ClassCard from '../Classes/ClassCard';
 import SectionHeader from './SectionHeader';
+import { NavProps } from '../types';
 
 interface Class {
     id: string;
@@ -14,7 +15,7 @@ interface Class {
     price?: number;
 }
 
-export class UpcomingClasses extends Component {
+export class UpcomingClasses extends Component<NavProps> {
     render() {
         const upcomingClasses: Class[] = [
             { 
@@ -60,7 +61,7 @@ export class UpcomingClasses extends Component {
                         <ClassCard
                             title={item.title}
                             coachName={item.trainer}
-                            navigation={item.trainer}
+                            navigation={this.props.navigation}
                             time={item.time}
                             price={item.price}
                             url={item.url}
