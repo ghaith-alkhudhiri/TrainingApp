@@ -167,6 +167,7 @@ class EWallet extends Component<EWalletProps, EWalletState> {
                         <View style={styles.eWalletCardsContainer}>
                             {eWalletCards.map((eWalletCard, index) => (
                                 <Pressable 
+                                    key={index}
                                     style={styles.eWalletCard} 
                                     onLongPress={eWalletCard.onLongPress}
                                     onPress={eWalletCard.onPress}
