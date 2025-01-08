@@ -28,12 +28,12 @@ import Data from './Preferences/Data';
 import InboxScreen from './Inbox/InboxScreen';
 import NotificationsScreen from './Notification/NotificationsScreen';
 import Workouts from './Home/ToDo/Workouts/Workouts';
-import TasksPage from './Tasks/TasksPage';
-import BodyMeasurementOverview from './Tasks/BodyMeasurementOverview';
-import BodyMeasurementForm from './Tasks/BodyMeasurementForm';
-import { DocumentPage } from './Tasks/DocumentPage';
-import DocumentViewer from './Tasks/DocumentViewer';
-import ProgressPhoto from './Tasks/ProgressPhoto';
+import TasksPage from './Home/ToDo/Tasks/TasksPage';
+import BodyMeasurementOverview from './Home/ToDo/Tasks/BodyMeasurementOverview';
+import BodyMeasurementForm from './Home/ToDo/Tasks/BodyMeasurementForm';
+import { DocumentPage } from './Home/ToDo/Tasks/DocumentPage';
+import DocumentViewer from './Home/ToDo/Tasks/DocumentViewer';
+import ProgressPhoto from './Home/ToDo/Tasks/ProgressPhoto';
 import Categories from './Discover/Categories';
 import CategoryDetails from './Discover/CategoryDetails';
 import ClassesPage from './Discover/ClassesPage';
@@ -77,6 +77,9 @@ import TrackPage from './You/TrackPage';
 import MyGoals from './You/MyAnalysis/MyGoals';
 import Metrics from './You/MyAnalysis/Metrics';
 import InBodyResults from './You/MyAnalysis/InBodyResults';
+import EventPage from './Discover/Events/EventPage';
+import MembershipDetail from './Discover/Memberships/MembershipDetail';
+import Overview from './Home/ToDo/Workouts/Overview';
 
 // const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -173,7 +176,7 @@ export default class App extends Component<any, State> {
     return (
       <NavigationContainer linking={linking as any}>
           {!hasSeenOnboarding ? (
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='You'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Main'>
             <Stack.Screen name="Onboarding">
               {(props) => (
                 <OnboardingPage {...props} onComplete={this.completeOnboarding} />
@@ -226,6 +229,7 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="Receipt" component={Receipt} />
             <Stack.Screen name="HelpCenter" component={HelpCenter} />
             <Stack.Screen name="EventCard" component={EventCard} />
+            <Stack.Screen name="Event" component={EventPage} />
             <Stack.Screen name="EventDetails" component={EventDetails} />
             <Stack.Screen name="AllEvents" component={AllEvents} />
             <Stack.Screen name="TrainerCard" component={PersonalTrainerCard} />
@@ -235,6 +239,8 @@ export default class App extends Component<any, State> {
             <Stack.Screen name="ShopCat" component={ShopCategoryPage} />
             <Stack.Screen name="Product" component={ProductPage} />
             <Stack.Screen name="MembershipForm" component={MembershipForm} />
+            <Stack.Screen name="Memberships" component={Overview} />
+            <Stack.Screen name="MembershipDetail" component={MembershipDetail} />
             <Stack.Screen name="Reschedule" component={Reschedule} />
             <Stack.Screen name="AddReview" component={AddReview} />
             <Stack.Screen name="Track" component={TrackPage} />

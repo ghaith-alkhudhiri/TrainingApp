@@ -1,8 +1,8 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import ScreenWrapper from '../Layout/ScreenWrapper'
-import CustomButton from '../Common/CustomButton'
-import DatePickerInput from '../Common/DatePickerInput';
+import ScreenWrapper from '../../../Layout/ScreenWrapper'
+import CustomButton from '../../../Common/CustomButton'
+import DatePickerInput from '../../../Common/DatePickerInput';
 
 interface Props {
     navigation: any;

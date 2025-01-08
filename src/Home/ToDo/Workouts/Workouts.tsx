@@ -150,7 +150,7 @@ export class Workouts extends Component<Props, State> {
           key: 'ongoing',
           label: 'Ongoing',
           content: (
-            <View style={{gap: 22, paddingLeft: 24, paddingRight: 27}}>
+            <View style={{gap: 22, }}>
               <FlatList
                 data={ongoingWorkouts}
                 renderItem={this.renderWorkoutItem}
@@ -165,7 +165,7 @@ export class Workouts extends Component<Props, State> {
           key: 'completed',
           label: 'Completed',
           content: (
-            <View style={{gap: 22, paddingLeft: 24, paddingRight: 27}}>
+            <View style={{gap: 22, }}>
                 <FlatList
                 data={completedWorkouts}
                 renderItem={this.renderWorkoutItem}
@@ -178,10 +178,7 @@ export class Workouts extends Component<Props, State> {
         }
       ];
     return (
-      <ScreenWrapper scrollContainerStyle={{padding:0}} withoutHeader>
-        <View style={{paddingHorizontal: 10}}>
-            <ScreenHeader title='My Workouts' backEnabled navigation={this.props.navigation} route={this.props.route} />
-        </View>
+      <ScreenWrapper scrollContainerStyle={{padding: 0}} childrenContainerStyle={{padding: 0}} title='My Workouts'>
         {/* <CustomTabs styleType='small' tabs={[{key:'ongoing', label:'ongoing', content: (null)}, {key:'completed', label:'completed', content: (null)}]} />
         <CustomTabs styleType='large' tabs={[{key:'ongoing', label:'ongoing', content: (null)}, {key:'completed', label:'completed', content: (null)}]} /> */}
         <CustomTabs styleType='underline' tabs={tabs} />

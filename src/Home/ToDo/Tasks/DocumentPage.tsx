@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
-import ScreenWrapper from '../Layout/ScreenWrapper'
-import DocumentIcon from '../Assets/Icons/DocumentIcon';
+import ScreenWrapper from '../../../Layout/ScreenWrapper'
+import DocumentIcon from '../../../Assets/Icons/DocumentIcon';
 import { FileOpener } from '@capawesome-team/capacitor-file-opener';
-import { isWeb } from '../Utils/PlatformUtil';
+import { isWeb } from '../../../Utils/PlatformUtil';
 
 
 interface Props {

@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
-import ScreenWrapper from '../Layout/ScreenWrapper'
-import DatePickerInput from '../Common/DatePickerInput'
-import CustomTextInput from '../Common/CustomTextInput';
+import ScreenWrapper from '../../../Layout/ScreenWrapper'
+import DatePickerInput from '../../../Common/DatePickerInput'
+import CustomTextInput from '../../../Common/CustomTextInput';
 
 interface State {
     selectedDate: Date | null;

@@ -1,9 +1,9 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
-import ScreenWrapper from '../Layout/ScreenWrapper';
-import CustomTabs from '../Common/CustomTabs';
+import ScreenWrapper from '../../../Layout/ScreenWrapper';
+import CustomTabs from '../../../Common/CustomTabs';
 import TaskCard from './TaskCard';
-import { storage } from '../firebase';
+import { storage } from '../../../firebase';
 import { getDownloadURL, ref } from 'firebase/storage';
 
 export interface Task {

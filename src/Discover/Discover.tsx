@@ -15,12 +15,12 @@ export class Discover extends Component<NavProps> {
     const {navigation, route} = this.props;
     return (
         <ScreenWrapper withoutHeader={true}>
-            <View style={{paddingHorizontal: 14, gap: 17}}>
+            {/* <View style={{paddingHorizontal: 14, gap: 17}}> */}
                 <Header navigation={navigation} route={route} />
                 <SearchInput />
                 <MembershipsCard navigation={navigation} route={route}/>
 
-                <SectionHeader title="Events" onPress={()=>{navigation.navigate('AllEvents')}} />
+                <SectionHeader title="Events" onPress={()=>{navigation.navigate('AllEvents', {navigation: navigation, route: route})}} />
                 <ScrollView horizontal contentContainerStyle={{gap: 13}}>
                   <EventCard 
                   title='Weight loss of the month' 
@@ -91,7 +91,7 @@ export class Discover extends Component<NavProps> {
                 navigation={navigation}
                 route={route}
                 />
-            </View>
+            {/* </View> */}
             {/* <CustomButton onPress={()=>{navigation.navigate('Memberships')}}/> */}
             {/* <CustomButton onPress={()=>{navigation.navigate('AllEvents')}}/> */}
         </ScreenWrapper>
