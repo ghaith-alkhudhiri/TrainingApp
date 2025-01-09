@@ -250,7 +250,7 @@ class MyOrders extends Component<MyOrdersProps, MyOrdersState> {
                 rightElement={
                     <CustomButton 
                         styleType='rounded'
-                        onPress={()=>{}} 
+                        onPress={()=>{this.props.navigation.navigate('Main', { screen: 'Shop' })}} 
                         icon={<AddIcon />} 
                     />
                 }
