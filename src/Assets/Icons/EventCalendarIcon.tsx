@@ -3,16 +3,20 @@ import { Svg, G, Path } from 'react-native-svg';
 
 interface Props {
   fill?: string;
+  width?: number;
+  height?: number;
 }
 
 class EventCalendarIcon extends Component<Props>{
   static defaultProps = {
     fill: "#0165FC",
+    width: 13,
+    height: 13,
   }
   render(){
-    const {fill} =  this.props;
+    const {fill, width, height} =  this.props;
     return (
-      <Svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+      <Svg width={width} height={height} viewBox="0 0 13 13" fill="none">
         <G id="vuesax/bold/calendar">
           <G id="calendar">
             <Path 

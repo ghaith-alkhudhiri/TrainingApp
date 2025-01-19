@@ -10,6 +10,7 @@ import Test from '../Test';
 import DiscoverNavigation from './DiscoverNavigation';
 import Shop from '../Shop/Shop';
 import You from '../You/You';
+import EventCalendarIcon from '../Assets/Icons/EventCalendarIcon';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,7 @@ const TabsNavigation = () => {
             component={HomeNavigation}
             options={{
                 headerShown: false,
-                tabBarIcon: ({color, size}) => <HomeIcon />
+                tabBarIcon: ({focused, color, size}) => <HomeIcon focused={focused ? true : false} />
             }}    
         />
         <Tab.Screen 
@@ -29,7 +30,7 @@ const TabsNavigation = () => {
             component={DiscoverNavigation}
             options={{
                 headerShown: false,
-                tabBarIcon: ({color, size}) => <DiscoverIcon />
+                tabBarIcon: ({focused, color, size}) => <DiscoverIcon focused={focused ? true : false} />
             }}    
         />
         <Tab.Screen
@@ -37,7 +38,7 @@ const TabsNavigation = () => {
             component={Test}
             options={{
                 headerShown: false,
-                tabBarIcon: ({color, size}) => <CalendarIcon />
+                tabBarIcon: ({focused, color, size}) => focused ? <EventCalendarIcon width={24} height={24} /> : <CalendarIcon />
             }}
         />
         <Tab.Screen
@@ -45,7 +46,7 @@ const TabsNavigation = () => {
             component={Shop}
             options={{
                 headerShown: false,
-                tabBarIcon: ({color, size}) => <ShopIcon />
+                tabBarIcon: ({focused, color, size}) => <ShopIcon focused={focused ? true : false} />
             }}
         />
         <Tab.Screen
@@ -53,7 +54,7 @@ const TabsNavigation = () => {
             component={You}
             options={{
                 headerShown: false,
-                tabBarIcon: ({color, size}) => <ProfileIcon color='#9DB2CE'/>
+                tabBarIcon: ({focused, color, size}) => <ProfileIcon color='#9DB2CE' focused={focused ? true : false} />
             }}
         />
     </Tab.Navigator>
