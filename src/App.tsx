@@ -118,6 +118,69 @@ const linking = {
   config,
 };
 
+const screens = {
+  "test": TestPage,
+  "Login": LoginPage,
+  "otp-verification": OTPVerification,
+  "Profile": ProfileScreen,
+  "goals": Goal,
+  "data": Data,
+  "success": SuccessPage,
+  "Tasks": TasksPage,
+  "bodyMeasurement": BodyMeasurementOverview,
+  "newBodyMeasurement": BodyMeasurementForm,
+  "Document": DocumentPage,
+  "DocumentViewer": DocumentViewer,
+  "ProgressPhoto": ProgressPhoto,
+  "Categories": Categories,
+  "CategoryDetails": CategoryDetails,
+  "Classes": ClassesPage,
+  "You": You,
+  "Settings": Settings,
+  "DeleteAccount": DeleteAccountForm,
+  "Language": Language,
+  "AboutGym": AboutGym,
+  "ContactUs": ContactUs,
+  "MembershipsSettings": MembershipsSettings,
+  "ClassesSettings": ClassesSettings,
+  "WorkoutsSettings": WorkoutsSettings,
+  "MyOrders": MyOrders,
+  "NotificationsSettings": NotificationsSettings,
+  "PrivacyPolicy": PrivacyPolicy,
+  "EWallet": EWallet,
+  "Topup": TopUp,
+  "AmountInput": AmountInput,
+  "MyFamily": MyFamily,
+  "MyAnalysis": MyAnalysis,
+  "ClassDetails": ClassesDetails,
+  "ReviewSummary": ReviewSummary,
+  "Checkout": Checkout,
+  "Cart": CartPage,
+  "Receipt": Receipt,
+  "HelpCenter": HelpCenter,
+  "EventCard": EventCard,
+  "Event": EventPage,
+  "EventDetails": EventDetails,
+  "AllEvents": AllEvents,
+  "TrainerCard": PersonalTrainerCard,
+  "TrainerProfile": TrainerProfile,
+  "AllTrainers": AllTrainers,
+  "Shop": Shop,
+  "ShopCat": ShopCategoryPage,
+  "Product": ProductPage,
+  "MembershipForm": MembershipForm,
+  "Memberships": Overview,
+  "MembershipDetail": MembershipDetail,
+  "Reschedule": Reschedule,
+  "AddReview": AddReview,
+  "Track": TrackPage,
+  "MyGoals": MyGoals,
+  "Metrics": Metrics,
+  "InBodyResults": InBodyResults,
+  "Main": TabsNavigation,
+  "Home": HomePage,
+}
+
 // class MainTabs extends Component {
 //   render(){
 //     return (
@@ -189,66 +252,9 @@ export default class App extends Component<any, State> {
                   <WelcomeScreen {...props} onComplete={this.completeOnboarding} />
                 )}
             </Stack.Screen>
-            <Stack.Screen name="test" component={TestPage} />
-            <Stack.Screen name="Login" component={LoginPage} />
-            <Stack.Screen name="otp-verification" component={OTPVerification} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="goals" component={Goal} />
-            <Stack.Screen name="data" component={Data} />
-            <Stack.Screen name="success" component={SuccessPage} />
-            <Stack.Screen name="Tasks" component={TasksPage} />
-            <Stack.Screen name="bodyMeasurement" component={BodyMeasurementOverview} />
-            <Stack.Screen name="newBodyMeasurement" component={BodyMeasurementForm} />
-            <Stack.Screen name="Document" component={DocumentPage} />
-            <Stack.Screen name="DocumentViewer" component={DocumentViewer} />
-            <Stack.Screen name="ProgressPhoto" component={ProgressPhoto} />
-            <Stack.Screen name="Categories" component={Categories} />
-            <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
-            <Stack.Screen name="Classes" component={ClassesPage} />
-            <Stack.Screen name="You" component={You} />
-            <Stack.Screen name="Settings" component={Settings} />
-            <Stack.Screen name="DeleteAccount" component={DeleteAccountForm} />
-            <Stack.Screen name="Language" component={Language} />
-            <Stack.Screen name="AboutGym" component={AboutGym} />
-            <Stack.Screen name="ContactUs" component={ContactUs} />
-            <Stack.Screen name="MembershipsSettings" component={MembershipsSettings} />
-            <Stack.Screen name="ClassesSettings" component={ClassesSettings} />
-            <Stack.Screen name="WorkoutsSettings" component={WorkoutsSettings} />
-            <Stack.Screen name="MyOrders" component={MyOrders} />
-            <Stack.Screen name="NotificationsSettings" component={NotificationsSettings} />
-            <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-            <Stack.Screen name="EWallet" component={EWallet} />
-            <Stack.Screen name="Topup" component={TopUp} />
-            <Stack.Screen name="AmountInput" component={AmountInput} />
-            <Stack.Screen name="MyFamily" component={MyFamily} />
-            <Stack.Screen name="MyAnalysis" component={MyAnalysis} />
-            <Stack.Screen name="ClassDetails" component={ClassesDetails} />
-            <Stack.Screen name="ReviewSummary" component={ReviewSummary} />
-            <Stack.Screen name="Checkout" component={Checkout} />
-            <Stack.Screen name="Cart" component={CartPage} />
-            <Stack.Screen name="Receipt" component={Receipt} />
-            <Stack.Screen name="HelpCenter" component={HelpCenter} />
-            <Stack.Screen name="EventCard" component={EventCard} />
-            <Stack.Screen name="Event" component={EventPage} />
-            <Stack.Screen name="EventDetails" component={EventDetails} />
-            <Stack.Screen name="AllEvents" component={AllEvents} />
-            <Stack.Screen name="TrainerCard" component={PersonalTrainerCard} />
-            <Stack.Screen name="TrainerProfile" component={TrainerProfile} />
-            <Stack.Screen name="AllTrainers" component={AllTrainers} />
-            <Stack.Screen name="Shop" component={Shop} />
-            <Stack.Screen name="ShopCat" component={ShopCategoryPage} />
-            <Stack.Screen name="Product" component={ProductPage} />
-            <Stack.Screen name="MembershipForm" component={MembershipForm} />
-            <Stack.Screen name="Memberships" component={Overview} />
-            <Stack.Screen name="MembershipDetail" component={MembershipDetail} />
-            <Stack.Screen name="Reschedule" component={Reschedule} />
-            <Stack.Screen name="AddReview" component={AddReview} />
-            <Stack.Screen name="Track" component={TrackPage} />
-            <Stack.Screen name="MyGoals" component={MyGoals} />
-            <Stack.Screen name="Metrics" component={Metrics} />
-            <Stack.Screen name="InBodyResults" component={InBodyResults} />
-            <Stack.Screen name="Main" component={TabsNavigation} />
-            <Stack.Screen name="Home" component={HomePage} />
+            {Object.entries(screens).map(([name, component]) => (
+              <Stack.Screen key={name} name={name} component={component} />
+            ))}
           </Stack.Navigator>
           ): (
             <>

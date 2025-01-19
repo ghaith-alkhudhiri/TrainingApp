@@ -46,7 +46,7 @@ export class UpcomingClasses extends Component<NavProps> {
                 time: '03:00 - 04:00 PM', 
                 trainer: 'Emily Johnson', 
                 price: 30,
-                url: 'https://s3-alpha-sig.figma.com/img/af44/d2fe/7e0adec90c31fff8d870b67312f76f20?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BCIoEus~TKCx9SOytaVtdpgEKd3VenHjoQ4ZUK6hAO24TWGAwn1VFnexCh0T-Cb-5yx-sRoLEBtvDDM4o5XwWyBLq4A1xermrjZSJfMbtI3yCTdsHRGjTtyZv2kKVYZe~LX8IrSmsqS6e8WLGu3KPiPd-WukA3aZj5dvLuSaUlyKW-4KOKkOr07P3lU6-lJrpjer-6J98GwWvS58qEcBmPLHpXDWVWfJkUc59WLx3JjgLQ2AnezcinbW-Sw18C8SdGt~t0WMZCPczig7zhDn5CDFD5h0OeFKW0X4u9aZmZprQ7TUehfkSGgQ8NtU1iMB~am9hEvlsWiVzVsCSUGddQ__'
+                url: 'https://images.ctfassets.net/cnu0m8re1exe/3qzr3eoWDYXq9tHmnr3QzK/dade797f13615399d1be31d5d68246a6/shutterstock_1660411888.jpg'
             },
         ];
 
