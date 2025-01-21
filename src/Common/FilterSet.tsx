@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from 'react-native'
 import React, { Component } from 'react'
-import DownArrow from '../Assets/Icons/downArrow'
+import DownArrow from '../Assets/Icons/DownArrow'
 import theme from '../Constants/theme';
 
 interface Props {

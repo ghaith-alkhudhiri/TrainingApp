@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 // import './App.css';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Test from './Test';
@@ -233,7 +233,9 @@ export default class App extends Component<any, State> {
     const { hasSeenOnboarding, isLoading} = this.state;
 
     if(isLoading){
-      return null; // Add loading spinner here
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
     }
 
     return (

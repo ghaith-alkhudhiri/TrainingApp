@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, View, Pressable } from 'react-native'
 import React, { Component } from 'react'
 import ScreenWrapper from '../../../Layout/ScreenWrapper'
 import CustomTabs from '../../../Common/CustomTabs';
@@ -100,7 +100,7 @@ export class Workouts extends Component<Props, State> {
     
       // Render Workouts
       renderWorkoutItem = ({ item }: { item: Workout }) => (
-        <View style={styles.workoutCard}>
+        <Pressable onPress={()=>{this.props.navigation.navigate('WorkoutsOverview')}} style={styles.workoutCard}>
           <Image source={item.image} resizeMode='cover' style={styles.workoutImage} />
           <View style={styles.workoutDetails}>
             <View style={styles.rowContainer}>
@@ -127,7 +127,7 @@ export class Workouts extends Component<Props, State> {
               <Text style={styles.progressText}>{item.progress}/{item.total}</Text>
             </View>
           </View>
-        </View>
+        </Pressable>
       );
 
   render() {

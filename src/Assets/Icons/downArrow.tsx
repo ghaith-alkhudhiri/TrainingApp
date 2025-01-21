@@ -6,7 +6,7 @@ type IconProps = {
     height?: number;
     color?: string;
 };
-export class downArrow extends Component<IconProps> {
+export class DownArrow extends Component<IconProps> {
     static defaultProps = {
         width: 20,
         height: 20,
@@ -23,4 +23,4 @@ export class downArrow extends Component<IconProps> {
   }
 }
 
-export default downArrow
+export default DownArrow
