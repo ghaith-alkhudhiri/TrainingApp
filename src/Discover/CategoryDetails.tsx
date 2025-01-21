@@ -6,10 +6,8 @@ import CustomTabs from '../Common/CustomTabs';
 import SearchInput from '../Common/SearchInput';
 import ReviewItem from './Components/ReviewItem';
 import SelectableItem from '../Common/SelectableItem';
-
-interface Props {
-    navigation: any;
-}
+import PersonalTrainerCard from './PersonalTrainers/PersonalTrainerCard';
+import { NavProps } from '../types';
 
 interface State {
     selectedOption: string | null;
@@ -25,8 +23,8 @@ export class ShareBtn extends Component {
     }
 }
 
-export class CategoryDetails extends Component<Props, State> {
-    constructor(props: any){
+export class CategoryDetails extends Component<NavProps, State> {
+    constructor(props: NavProps){
         super(props);
         this.state = {
             selectedOption: null,
@@ -44,6 +42,7 @@ export class CategoryDetails extends Component<Props, State> {
     }
 
     render() {
+        const { navigation, route } = this.props;
         const { selectedOption } = this.state;
         const galleryImages = [
             "https://images.unsplash.com/photo-1507398941214-572c25f4b1dc?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -134,7 +133,36 @@ export class CategoryDetails extends Component<Props, State> {
                 label: 'Trainers',
                 content: (
                     <View>
-                       <Text>Hello</Text>
+                       <PersonalTrainerCard 
+                        name="Noor M. Ali"
+                        imageUrl={require('../Assets/Images/noor.png')}
+                        tags={['Hatha yoga', 'Yin yoga']}
+                        position="Yoga Trainer"
+                        rating={4.5}
+                        reviews={23}
+                        navigation={navigation}
+                        route={route}
+                        />
+                        <PersonalTrainerCard 
+                        name="Noor M. Ali"
+                        imageUrl={require('../Assets/Images/noor.png')}
+                        tags={['Hatha yoga', 'Yin yoga']}
+                        position="Yoga Trainer"
+                        rating={4.5}
+                        reviews={23}
+                        navigation={navigation}
+                        route={route}
+                        />
+                        <PersonalTrainerCard 
+                        name="Noor M. Ali"
+                        imageUrl={require('../Assets/Images/noor.png')}
+                        tags={['Hatha yoga', 'Yin yoga']}
+                        position="Yoga Trainer"
+                        rating={4.5}
+                        reviews={23}
+                        navigation={navigation}
+                        route={route}
+                        />
                     </View>
                 )
             },
@@ -198,6 +226,7 @@ export class CategoryDetails extends Component<Props, State> {
                 "https://plus.unsplash.com/premium_photo-1669446008800-9a124b0fd3a2?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","https://plus.unsplash.com/premium_photo-1683133543401-edc31ed41140?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]} floatingBtn 
             floatingBtnProps={[{label: "View Classes", onPress: this.navigateToClasses}]}
             rightElement={<ShareBtn />}
+            childrenContainerStyle={{padding: 0}}
             >
                 <View style={styles.container}>
                     <Text style={styles.title}>Vinyasa Yoga</Text>

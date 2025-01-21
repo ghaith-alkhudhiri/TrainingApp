@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import theme from '../Constants/theme';
 
@@ -7,13 +7,14 @@ interface Props {
     imageUrl?: any;
     description: string;
     cta: string;
+    onPress?: ()=>void;
 }
 
 export class AdvertisementBanner extends Component<Props> {
   render() {
-    const {title, imageUrl, description, cta} = this.props;
+    const {title, imageUrl, description, cta, onPress} = this.props;
     return (
-      <View style={styles.container}>
+      <Pressable onPress={onPress} style={styles.container}>
         <View style={styles.advertisementContent}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.description}>{description}</Text>
@@ -23,7 +24,7 @@ export class AdvertisementBanner extends Component<Props> {
         </View>
         <Image source={imageUrl} style={styles.advertisementImg}/>
         {/* <Image source={{uri: imageUrl}} style={styles.advertisementImg} /> */}
-      </View>
+      </Pressable>
     )
   }
 }

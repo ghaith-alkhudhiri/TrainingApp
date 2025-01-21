@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Modal, Text, TouchableOpacity, ScrollView, TextStyle } from 'react-native';
+import { View, StyleSheet, Modal, Text, TouchableOpacity, ScrollView, TextStyle, Image } from 'react-native';
 
 export interface Action {
     text: string;
@@ -20,6 +20,7 @@ interface CustomModalProps {
     animationType?: 'none' | 'slide' | 'fade';
     options?: string[];
     onSelectOption?: (option: string) => void;
+    image?: string;
 }
 
 interface CustomModalState {
@@ -41,7 +42,7 @@ class CustomModal extends React.Component<CustomModalProps, CustomModalState> {
     }
 
     render() {
-        const { onClose, title, description, children, actions, closeIcon, animationType, descriptionStyle, options, onSelectOption } = this.props;
+        const { onClose, title, description, children, actions, closeIcon, animationType, descriptionStyle, options, onSelectOption, image } = this.props;
         const { visible } = this.state;
 
         return (
@@ -59,6 +60,7 @@ class CustomModal extends React.Component<CustomModalProps, CustomModalState> {
                     </TouchableOpacity>
                   </View>
                   <View style={styles.contentContainer}>
+                    {image && <Image source={{ uri: image }} style={styles.image} />}
                     <Text style={styles.title}>{title}</Text>
                     {description && <Text style={[styles.description, descriptionStyle]}>{description}</Text>}
                     {options && (
@@ -148,6 +150,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 18,
     fontFamily: 'Inter',
+  },
+  image: {
+    width: '100%',
+    height: 175,
+    borderRadius: 14,
+    marginBottom: 5,
   },
   optionsContainer: {
     maxHeight: 200,

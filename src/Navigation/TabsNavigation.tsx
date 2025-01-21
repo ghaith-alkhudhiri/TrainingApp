@@ -11,6 +11,7 @@ import DiscoverNavigation from './DiscoverNavigation';
 import Shop from '../Shop/Shop';
 import You from '../You/You';
 import EventCalendarIcon from '../Assets/Icons/EventCalendarIcon';
+import CalendarScreen from '../Calendar/CalendarScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +36,7 @@ const TabsNavigation = () => {
         />
         <Tab.Screen
             name="Calendar"
-            component={Test}
+            component={CalendarScreen}
             options={{
                 headerShown: false,
                 tabBarIcon: ({focused, color, size}) => focused ? <EventCalendarIcon width={24} height={24} /> : <CalendarIcon />

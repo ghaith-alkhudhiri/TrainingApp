@@ -6,12 +6,9 @@ import VinyasaYoga from '../Assets/Icons/VinyasaYoga'
 import YinYoga from '../Assets/Icons/YinYoga'
 import LyengarYoga from '../Assets/Icons/LyengarYoga'
 import CategoryCard from './CategoryCard'
+import { NavProps } from '../types'
 
-interface Props {
-    navigation: any;
-}
-
-export class Categories extends Component<Props> {
+export class Categories extends Component<NavProps> {
     navigateToCategoryDetails = () => {
         this.props.navigation.navigate("CategoryDetails");
     }
@@ -74,7 +71,7 @@ export class Categories extends Component<Props> {
       <ScreenWrapper title="Categories">
         <View style={styles.container}>
             {categoriesList.map((category, index) => (
-                <CategoryCard icon={category.icon} title={category.title} onPress={this.navigateToCategoryDetails}/>
+                <CategoryCard key={index} icon={category.icon} title={category.title} onPress={this.navigateToCategoryDetails}/>
             ))}
         </View>
       </ScreenWrapper>
