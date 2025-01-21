@@ -136,7 +136,7 @@ const smallStyles = StyleSheet.create({
         backgroundColor: 'transparent',
         padding: 2,
         borderRadius: 8,
-        gap: 6,
+        gap: 9,
     },
     tab: {
         borderRadius: 5,

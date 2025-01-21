@@ -23,6 +23,7 @@ import { NavProps } from '../types';
 import HighlightedClassCard from './HighlightedClassCard';
 import EventCard from '../Discover/Events/EventCard';
 import WeightGraph from '../Common/WeightGraph';
+import CustomModal, {Action} from '../Common/CustomModal';
 
 const goals = [
   { title: 'Previous', value: 80, unit: 'kg'},
@@ -32,6 +33,7 @@ const goals = [
 
 interface State {
   selectedView: 'Weekly' | 'Monthly' | 'Yearly';
+  modalVisible: boolean;
 }
 
 export default class HomePage extends Component<NavProps, State> {
@@ -39,6 +41,7 @@ export default class HomePage extends Component<NavProps, State> {
     super(props);
     this.state = {
       selectedView: 'Weekly',
+      modalVisible: false,
     };
   }
 
@@ -48,7 +51,14 @@ export default class HomePage extends Component<NavProps, State> {
   };
   render() {
     const {navigation, route} = this.props;
-    const { selectedView } = this.state;
+    const { selectedView, modalVisible } = this.state;
+    const actions: Action[] = [
+      {
+        text: 'Discover more',
+        onPress: () => this.setState({modalVisible: false}),
+        style: 'primary',
+      },
+    ];
     const tabs = [
       {
         key: 'general',
@@ -60,7 +70,20 @@ export default class HomePage extends Component<NavProps, State> {
               title='Varies Membership'
               description="Don't miss out on our membership benefits"
               cta='Shop now'
+              onPress={()=>{this.setState({modalVisible: true})}}
             />
+
+            <View>
+              <SectionHeader title="Upcoming Classes" counter={3} onPress={() => {}} />
+              <HighlightedClassCard 
+                title='Hatha yoga'
+                date='Monday, 26 July'
+                time='09:00 - 10:00'
+                coach='Noor M. Ali'
+                imageUrl={require('../Assets/Images/img.png')}
+              />
+            </View>
+
             <UpcomingClasses navigation={navigation} route={route} />
             <AdvertisementBanner 
               imageUrl={require('../Assets/Images/ad2.png')}
@@ -68,16 +91,9 @@ export default class HomePage extends Component<NavProps, State> {
               description='Be the first to buy the new merchandise'
               cta='Shop now'
             />
-            <SectionHeader title="Upcoming Classes" counter={3} onPress={() => {}} />
-            <HighlightedClassCard 
-              title='Hatha yoga'
-              date='Monday, 26 July'
-              time='09:00 - 10:00'
-              coach='Noor M. Ali'
-              imageUrl={require('../Assets/Images/img.png')}
-            />
             
-            <SectionHeader title="Events" onPress={()=>{navigation.navigate('AllEvents', {navigation: navigation, route: route})}} />
+            <View>
+              <SectionHeader title="Events" onPress={()=>{navigation.navigate('AllEvents', {navigation: navigation, route: route})}} />
               <ScrollView horizontal contentContainerStyle={{gap: 13}}>
                 <EventCard
                 title='Weight loss of the month' 
@@ -116,6 +132,17 @@ export default class HomePage extends Component<NavProps, State> {
                 route={route}
                 />
               </ScrollView>
+            </View>
+
+            <CustomModal
+              visible={modalVisible}
+              onClose={() => this.setState({modalVisible: false})}
+              title="Discover"
+              description="Lorem ipsum dolor sit amet, cons ectetur adipiscing elit..."
+              actions={actions}
+              animationType='slide'
+              image={require('../Assets/Images/noor.png')}
+            />
           </View>
         )
       },

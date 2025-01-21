@@ -9,17 +9,47 @@ import CustomButton from '../Common/CustomButton'
 import EventCard from './Events/EventCard'
 import SectionHeader from '../Home/SectionHeader'
 import PersonalTrainerCard from './PersonalTrainers/PersonalTrainerCard'
+import UpcomingClasses from '../Home/UpcomingClasses'
+import HathaYoga from '../Assets/Icons/HathaYoga'
+import LyengarYoga from '../Assets/Icons/LyengarYoga'
+import VinyasaYoga from '../Assets/Icons/VinyasaYoga'
+import YinYoga from '../Assets/Icons/YinYoga'
+import CategoryCard from './CategoryCard'
 
 export class Discover extends Component<NavProps> {
   render() {
     const {navigation, route} = this.props;
+    const categoriesList = [
+      {
+          icon: <HathaYoga />,
+          title: "Hatha Yoga",
+      },
+      {
+          icon: <VinyasaYoga />,
+          title: "Vinyasa Yoga",
+      },
+      {
+          icon: <YinYoga />,
+          title: "Yin Yoga"
+      },
+      {
+          icon: <LyengarYoga />,
+          title: "lyengar yoga",
+      },
+    ]
     return (
         <ScreenWrapper withoutHeader={true}>
             {/* <View style={{paddingHorizontal: 14, gap: 17}}> */}
                 <Header navigation={navigation} route={route} />
                 <SearchInput />
+                <SectionHeader title="Categories" onPress={()=>{this.props.navigation.navigate("Categories")}} />
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  {categoriesList.map((category, index) => (
+                      <CategoryCard key={index} icon={category.icon} title={category.title} onPress={()=>{this.props.navigation.navigate("CategoryDetails")}}/>
+                  ))}
+                </View>
+                <UpcomingClasses navigation={navigation} route={route} />
                 <MembershipsCard navigation={navigation} route={route}/>
-
                 <SectionHeader title="Events" onPress={()=>{navigation.navigate('AllEvents', {navigation: navigation, route: route})}} />
                 <ScrollView horizontal contentContainerStyle={{gap: 13}}>
                   <EventCard 
