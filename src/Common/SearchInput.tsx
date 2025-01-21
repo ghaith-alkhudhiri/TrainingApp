@@ -11,14 +11,13 @@ interface SearchInputProps extends TextInputProps {
 
 export class SearchInput extends Component<SearchInputProps> {
   static defaultProps = {
-    placeholder: 'Search...',
+    placeholder: 'Search Classes, Trainer',
     icon: <SearchIcon />
   }
   render() {
     const {containerStyle, inputStyle, icon, ...textInputProps} =  this.props;
     return (
       <View style={[styles.container, containerStyle]}>
-        {/* <SearchIcon /> */}
         {icon}
         <TextInput 
           style={[styles.input, inputStyle]} 

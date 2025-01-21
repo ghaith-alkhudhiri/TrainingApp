@@ -21,6 +21,8 @@ import theme from '../Constants/theme';
 import ToDoSection from './ToDo/ToDoSection';
 import { NavProps } from '../types';
 import HighlightedClassCard from './HighlightedClassCard';
+import EventCard from '../Discover/Events/EventCard';
+import WeightGraph from '../Common/WeightGraph';
 
 const goals = [
   { title: 'Previous', value: 80, unit: 'kg'},
@@ -28,72 +30,25 @@ const goals = [
   { title: 'Current', value: 71, unit: 'kg'},
 ];
 
-const weightData = [
-  { date: '2024-01-01', weight: 70 },
-  { date: '2024-01-08', weight: 69.5 },
-  { date: '2024-02-01', weight: 69 },
-  { date: '2024-03-01', weight: 68.5 },
-  { date: '2024-06-01', weight: 67 },
-  { date: '2024-07-01', weight: 66},
-  { date: '2024-07-02', weight: 64},
-  { date: '2024-07-03', weight: 65},
-  { date: '2024-07-04', weight: 61},
-  { date: '2024-07-11', weight: 61},
-  { date: '2024-07-12', weight: 61},
-  { date: '2024-07-13', weight: 61},
-];
+interface State {
+  selectedView: 'Weekly' | 'Monthly' | 'Yearly';
+}
 
-const workouts = [
-  {
-    id: '1',
-    title: 'Upper Workout',
-    tags: ['Hardcore', 'Yoga'],
-    progress: 5,
-    total: 20,
-    image: 'https://via.placeholder.com/150',
-    instructor: 'Noor M. Ali',
-  },
-  {
-    id: '2',
-    title: 'Lower Workout',
-    tags: ['Hardcore', 'Yoga'],
-    progress: 5,
-    total: 20,
-    image: 'https://via.placeholder.com/150',
-    instructor: 'Noor M. Ali',
-  },
-];
+export default class HomePage extends Component<NavProps, State> {
+  constructor(props: NavProps) {
+    super(props);
+    this.state = {
+      selectedView: 'Weekly',
+    };
+  }
 
-const tasks = [
-  {
-    id: '1',
-    title: 'Body Measurement',
-    description: 'June Weight Update',
-    time: '10:00 AM',
-    date: '13th June, 2024',
-    completed: true,
-  },
-  {
-    id: '2',
-    title: 'Tips for breath work',
-    description: 'Useful Document',
-    time: '10:00 AM',
-    date: '13th June, 2024',
-    completed: false,
-  },
-  {
-    id: '3',
-    title: 'Progress Photo',
-    description: 'June Progress Photo',
-    time: '10:00 AM',
-    date: '13th June, 2024',
-    completed: false,
-  },
-];
-
-export class HomePage extends Component<NavProps> {
+  // Handle dropdown change
+  handleViewChange = (selectedView: 'Weekly' | 'Monthly' | 'Yearly') => {
+    this.setState({ selectedView });
+  };
   render() {
     const {navigation, route} = this.props;
+    const { selectedView } = this.state;
     const tabs = [
       {
         key: 'general',
@@ -121,7 +76,46 @@ export class HomePage extends Component<NavProps> {
               coach='Noor M. Ali'
               imageUrl={require('../Assets/Images/img.png')}
             />
-            {/* <Events/> */}
+            
+            <SectionHeader title="Events" onPress={()=>{navigation.navigate('AllEvents', {navigation: navigation, route: route})}} />
+              <ScrollView horizontal contentContainerStyle={{gap: 13}}>
+                <EventCard
+                title='Weight loss of the month' 
+                imageUrl={require('../Assets/Images/noor.png')}
+                tags={['Monthly Challenge', 'Fitness']}
+                time='3:00 - 4:00 PM'
+                date='23 July 2024'
+                navigation={navigation}
+                route={route}
+                />
+                <EventCard
+                title='Weight loss of the month' 
+                imageUrl={require('../Assets/Images/noor.png')}
+                tags={['Monthly Challenge', 'Fitness']}
+                time='3:00 - 4:00 PM'
+                date='23 July 2024'
+                navigation={navigation}
+                route={route}
+                />
+                <EventCard
+                title='Weight loss of the month' 
+                imageUrl={require('../Assets/Images/noor.png')}
+                tags={['Monthly Challenge', 'Fitness']}
+                time='3:00 - 4:00 PM'
+                date='23 July 2024'
+                navigation={navigation}
+                route={route}
+                />
+                <EventCard
+                title='Weight loss of the month' 
+                imageUrl={require('../Assets/Images/noor.png')}
+                tags={['Monthly Challenge', 'Fitness']}
+                time='3:00 - 4:00 PM'
+                date='23 July 2024'
+                navigation={navigation}
+                route={route}
+                />
+              </ScrollView>
           </View>
         )
       },
@@ -136,8 +130,15 @@ export class HomePage extends Component<NavProps> {
                 <GoalsCard goals={goals} />
               </View>
               <View>
-                <SectionHeader showActionBtn={false} showDropdown={true} title="Weight" />
+                <SectionHeader
+                  showActionBtn={false}
+                  showDropdown={true}
+                  title="Weight"
+                  selectedView={selectedView}
+                  onViewChange={this.handleViewChange}
+                />
                 {/* <WeightGraph data={weightData} /> */}
+                <WeightGraph selectedView={selectedView} />
               </View>
           </View>
         )
@@ -153,70 +154,13 @@ export class HomePage extends Component<NavProps> {
       }
     ];
     return (
-        <ScreenWrapper withoutHeader={true}>
-          {/* <View style={{paddingHorizontal: 14, gap: 17}}> */}
+        <ScreenWrapper withoutHeader={true} childrenContainerStyle={{gap: 13}}>
+          <View style={{gap: 16}}>
             <Header navigation={navigation} route={route} />
             <SearchInput />
-            <CustomTabs styleType='small' tabs={tabs} />
-          {/* </View> */}
+          </View>
+          <CustomTabs styleType='small' tabs={tabs} />
         </ScreenWrapper>
     );
   };
 }
-
-export default HomePage
-
-const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-    padding: 15,
-    gap: 10,
-    backgroundColor: 'white'
-  },
-  form: {
-    padding: 15,
-    borderWidth: 2,
-    borderColor: 'black',
-    borderRadius: 10,
-    alignItems: 'center',
-    gap: 10,
-  },
-  input: {
-    borderWidth: 2,
-    borderColor: 'gray',
-    borderRadius: 10,
-    padding: 10,
-    width: 250,
-  },
-  label: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    
-  },
-  button: {
-    backgroundColor: 'blue',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    color: 'white',
-    borderRadius: 10,
-  },
-  errorText: {
-    backgroundColor: '#FFCCCB',
-    color: 'red',
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 5,
-  },
-  successText: {
-    backgroundColor: 'lightgreen',
-    color: 'green',
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 5,
-  },
-  image: {
-    width: 50,
-    height: 50,
-    borderRadius: 10,
-  }
-})

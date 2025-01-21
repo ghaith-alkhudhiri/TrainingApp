@@ -3,16 +3,23 @@ import React, { Component } from 'react'
 import DirectIcon from '../Assets/Icons/DirectIcon';
 import NotificationBingIcon from '../Assets/Icons/NotificationBingIcon';
 import { NavProps } from '../types';
+import DownArrow from '../Assets/Icons/DownArrow';
 
 export class Header extends Component<NavProps> {
   render() {
     const {navigation, route} = this.props;
+    const username = 'User';
+    const branch = 'Al Dammam';
+    const country = 'SA';
     return (
       <View style={styles.container}>
         <View style={styles.welcomeContainer}>
-            <Text>Hi User</Text>
-            <View>
-                <Text style={styles.branchText}>Al Dammam, SA</Text>
+            <Text>Hi {username}</Text>
+            <View style={{flexDirection: 'row', gap: 5}}>
+                <Text style={styles.branchText}>{branch}, {country}</Text>
+                <View style={{alignSelf: 'baseline'}}>
+                    <DownArrow color='#292D32' width={13} height={13} />
+                </View>
             </View>
         </View>
         <View style={styles.iconsContainer}>
@@ -41,7 +48,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 16,
     },
     iconsContainer: {
         flexDirection: 'row',
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
         lineHeight: 17.5,
     },
     welcomeContainer: {
-        gap: 7,
+        gap: 10,
     }
 
 })
