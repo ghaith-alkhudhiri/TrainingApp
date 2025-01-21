@@ -2823,10 +2823,10 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
-"@react-native-picker/picker@^2.9.1":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.9.1.tgz#7c51ab168c21645aa151e8af34a788dbd83c3b26"
-  integrity sha512-p7BuPbOt3yfn+hflamaYVsdICjilATtzbY/M+6LCWY88a7xgWn7EcDGVWkn3rB0UdvgZ0OkyGmPP1GRGBg02Fw==
+"@react-native-picker/picker@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.npmjs.org/@react-native-picker/picker/-/picker-2.11.0.tgz#4587fbce6a382adedad74311e96ee10bb2b2d63a"
+  integrity sha512-QuZU6gbxmOID5zZgd/H90NgBnbJ3VV6qVzp6c7/dDrmWdX8S0X5YFYgDcQFjE3dRen9wB9FWnj2VVdPU64adSg==
 
 "@react-native/assets-registry@0.76.2", "@react-native/assets-registry@^0.76.2":
   version "0.76.2"
